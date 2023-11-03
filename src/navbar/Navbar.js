@@ -58,6 +58,7 @@ export default function Navbar() {
             <NavbarDropdown.CSSTransitionMenu
               className="navbar-dropdown-menu"
               classNames="navbar-dropdown-menu"
+              timeout={10}
             >
               <NavbarDropdown.Item className="navbar-dropdown-menu-item">
                 Log Out
@@ -67,6 +68,7 @@ export default function Navbar() {
             <NavbarDropdown.CSSTransitionMenu
               className="navbar-dropdown-menu"
               classNames="navbar-dropdown-menu"
+              timeout={200}
             >
               <NavbarDropdown.Item
                 className="navbar-dropdown-menu-item"

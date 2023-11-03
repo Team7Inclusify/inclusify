@@ -124,4 +124,5 @@
 
 .navbar-searchbar:focus-within {
   width: 60%;
+  min-width: 150px;
 }
