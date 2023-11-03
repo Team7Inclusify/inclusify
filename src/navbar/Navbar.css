@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 10px 10px 8px #888888;
+  box-shadow: 1px 1px 4px #888888;
   width: 100%;
 }
 
@@ -93,11 +93,12 @@
   border-style: solid;
   border-color: #c3c5c7;
   border-width: 1px;
+  height: 2rem;
 }
 
 .navbar-searchbar-icon {
   margin-left: 3px;
-  height: 2rem;
+  height: 1.5rem;
 }
 
 .navbar-searchbar-input {

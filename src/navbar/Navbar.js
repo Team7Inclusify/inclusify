@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import inclusify_image from "../images/inclusify.png";
 import NavbarDropdown from "react-navbar-dropdown";
 import profile_icon from "../images/profile_icon.png";
 import search_icon from "../images/search_icon.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const loggedIn = true;
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+  function navigateTo(link) {
+    navigate(link);
+  }
+  console.log("check this");
+
   return (
     <div className="navbar-whole">
-      <div className="navbar-homeLink">
+      <div className="navbar-homeLink" onClick={() => navigate("/")}>
         <img
           className="navbar-homeImage"
           src={inclusify_image}
@@ -30,7 +38,7 @@ export default function Navbar() {
               className="navbar-profileImage"
             />
           </NavbarDropdown.Toggle>
-          {loggedIn ? (
+          {isLoggedIn ? (
             <NavbarDropdown.CSSTransitionMenu
               className="navbar-dropdown-menu"
               classNames="navbar-dropdown-menu"
@@ -40,9 +48,21 @@ export default function Navbar() {
               </NavbarDropdown.Item>
             </NavbarDropdown.CSSTransitionMenu>
           ) : (
-            <NavbarDropdown.CSSTransitionMenu>
-              <NavbarDropdown.Item className="navbar-dropdown-menu-item">
+            <NavbarDropdown.CSSTransitionMenu
+              className="navbar-dropdown-menu"
+              classNames="navbar-dropdown-menu"
+            >
+              <NavbarDropdown.Item
+                className="navbar-dropdown-menu-item"
+                onClick={() => navigate("/login")}
+              >
                 Log In
+              </NavbarDropdown.Item>
+              <NavbarDropdown.Item
+                className="navbar-dropdown-menu-item"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
               </NavbarDropdown.Item>
             </NavbarDropdown.CSSTransitionMenu>
           )}
