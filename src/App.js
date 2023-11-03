@@ -3,6 +3,7 @@ import Navbar from "./navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import LogIn from "./pages/Log In/LogIn";
+import Search from "./pages/Search/Search";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<Home />} />
+          <Route path="/search_results/:search_tag" element={<Search />} />
         </Routes>
       </div>
     </>
