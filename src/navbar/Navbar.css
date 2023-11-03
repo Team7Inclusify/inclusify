@@ -1,0 +1,15 @@
+.navbar-whole {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 10px 10px 8px #888888;
+  width: 100%;
+}
+
+.navbar-homeLink {
+  font-size: 2rem;
+}
+
+.navbar-homeImage {
+  height: 2.5rem;
+}
