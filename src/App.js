@@ -8,6 +8,7 @@ import Search from "./pages/Search/Search";
 import SignUp from "./pages/Sign Up/SignUp";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Tutorials from "./pages/Tutorials/Tutorials";
+import FAQ from "./pages/FAQ/FAQ";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/search_results/:search_tag" element={<Search />} />
           <Route path="/about_us" element={<AboutUs />} />
           <Route path="/tutorials" element={<Tutorials />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </div>
     </div>
