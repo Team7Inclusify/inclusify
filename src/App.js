@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import Navbar from "./navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
@@ -10,9 +11,9 @@ import Tutorials from "./pages/Tutorials/Tutorials";
 
 function App() {
   return (
-    <>
+    <div className="App-Page">
       <Navbar />
-      <div>
+      <div className="Rest-App-Page">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
@@ -22,7 +23,7 @@ function App() {
           <Route path="/tutorials" element={<Tutorials />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 

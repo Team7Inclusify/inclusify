@@ -68,6 +68,12 @@ export default function Navbar() {
             </NavbarDropdown.Item>
             <NavbarDropdown.Item
               className="navbar-dropdown-menu-item"
+              onClick={() => navigate("/faq")}
+            >
+              FAQ
+            </NavbarDropdown.Item>
+            <NavbarDropdown.Item
+              className="navbar-dropdown-menu-item"
               onClick={() => navigate("/about_us")}
             >
               About Us

@@ -1,0 +1,15 @@
+.login-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-content {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 50%;
+    background-color: #DAF7FE;
+    box-shadow: 0px 0px 5px #c3c5c7;
+}
