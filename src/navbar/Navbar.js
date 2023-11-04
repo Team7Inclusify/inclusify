@@ -3,6 +3,7 @@ import "./Navbar.css";
 import inclusify_image from "../images/inclusify.png";
 import NavbarDropdown from "react-navbar-dropdown";
 import profile_icon from "../images/profile_icon.png";
+import more_info_icon from "../images/more_info.png";
 import search_icon from "../images/search_icon.png";
 import { useNavigate } from "react-router-dom";
 
@@ -46,6 +47,33 @@ export default function Navbar() {
             onKeyDown={(key) => newSearch(key)}
           />
         </div>
+        <NavbarDropdown>
+          <NavbarDropdown.Toggle className="navbar_toggle">
+            <img
+              src={more_info_icon}
+              alt="More Info Icon"
+              className="navbar-profileImage"
+            />
+          </NavbarDropdown.Toggle>
+          <NavbarDropdown.CSSTransitionMenu
+            className="navbar-dropdown-menu"
+            classNames="navbar-dropdown-menu"
+            timeout={10}
+          >
+            <NavbarDropdown.Item
+              className="navbar-dropdown-menu-item"
+              onClick={() => navigate("/tutorials")}
+            >
+              Tutorials
+            </NavbarDropdown.Item>
+            <NavbarDropdown.Item
+              className="navbar-dropdown-menu-item"
+              onClick={() => navigate("/about_us")}
+            >
+              About Us
+            </NavbarDropdown.Item>
+          </NavbarDropdown.CSSTransitionMenu>
+        </NavbarDropdown>
         <NavbarDropdown>
           <NavbarDropdown.Toggle className="navbar_toggle">
             <img
