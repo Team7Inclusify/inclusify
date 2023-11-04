@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import inclusify_image from "../images/inclusify.png";
+import inclusify_image from "../images/inclusify_no_name.png";
 import NavbarDropdown from "react-navbar-dropdown";
 import profile_icon from "../images/profile_icon.png";
 import more_info_icon from "../images/more_info.png";

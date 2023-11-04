@@ -1,0 +1,12 @@
+.about-us-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.au-inclusify-logo {
+    width: 200px;
+}
+
+
