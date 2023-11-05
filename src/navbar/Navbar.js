@@ -1,27 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import inclusify_image from "../images/inclusify_no_name.png";
 import NavbarDropdown from "react-navbar-dropdown";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+
+// Images
+import inclusify_image from "../images/inclusify_no_name.png";
 import profile_icon from "../images/profile_icon.png";
 import more_info_icon from "../images/more_info.png";
 import search_icon from "../images/search_icon.png";
-import { useNavigate } from "react-router-dom";
+import mic_icon from "../images/microphone-icon.png";
+import red_mic_icon from "../images/red-mic-icon.png";
+import close_button from "../images/close_icon.png";
+import reset_icon from "../images/reset_icon.png";
 
 export default function Navbar() {
   // This to be used later ignore the eslint warning for this for now
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isMicOn, setMicOn] = useState(false);
+  const micOn = useCallback(() => setMicOn(true), []);
+  const micOff = useCallback(() => setMicOn(false), []);
+
+  const [openMicModal, setMicModalOpen] = useState(false);
+
+  const onOpenMicModal = () => setMicModalOpen(true);
+  const onCloseMicModal = () => setMicModalOpen(false);
 
   const navigate = useNavigate();
   function newSearch(event) {
+    let searched = document
+      .getElementById("navBarSearchInput")
+      .value.toLowerCase()
+      .replace(/ /g, "_");
     if (event.key === "Enter") {
-      let searched = document
-        .getElementById("navBarSearchInput")
-        .value.toLowerCase()
-        .replace(/ /g, "_");
       console.log("User Searched: " + searched);
       navigate(`/search_results/${searched}`);
     }
   }
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  const clearSearchInput = () => {
+    // Clear the input field
+    document.getElementById("navBarSearchInput").value = "";
+  };
+
+  const confirmSpeechToText = () => {
+    navigate(`/search_results/${transcript.toLowerCase().replace(/ /g, "_")}`);
+    onCloseMicModal();
+    resetTranscript();
+  };
+
+  const speechToText = () => {
+    if (!listening) {
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+      console.log(transcript);
+    }
+  };
 
   return (
     <div className="navbar-whole">
@@ -45,6 +96,18 @@ export default function Navbar() {
             placeholder="Search Here"
             id="navBarSearchInput"
             onKeyDown={(key) => newSearch(key)}
+          />
+          <img
+            className="navbar-clear-icon"
+            src={close_button}
+            alt="Clear Icon"
+            onClick={clearSearchInput}
+          />
+          <img
+            className="navbar-mic-icon"
+            src={mic_icon}
+            alt="Mic Icon"
+            onClick={onOpenMicModal}
           />
         </div>
         <NavbarDropdown>
@@ -120,6 +183,35 @@ export default function Navbar() {
           )}
         </NavbarDropdown>
       </div>
+      <Modal
+        open={openMicModal}
+        onClose={onCloseMicModal}
+        classNames={{ modal: "micModal" }}
+      >
+        <div className="modalStuff">
+          <h2> {listening ? "Mic is On" : "Mic is Off"}</h2>
+          <div className="micModalTranscript">
+            {transcript} {listening.valueOf()}
+          </div>
+          <div className="micModalFooter">
+            <img
+              className="micModalIcon"
+              src={reset_icon}
+              alt="Reset Icon"
+              onClick={resetTranscript}
+            />
+            <img
+              className="micModalIcon"
+              src={listening ? red_mic_icon : mic_icon}
+              alt="Mic Icon"
+              onClick={speechToText}
+            />
+            <button onClick={confirmSpeechToText} className="confirmSearchBT">
+              Confirm Search
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

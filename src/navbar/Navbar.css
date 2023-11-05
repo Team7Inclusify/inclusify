@@ -105,6 +105,19 @@
   height: 1.5rem;
 }
 
+.navbar-clear-icon {
+  margin-left: 3px;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.navbar-mic-icon {
+  margin-left: 5px;
+  margin-right: 2px;
+  cursor: pointer;
+  height: 1.5rem;
+}
+
 .navbar-searchbar-input {
   height:2.5rem;
   width: 100px;
@@ -125,4 +138,39 @@
 .navbar-searchbar:focus-within {
   width: 60%;
   min-width: 150px;
+}
+
+.micModal {
+  width: 50%;
+  height: 50%;
+}
+
+.modalStuff {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.micModalTranscript {
+  height: 100%;
+  width: 100%;
+}
+
+.micModalFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.micModalIcon {
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.confirmSearchBT {
+  background-color: #00FA9A;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
 }
