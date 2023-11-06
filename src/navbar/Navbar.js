@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import NavbarDropdown from "react-navbar-dropdown";
@@ -18,6 +18,7 @@ import mic_icon from "../images/microphone-icon.png";
 import red_mic_icon from "../images/red-mic-icon.png";
 import close_button from "../images/close_icon.png";
 import reset_icon from "../images/reset_icon.png";
+import confirm_search from "../images/confirm_search.png";
 
 export default function Navbar() {
   // This to be used later ignore the eslint warning for this for now
@@ -200,9 +201,12 @@ export default function Navbar() {
               alt="Mic Icon"
               onClick={speechToText}
             />
-            <button onClick={confirmSpeechToText} className="confirmSearchBT">
-              Confirm Search
-            </button>
+            <img
+              className="micModalIcon"
+              src={confirm_search}
+              alt="Confirm Search Icon"
+              onClick={confirmSpeechToText}
+            />
           </div>
         </div>
       </Modal>
