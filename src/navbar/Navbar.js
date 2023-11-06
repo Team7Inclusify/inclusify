@@ -22,9 +22,6 @@ import reset_icon from "../images/reset_icon.png";
 export default function Navbar() {
   // This to be used later ignore the eslint warning for this for now
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isMicOn, setMicOn] = useState(false);
-  const micOn = useCallback(() => setMicOn(true), []);
-  const micOff = useCallback(() => setMicOn(false), []);
 
   const [openMicModal, setMicModalOpen] = useState(false);
 
@@ -38,7 +35,6 @@ export default function Navbar() {
       .value.toLowerCase()
       .replace(/ /g, "_");
     if (event.key === "Enter") {
-      console.log("User Searched: " + searched);
       navigate(`/search_results/${searched}`);
     }
   }
@@ -49,10 +45,6 @@ export default function Navbar() {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
 
   const clearSearchInput = () => {
     // Clear the input field
@@ -103,12 +95,14 @@ export default function Navbar() {
             alt="Clear Icon"
             onClick={clearSearchInput}
           />
-          <img
-            className="navbar-mic-icon"
-            src={mic_icon}
-            alt="Mic Icon"
-            onClick={onOpenMicModal}
-          />
+          {browserSupportsSpeechRecognition && (
+            <img
+              className="navbar-mic-icon"
+              src={mic_icon}
+              alt="Mic Icon"
+              onClick={onOpenMicModal}
+            />
+          )}
         </div>
         <NavbarDropdown>
           <NavbarDropdown.Toggle className="navbar_toggle">
