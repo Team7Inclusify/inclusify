@@ -76,7 +76,7 @@
   color: #333537;
 
   &:hover {
-    background-color: #f3f5f7;
+    background-color: #dadcde;
   }
 
   &__spacer {
@@ -120,7 +120,7 @@
 }
 
 .navbar-searchbar-input {
-  height:2.5rem;
+  height: 2.5rem;
   width: 100px;
   background-color: transparent;
   margin-right: 10px;
@@ -168,10 +168,7 @@
   cursor: pointer;
 }
 
-.confirmSearchBT {
-  background-color: #00FA9A;
-  border: none;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
+.micModalIcon:hover {
+  background-color: #dadcde;
+  border-radius: 5px;
 }
