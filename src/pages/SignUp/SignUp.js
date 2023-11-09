@@ -18,12 +18,7 @@ export default function SignUp() {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password).then(
-        (userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-        }
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error(error);
     }

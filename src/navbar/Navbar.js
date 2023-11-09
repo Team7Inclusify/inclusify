@@ -6,6 +6,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -24,7 +25,9 @@ import confirm_search from "../images/confirm_search.png";
 export default function Navbar() {
   // This to be used later ignore the eslint warning for this for now
   const [isLoggedIn, setLoggedIn] = useState(false);
-  console.log(auth?.currentUser?.email);
+  console.log(auth?.currentUser);
+
+  let loggedIn = auth?.currentUser;
 
   const [openMicModal, setMicModalOpen] = useState(false);
 
@@ -41,6 +44,14 @@ export default function Navbar() {
       navigate(`/search_results/${searched}`);
     }
   }
+
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const {
     transcript,
@@ -148,13 +159,16 @@ export default function Navbar() {
               className="navbar-profileImage"
             />
           </NavbarDropdown.Toggle>
-          {isLoggedIn ? (
+          {loggedIn ? (
             <NavbarDropdown.CSSTransitionMenu
               className="navbar-dropdown-menu"
               classNames="navbar-dropdown-menu"
               timeout={10}
             >
-              <NavbarDropdown.Item className="navbar-dropdown-menu-item">
+              <NavbarDropdown.Item
+                className="navbar-dropdown-menu-item"
+                onClick={logOut}
+              >
                 Log Out
               </NavbarDropdown.Item>
             </NavbarDropdown.CSSTransitionMenu>

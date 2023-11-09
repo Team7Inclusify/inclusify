@@ -12,8 +12,9 @@ export default function LogIn() {
   const [password, setPassword] = useState("");
 
   const logIn = async () => {
-    await signInWithEmailAndPassword(auth, email, password);
     try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("LOG IN SUCCESS");
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +46,7 @@ export default function LogIn() {
           />
           <div className="passwordSpace" />
         </div>
-        <button>Log In</button>
+        <button onClick={logIn}>Log In</button>
       </div>
     </div>
   );
