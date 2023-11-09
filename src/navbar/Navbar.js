@@ -48,6 +48,7 @@ export default function Navbar() {
   const logOut = async () => {
     try {
       await signOut(auth);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -12,6 +13,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const signUp = async () => {
     if (password !== confirmPassword) {
       alert("PASSWORD DO NOT MATCH" + password + ", " + confirmPassword);
@@ -19,6 +22,7 @@ export default function SignUp() {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
