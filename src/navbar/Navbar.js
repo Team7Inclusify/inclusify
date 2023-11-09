@@ -23,10 +23,6 @@ import reset_icon from "../images/reset_icon.png";
 import confirm_search from "../images/confirm_search.png";
 
 export default function Navbar() {
-  // This to be used later ignore the eslint warning for this for now
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  console.log(auth?.currentUser);
-
   let loggedIn = auth?.currentUser;
 
   const [openMicModal, setMicModalOpen] = useState(false);
