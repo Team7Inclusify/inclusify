@@ -10,6 +10,7 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import Tutorials from "./pages/Tutorials/Tutorials";
 import FAQ from "./pages/FAQ/FAQ";
 import Profile from "./pages/Profile/Profile";
+import TempAddVideo from "./pages/TempAddVideo/TempAddVideo";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/amazons3" element={<TempAddVideo />} />
         </Routes>
       </div>
     </div>
