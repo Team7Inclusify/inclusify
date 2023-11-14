@@ -1,0 +1,15 @@
+.files-dropzone {
+    width: 40%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-radius: 5px;
+    border-color:silver;
+}
+
+.upload-icon {
+    height: 50%;
+}
