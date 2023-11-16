@@ -20,6 +20,25 @@ export default function Record() {
       });
   };
 
+  const recordVideo = () => {
+    const width = 414;
+    const height = width / (16 / 9);
+    let video = videoRef.current;
+    let photo = photoRef.current;
+    photo.width = width;
+    photo.height = height;
+    let ctx = photo.getContext("2d");
+    ctx.drawImage(video, 0, 0, width, height);
+    setHasPhoto(true);
+  };
+
+  const closePhoto = () => {
+    let photo = photoRef.current;
+    let ctx = photo.getContext("2d");
+    ctx.clearRect(0, 0, photo.width, photo.height);
+    setHasPhoto(false);
+  };
+
   useEffect(() => {
     getVideo();
   }, [videoRef]);
@@ -28,11 +47,11 @@ export default function Record() {
     <>
       <div className="camera">
         <video ref={videoRef} />
-        <button>RECORD</button>
+        <button onClick={recordVideo}>RECORD</button>
       </div>
       <div className={"result" + (hasPhoto ? "hasPhoto" : "")}>
         <canvas ref={photoRef} />
-        <button>CLOSE</button>
+        <button onClick={closePhoto}>CLOSE</button>
       </div>
     </>
   );
