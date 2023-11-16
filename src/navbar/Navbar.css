@@ -1,10 +1,15 @@
+
+
 .navbar-whole {
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 4px #888888;
   width: fit-content;
-  min-width: 100vw;
+  min-width: 100%;
+  max-width: 100vw;
+  background-color: #87CEEB; /* Sky blue background color */
+  padding: 20px; /* Add some padding for a better look */
 }
 
 .navbar_toggle {
@@ -19,7 +24,8 @@
 }
 
 .navbar-homeImage {
-  height: 3rem;
+  height: 5rem;
+  margin-top: -15px;
 }
 
 .navbar-profileImage {
@@ -30,11 +36,25 @@
   background-color: #f3f5f7;
 }
 
+.navbar-homeImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-homeText {
+  margin-top: -5px; /* Adjust the margin-top to provide space between the image and text */
+  font-size: 1.2rem; /* You can adjust the font size as needed */
+  text-align: center; /* Center the text */
+  font-weight: 400;
+}
+
 .navbar-otherLinks {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: right;
+  margin-right: 30px;
 }
 
 .navbar-dropdown-menu {
@@ -91,14 +111,26 @@
 .navbar-searchbar {
   display: flex;
   align-items: center;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-left: auto;
+  margin-right: 20px;
   border-radius: 5px;
   border-style: solid;
   border-color: #c3c5c7;
   border-width: 1px;
-  height: 2rem;
+  height: 2.5rem;
+  background-color: white; /* Set background color to white */
 }
+
+.navbar-searchbar-input {
+  height: 2.5rem;
+  width: 100px;
+  background-color: white; /* Set background color to white */
+  margin-right: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
 
 .navbar-searchbar-icon {
   margin-left: 3px;
@@ -171,4 +203,29 @@
 .micModalIcon:hover {
   background-color: #dadcde;
   border-radius: 5px;
+}
+
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 50px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link {
+  margin-right: 20px; /* Adjust the margin as needed */
+  cursor: pointer;
+  font-size: 1.2rem; /* Adjust the font size as needed */
+  color: #333537;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #000; /* Adjust the hover color as needed */
 }

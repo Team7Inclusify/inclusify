@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import Navbar from "./navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import Discussion from "./pages/Discussion/Discussion";
+import Join from "./pages/JoinUs/Join";
 import LogIn from "./pages/Log In/LogIn";
 import Search from "./pages/Search/Search";
 import SignUp from "./pages/SignUp/SignUp";
@@ -10,6 +11,8 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import Tutorials from "./pages/Tutorials/Tutorials";
 import FAQ from "./pages/FAQ/FAQ";
 import Profile from "./pages/Profile/Profile";
+import Welcome from "./pages/Welcome/Welcome";
+
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
       <Navbar />
       <div className="Rest-App-Page">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Welcome />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/discussion" element={<Discussion />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/search_results/:search_tag" element={<Search />} />

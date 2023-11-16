@@ -1,0 +1,49 @@
+/* Welcome.css */
+.welcome-container {
+  height: 90vh; /* Set the container height to full viewport height */
+  background-image: url('../../images/wallpaper.jpg'); /* Replace with the path to your wallpaper image */
+  background-size: cover; /* Cover the entire container with the background image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Align content in a column */
+}
+
+.welcome-content {
+  text-align: center;
+  color: white; /* Set text color to white or a suitable contrast */
+}
+
+.buttons-container {
+  margin-top: 20px;
+}
+
+.signup-button,
+.login-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Green background color, you can customize */
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Added styles for the bottom background */
+.bottom-background {
+  width: 100%;
+  background-color: #a6d1e2;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 50px;
+  margin-bottom: -550px;
+
+}
+.custom-title {
+  font-family: 'Arial, sans-serif';
+  font-weight: bold;
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+}
