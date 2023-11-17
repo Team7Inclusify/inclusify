@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import NavbarDropdown from "react-navbar-dropdown";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -20,16 +22,30 @@ import close_button from "../images/close_icon.png";
 import reset_icon from "../images/reset_icon.png";
 import confirm_search from "../images/confirm_search.png";
 
-export default function Navbar() {
-  // This to be used later ignore the eslint warning for this for now
-  const [isLoggedIn, setLoggedIn] = useState(false);
+const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(null);
+  const navigate = useNavigate();
 
   const [openMicModal, setMicModalOpen] = useState(false);
-
   const onOpenMicModal = () => setMicModalOpen(true);
   const onCloseMicModal = () => setMicModalOpen(false);
 
-  const navigate = useNavigate();
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   function newSearch(event) {
     let searched = document
       .getElementById("navBarSearchInput")
@@ -40,15 +56,7 @@ export default function Navbar() {
     }
   }
 
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
-
   const clearSearchInput = () => {
-    // Clear the input field
     document.getElementById("navBarSearchInput").value = "";
   };
 
@@ -67,44 +75,85 @@ export default function Navbar() {
     }
   };
 
+  const checkAuth = () =>
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(user);
+      } else {
+        setLoggedIn(null);
+      }
+    });
+
+  useEffect(() => {
+    return () => checkAuth();
+  }, []);
+
   return (
     <div className="navbar-whole">
+      {/* Inclusify Logo */}
       <div className="navbar-homeLink" onClick={() => navigate("/")}>
+        <div className="navbar-homeImageContainer">
         <img
-          className="navbar-homeImage"
-          src={inclusify_image}
-          alt="Inclusify Logo"
-        />
-        Inclusify
-      </div>
-      <div className="navbar-otherLinks">
-        <div className="navbar-searchbar">
-          <img
-            className="navbar-searchbar-icon"
-            src={search_icon}
-            alt="Search Icon"
+            className="navbar-homeImage"
+            src={inclusify_image}
+            alt="Inclusify Logo"
           />
-          <input
-            className="navbar-searchbar-input"
-            placeholder="Search Here"
-            id="navBarSearchInput"
-            onKeyDown={(key) => newSearch(key)}
-          />
-          <img
-            className="navbar-clear-icon"
-            src={close_button}
-            alt="Clear Icon"
-            onClick={clearSearchInput}
-          />
-          {browserSupportsSpeechRecognition && (
-            <img
-              className="navbar-mic-icon"
-              src={mic_icon}
-              alt="Mic Icon"
-              onClick={onOpenMicModal}
-            />
-          )}
+          <div className="navbar-homeText">Inclusify</div>
         </div>
+          
+        </div>
+      {/* Left Side of Navbar */}
+      <div className="navbar-links-container">
+        {/* Navigation Menu */}
+        <div className="navbar-links">
+        <div className="navbar-link" onClick={() => navigate("/videoresume")}>
+            Video Resume
+          </div>
+          <div className="navbar-link" onClick={() => navigate("/discussion")}>
+            Discussion
+          </div>
+          <div className="navbar-link" onClick={() => navigate("/resources")}>
+            Resources
+          </div>
+          <div className="navbar-link" onClick={() => navigate("/about_us")}>
+            About Us
+          </div>
+        </div>
+      </div>
+
+
+      {/* Right Side of Navbar */}
+      
+      <div className="navbar-otherLinks">
+        {/* Search Bar */}
+      <div className="navbar-searchbar">
+        <img
+          className="navbar-searchbar-icon"
+          src={search_icon}
+          alt="Search Icon"
+        />
+        <input
+          className="navbar-searchbar-input"
+          placeholder="Search Here"
+          id="navBarSearchInput"
+          onKeyDown={(key) => newSearch(key)}
+        />
+        <img
+          className="navbar-clear-icon"
+          src={close_button}
+          alt="Clear Icon"
+          onClick={clearSearchInput}
+        />
+        {browserSupportsSpeechRecognition && (
+          <img
+            className="navbar-mic-icon"
+            src={mic_icon}
+            alt="Mic Icon"
+            onClick={onOpenMicModal}
+          />
+        )}
+      </div>
+        {/* More Info Dropdown */}
         <NavbarDropdown>
           <NavbarDropdown.Toggle className="navbar_toggle">
             <img
@@ -138,21 +187,43 @@ export default function Navbar() {
             </NavbarDropdown.Item>
           </NavbarDropdown.CSSTransitionMenu>
         </NavbarDropdown>
+
+        {/* Profile/Log In/Sign Up Dropdown */}
         <NavbarDropdown>
-          <NavbarDropdown.Toggle className="navbar_toggle">
-            <img
-              src={profile_icon}
-              alt="Profile Icon"
-              className="navbar-profileImage"
-            />
-          </NavbarDropdown.Toggle>
-          {isLoggedIn ? (
+          {loggedIn ? (
+            <NavbarDropdown.Toggle className="navbar_toggle">
+              <img
+                src={profile_icon}
+                alt="Profile Icon"
+                className="navbar-profileImage"
+              />
+            </NavbarDropdown.Toggle>
+          ) : (
+            <NavbarDropdown.Toggle className="navbar_toggle">
+              <img
+                src={profile_icon}
+                alt="Profile Icon"
+                className="navbar-profileImage"
+              />
+            </NavbarDropdown.Toggle>
+          )}
+
+          {loggedIn ? (
             <NavbarDropdown.CSSTransitionMenu
               className="navbar-dropdown-menu"
               classNames="navbar-dropdown-menu"
               timeout={10}
             >
-              <NavbarDropdown.Item className="navbar-dropdown-menu-item">
+              <NavbarDropdown.Item
+                className="navbar-dropdown-menu-item"
+                onClick={() => navigate("/profile")}
+              >
+                Profile
+              </NavbarDropdown.Item>
+              <NavbarDropdown.Item
+                className="navbar-dropdown-menu-item"
+                onClick={logOut}
+              >
                 Log Out
               </NavbarDropdown.Item>
             </NavbarDropdown.CSSTransitionMenu>
@@ -178,6 +249,8 @@ export default function Navbar() {
           )}
         </NavbarDropdown>
       </div>
+
+      {/* Mic Modal */}
       <Modal
         open={openMicModal}
         onClose={onCloseMicModal}
@@ -212,4 +285,6 @@ export default function Navbar() {
       </Modal>
     </div>
   );
-}
+};
+
+export default Navbar;

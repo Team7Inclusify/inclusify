@@ -1,0 +1,64 @@
+/* Join.css */
+.join-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c6d8de; /* Sky blue color */
+  }
+  
+  .join-content {
+    text-align: center;
+    color: #333; /* Dark text color */
+    width: 70%; /* Adjust the width as needed */
+    height: 500px;
+  }
+  
+  .buttons-container {
+    margin-top: 20px;
+  }
+
+  .signup-box,
+.login-box {
+  background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}
+  
+  .signup-button,
+  .login-button,
+  .join-us-button {
+    padding: 18px 36px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button {
+    background-color: #4CAF50; /* Green background color, you can customize */
+    color: white;
+  }
+  
+  .login-button {
+    background-color:  #3a8a3c; /* Dark gray background color, you can customize */
+    color: white;
+  }
+  
+  .join-us-button {
+    background-color: #001F3F; /* Deep dark blue color */
+    color: white;
+  }
+
+  .signup-button:hover,
+.login-button:hover {
+  background-color:  #0b550d; /* Darker shade on hover, you can customize */
+}
+  
+  .join-us-button:hover {
+    background-color: #003366; /* Darker shade on hover, you can customize */
+  }
+  

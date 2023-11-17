@@ -1,15 +1,15 @@
-.login-page {
-    height: 100vh;
+
+.signup-page {
+    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
   }
   
-  .login-content {
+  .signup-content {
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height: 400px;
+    width: 700px; 
     padding: 20px;
     background-color: #cbf1fa;
     border: 1px solid #ddd;
@@ -29,9 +29,9 @@
   }
   
   input {
-    width: 100%;
-    height: 30px;
-    padding: 5px;
+    width: 50%;
+    height: 30px; 
+    padding: 5px; 
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
@@ -44,8 +44,9 @@
   
   .signup-password {
     flex: 1;
-    height: 30px;
-    padding: 5px;
+    height: 30px; 
+    width: 50%;
+    padding: 5px; 
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
@@ -62,30 +63,33 @@
   }
   
   button {
-    background-color: #3498db;
+    background-color: #4caf50;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 3px;
-    width: 100%;
+    width: 150px;
     cursor: pointer;
+    margin: 0 auto;
   }
   
   button:hover {
-    background-color: #2980b9;
+    background-color: #45a049;
   }
-  
   p {
-    text-align: center;
-    margin-top: 15px;
+    text-align: center; 
+    margin-top: 15px; 
   }
   
   p a {
-    color: #3498db;
+    color: #0b456c;
     text-decoration: none;
   }
   
   p a:hover {
     text-decoration: underline;
   }
+
+  
+
   
