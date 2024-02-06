@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./SignUp.css";
 import { auth } from "../../config/firebase";
 import {
@@ -45,6 +45,18 @@ export default function SignUp() {
     <div className="signup-page">
       <div className="signup-content">
         <h2>Sign Up</h2>
+        <h3>First Name</h3>
+        <input
+          placeholder="First Name"
+          type={"text"}
+          onChange={(event) => setFirstName(event.target.value)}
+        />
+        <h3>Last Name</h3>
+        <input
+          placeholder="Last Name"
+          type={"text"}
+          onChange={(event) => setLastName(event.target.value)}
+        />
         <h3>Email</h3>
         <input
           placeholder="Email"
@@ -72,19 +84,12 @@ export default function SignUp() {
           type={showPassword ? "text" : "password"}
           onChange={(event) => setConfirmPassword(event.target.value)}
         />
-        <h3>First Name</h3>
-        <input
-          placeholder="First Name"
-          type={"text"}
-          onChange={(event) => setFirstName(event.target.value)}
-        />
-        <h3>Last Name</h3>
-        <input
-          placeholder="Last Name"
-          type={"text"}
-          onChange={(event) => setLastName(event.target.value)}
-        />
+
         <button onClick={signUp}>Sign Up</button>
+
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );

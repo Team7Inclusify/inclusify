@@ -1,34 +1,95 @@
+
 .signup-page {
     height: 100%;
     display: flex;
     justify-content: center;
-}
-
-.signup-content {
-    margin-top: 15px;
+    align-items: center; 
+  }
+  
+  .signup-content {
     display: flex;
     flex-direction: column;
+    width: 700px; 
+    padding: 20px;
+    background-color: #cbf1fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input {
     width: 50%;
-    height: 50%;
-    background-color: #DAF7FE;
-    box-shadow: 0px 0px 5px #c3c5c7;
-}
-
-.passwordDiv {
+    height: 30px; 
+    padding: 5px; 
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .passwordDiv {
     display: flex;
     align-items: center;
-}
-
-.signup-password {
-    width: 100%;
-}
-
-.passwordSpace {
-    width: 5px;
-}
-
-.showPasswordIcon {
-    width: 30px;
+  }
+  
+  .signup-password {
+    flex: 1;
+    height: 30px; 
+    width: 50%;
+    padding: 5px; 
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .passwordSpace {
+    width: 10px;
+  }
+  
+  .showPasswordIcon {
+    width: 20px;
     height: 20px;
     cursor: pointer;
-}
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    width: 150px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  p {
+    text-align: center; 
+    margin-top: 15px; 
+  }
+  
+  p a {
+    color: #0b456c;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+
+  
+
+  

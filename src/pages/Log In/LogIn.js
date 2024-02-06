@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LogIn.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -51,6 +51,9 @@ export default function LogIn() {
           <div className="passwordSpace" />
         </div>
         <button onClick={logIn}>Log In</button>
+        <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
       </div>
     </div>
   );
