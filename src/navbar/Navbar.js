@@ -85,8 +85,9 @@ const Navbar = () => {
     });
 
   useEffect(() => {
-    return () => checkAuth();
-  }, []);
+    checkAuth();
+    console.log("changeInLogIn");
+  }, [loggedIn]);
 
   return (
     <div className="navbar-whole">
