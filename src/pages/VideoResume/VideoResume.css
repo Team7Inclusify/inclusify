@@ -11,3 +11,249 @@ h2 {
 p {
   margin-bottom: 20px;
 }
+.video-resume-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.option-cards-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 50px; /* Increase the gap between cards */
+}
+
+.option-card {
+  width: 600px; /* Increase the width of the cards */
+  height: 300px; /* Increase the height of the cards */
+  padding: 40px;
+  background: linear-gradient(to bottom right, #87ceeb, #87e0eb); /* Change shading color to sky blue gradient */
+  border-radius: 30px; /* Increase border radius for rounded corners */
+  box-shadow: 0px 0px 30px rgba(135, 206, 235, 0.3); /* Adjust box-shadow color */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+}
+
+.option-card h3 {
+  font-size: 36px; /* Increase font size of heading */
+  color: #fff;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif; /* Change font family */
+  font-weight: bold; /* Make the text bold */
+}
+
+.option-card p {
+  font-size: 24px; /* Increase font size of paragraph */
+  color: #fff;
+  font-family: "Arial", sans-serif; /* Change font family */
+}
+
+.or-divider {
+  font-size: 24px; /* Make the text bigger */
+  font-weight: bold; /* Make the text bold */
+  text-align: center; /* Center the text horizontally */
+  margin: 20px 0; /* Add margin for spacing */
+}
+
+
+/*************template page**********/
+.template-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.card {
+  width: 200px;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+}
+
+/*******StepCard******************/
+.step-card {
+  width: 350px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  margin: 20px auto;
+}
+
+.step-title {
+  background-color: #f0f0f0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 15px 30px;
+}
+
+.step-title h2 {
+  font-size: 28px;
+  color: #333333;
+  margin: 0;
+}
+
+.step-description {
+  padding: 20px 30px;
+}
+
+.step-description h3 {
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.bullet-list {
+  font-size: 18px;
+  color: #666666;
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.bullet-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+}
+
+/***************Record page******************/
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.record-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.record-button.recording {
+  background-color: #dc3545;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+}
+
+.video {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.recorded-video-container {
+  margin-top: 20px;
+}
+
+.recorded-video {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.download-button {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+.timer-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.timer {
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #007bff; /* Blue color */
+  border-radius: 50%;
+  padding: 10px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Adding shadow for depth */
+}
+
+.timer::before {
+  content: "";
+  position: absolute;
+  border: 8px solid transparent;
+  border-bottom-color: #007bff; /* Blue color */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Ensure the triangle is above the background */
+}
+
+.timer::after {
+  content: "";
+  position: absolute;
+  border: 8px solid transparent;
+  border-bottom-color: #fff; /* White color */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Ensure the triangle is above the background */
+}
+
