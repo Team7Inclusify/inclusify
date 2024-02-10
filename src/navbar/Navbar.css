@@ -8,7 +8,7 @@
   width: fit-content;
   min-width: 100%;
   max-width: 100vw;
-  background-color: #87CEEB; /* Sky blue background color */
+  background-color: #001F3F; /* Sky blue background color */
   padding: 20px; /* Add some padding for a better look */
 }
 
@@ -29,11 +29,12 @@
 }
 
 .navbar-profileImage {
-  height: 2rem;
-  margin-right: 5px;
+  height: 3rem;
+  margin-right: 10px;
+  
 }
 .navbar-profileImage:hover {
-  background-color: #f3f5f7;
+  background-color: rgb(154, 220, 237);
 }
 
 .navbar-homeImageContainer {
@@ -47,6 +48,7 @@
   font-size: 1.2rem; /* You can adjust the font size as needed */
   text-align: center; /* Center the text */
   font-weight: 400;
+  color:#ffffff;
 }
 
 .navbar-otherLinks {
@@ -224,8 +226,9 @@
   font-size: 1.2rem; /* Adjust the font size as needed */
   color: #333537;
   text-decoration: none;
+  color: white;
 }
 
 .navbar-link:hover {
-  color: #000; /* Adjust the hover color as needed */
+  color: rgb(154, 220, 237) /* Adjust the hover color as needed */
 }
