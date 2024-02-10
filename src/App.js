@@ -13,7 +13,10 @@ import Resources from "./pages/Resources/Resources";
 import FAQ from "./pages/FAQ/FAQ";
 import Profile from "./pages/Profile/Profile";
 import Welcome from "./pages/Welcome/Welcome";
+import Step1 from "./pages/VideoResume/Step1";
 import VideoResume from "./pages/VideoResume/VideoResume";
+import Template from "./pages/VideoResume/Template";
+import Record from "./pages/VideoResume/Record";
 
 
 function App() {
@@ -33,6 +36,8 @@ function App() {
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/videoresume" element={<VideoResume />} />
+          <Route path="/template" element={<Template />} />
+          <Route path="/record" element={<Record />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
