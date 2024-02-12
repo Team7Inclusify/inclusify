@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import "./Steps.css"; 
+import MicIcon from "../../images/mic.svg";
 
 const Step1 = ({ onNext }) => {
   const [name, setName] = useState("");
@@ -61,32 +63,29 @@ const Step1 = ({ onNext }) => {
     },
   };
 
-  const buttonContainerStyle = {
-    textAlign: "center",
-    marginTop: "20px",
-  };
-
   return (
-    <div style={{ backgroundColor: "#87CEEB", padding: "30px", borderRadius: "15px", boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.1)", width: "60%", margin: "auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px", fontFamily: "Arial, sans-serif", color: "#333" }}>Step 1</h2>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>What's your name?</h3>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(setNameListening, setNameModalOpen, setName)
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+    <div className="container">
+      <h2 className="title">Step 1</h2>
+      <div className="input-container">
+        <div>
+          <h3>What's your name?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {nameListening && (
             <Modal
               open={nameModalOpen}
@@ -98,23 +97,25 @@ const Step1 = ({ onNext }) => {
             </Modal>
           )}
         </div>
-        <div style={{width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Where do you live?</h3>
-          <input
-            type="text"
-            placeholder="Enter your location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(setLocationListening, setLocationModalOpen, setLocation)
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+        <div>
+          <h3>Where do you live?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {locationListening && (
             <Modal
               open={locationModalOpen}
@@ -126,23 +127,25 @@ const Step1 = ({ onNext }) => {
             </Modal>
           )}
         </div>
-        <div style={{width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Where do you study?</h3>
-          <input
-            type="text"
-            placeholder="Enter your study location"
-            value={studyLocation}
-            onChange={(e) => setStudyLocation(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(setStudyLocationListening, setStudyLocationModalOpen, setStudyLocation)
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+        <div>
+          <h3>Where do you study?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your study location"
+              value={studyLocation}
+              onChange={(e) => setStudyLocation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {studyLocationListening && (
             <Modal
               open={studyLocationModalOpen}
@@ -154,23 +157,25 @@ const Step1 = ({ onNext }) => {
             </Modal>
           )}
         </div>
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>What do you do?</h3>
-          <input
-            type="text"
-            placeholder="Tell us about your occupation..."
-            value={occupation}
-            onChange={(e) => setOccupation(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(setOccupationListening, setOccupationModalOpen, setOccupation)
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+        <div>
+          <h3>What do you do?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Tell us about your occupation..."
+              value={occupation}
+              onChange={(e) => setOccupation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {occupationListening && (
             <Modal
               open={occupationModalOpen}
@@ -183,9 +188,8 @@ const Step1 = ({ onNext }) => {
           )}
         </div>
       </div>
-
-      <div style={buttonContainerStyle}>
-        <button onClick={handleNext} style={{ padding: "15px 30px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "18px", cursor: "pointer", transition: "background-color 0.3s" }}>Next</button>
+      <div className="button-container">
+        <button onClick={handleNext} className="button">Next</button>
       </div>
     </div>
   );

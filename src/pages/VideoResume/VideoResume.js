@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import Step1 from "./Step1";
 import Step2 from "./Step2";
-import Summary from "./summary";
+import Summary from "./Summary";
 import './VideoResume.css'; // Import your CSS file for styling
 
 const VideoResume = () => {
