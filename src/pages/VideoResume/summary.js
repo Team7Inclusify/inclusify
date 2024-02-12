@@ -1,174 +1,71 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link from React Router
 
 const Summary = ({ data }) => {
-  const fileInputRef = useRef(null);
-  const videoRef = useRef(null);
-  const mediaRecorderRef = useRef(null);
-
-  const [isRecording, setIsRecording] = useState(false);
-
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true,
-      });
-
-      videoRef.current.srcObject = stream;
-
-      const mediaRecorder = new MediaRecorder(stream);
-
-      mediaRecorder.ondataavailable = handleDataAvailable;
-      mediaRecorder.onstop = handleStop;
-
-      mediaRecorderRef.current = mediaRecorder;
-
-      mediaRecorder.start();
-      setIsRecording(true);
-      console.log("Recording started...");
-    } catch (error) {
-      console.error("Error accessing camera:", error);
-    }
-  };
-
-  const stopRecording = () => {
-    const mediaRecorder = mediaRecorderRef.current;
-    if (mediaRecorder && mediaRecorder.state !== "inactive") {
-      mediaRecorder.stop();
-      setIsRecording(false);
-      console.log("Recording stopped...");
-    }
-  };
-
-  const handleDataAvailable = (event) => {
-    if (event.data.size > 0) {
-      const recordedChunks = [];
-      recordedChunks.push(event.data);
-
-      const blob = new Blob(recordedChunks, { type: "video/mp4" });
-
-      const videoUrl = URL.createObjectURL(blob);
-      videoRef.current.controls = true;
-
-      videoRef.current.src = videoUrl;
-
-      videoRef.current.controls = true;
-
-      console.log(videoRef.current);
-
-      const downloadLink = document.createElement("a");
-      downloadLink.href = videoUrl;
-      downloadLink.download = "recorded-video.mp4";
-
-      document.body.appendChild(downloadLink);
-
-      downloadLink.click();
-
-      document.body.removeChild(downloadLink);
-    }
-  };
-
-  const handleStop = () => {
-    const stream = videoRef.current.srcObject;
-    if (stream) {
-      const tracks = stream.getTracks();
-      tracks.forEach((track) => track.stop());
-    }
-
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      console.log("Selected File:", selectedFile);
-    }
-  };
-
-  const centerContainerStyle = {
-    textAlign: "center",
-    marginTop: "50px",
-  };
-
-  const readyToRecordStyle = {
-    color: "darkblue",
-    fontWeight: "bold",
-  };
-
-  const startButtonStyle = {
-    backgroundColor: "green",
-    color: "white",
-    padding: "10px",
-    borderRadius: "5px",
-    marginRight: "10px",
-    cursor: "pointer",
-  };
-
-  const stopButtonStyle = {
-    backgroundColor: "red",
-    color: "white",
-    padding: "10px",
-    borderRadius: "5px",
-    cursor: "pointer",
-  };
-
-  const uploadButtonStyle = {
-    backgroundColor: "green",
-    color: "white",
-    padding: "10px",
-    borderRadius: "5px",
-    marginTop: "10px",
-    cursor: "pointer",
-  };
-
   return (
-    <div>
-      <h2>Personal Story</h2>
-      <p>
-        Hi, my name is {data.name}. I live in {data.location} and work as a{" "}
-        {data.occupation}. Let me tell you a bit about myself.
+    <div style={summaryContainerStyle}>
+      <h2 style={headingStyle}>Personal Story</h2>
+      <p style={paragraphStyle}>
+        Hi, my name is <strong>{data.name}</strong>. I live in{" "}
+        <strong>{data.location}</strong> and work as a{" "}
+        <strong>{data.occupation}</strong>. Let me tell you a bit about myself.
       </p>
-      <p>
-        In my free time, I enjoy {data.interests}. I've developed a set of
-        skills that include {data.skills}. Over the years, I've gained valuable
-        experience in {data.experience}.
+      <p style={paragraphStyle}>
+        In my free time, I enjoy <strong>{data.interests}</strong>. I've
+        developed a set of skills that include <strong>{data.skills}</strong>.
+        Over the years, I've gained valuable experience in{" "}
+        <strong>{data.experience}</strong>.
       </p>
-      <p>
-        Currently, I'm pursuing {data.education} to further enhance my
-        knowledge. Here's a bit more about me: {data.about}
+      <p style={paragraphStyle}>
+        Currently, I'm pursuing <strong>{data.education}</strong> to further
+        enhance my knowledge. Here's a bit more about me:{" "}
+        <strong>{data.about}</strong>
       </p>
-
-      <div style={centerContainerStyle}>
-        <p style={readyToRecordStyle}>Ready to record yourself?</p>
-        <button
-          style={startButtonStyle}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          {isRecording ? "Stop Recording" : "Start Recording"}
-        </button>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          onChange={handleFileChange}
-        />
-        <video
-          ref={videoRef}
-          style={{ width: "100%", height: "auto", marginTop: "20px" }}
-          autoPlay
-          playsInline
-          controls
-          muted
-        ></video>
-        <button
-          style={uploadButtonStyle}
-          onClick={() => fileInputRef.current.click()}
-        >
-          Upload Video
-        </button>
-      </div>
+      {/* Button to navigate to Record.js */}
+      <Link to="/record" style={linkStyle}>
+        <button style={buttonStyle}>I am ready!</button>
+      </Link>
     </div>
   );
+};
+
+// CSS Styles
+const summaryContainerStyle = {
+  backgroundColor: "#f9f9f9",
+  padding: "30px",
+  borderRadius: "15px",
+  boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
+  maxWidth: "800px",
+  margin: "auto",
+  textAlign: "center",
+};
+
+const headingStyle = {
+  color: "#333",
+  fontSize: "28px",
+  marginBottom: "30px",
+};
+
+const paragraphStyle = {
+  fontSize: "20px",
+  lineHeight: "1.6",
+  marginBottom: "20px",
+};
+
+const linkStyle = {
+  textDecoration: "none",
+};
+
+const buttonStyle = {
+  padding: "15px 30px",
+  borderRadius: "10px",
+  border: "none",
+  backgroundColor: "#4CAF50",
+  color: "white",
+  fontFamily: "Arial, sans-serif",
+  fontSize: "20px",
+  cursor: "pointer",
+  transition: "background-color 0.3s",
 };
 
 export default Summary;

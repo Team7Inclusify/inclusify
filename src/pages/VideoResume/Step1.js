@@ -1,34 +1,28 @@
 import React, { useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import "./Steps.css"; 
+import MicIcon from "../../images/mic.svg";
 
 const Step1 = ({ onNext }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [studyLocation, setStudyLocation] = useState("");
   const [occupation, setOccupation] = useState("");
-  const [nameTranscript, setNameTranscript] = useState("");
-  const [locationTranscript, setLocationTranscript] = useState("");
-  const [studyLocationTranscript, setStudyLocationTranscript] = useState("");
-  const [occupationTranscript, setOccupationTranscript] = useState("");
   const [nameListening, setNameListening] = useState(false);
   const [locationListening, setLocationListening] = useState(false);
-  const [studyLocationListening, setStudyLocationListening] = useState("");
-  const [occupationListening, setOccupationListening] = useState("");
+  const [studyLocationListening, setStudyLocationListening] = useState(false);
+  const [occupationListening, setOccupationListening] = useState(false);
   const [nameModalOpen, setNameModalOpen] = useState(false);
   const [locationModalOpen, setLocationModalOpen] = useState(false);
   const [studyLocationModalOpen, setStudyLocationModalOpen] = useState(false);
-  const [occupationModalOpen, setOccupationModalOpen] = useState("");
+  const [occupationModalOpen, setOccupationModalOpen] = useState(false);
 
   const handleNext = () => {
     onNext({ name, location, studyLocation, occupation });
-    setNameTranscript("");
-    setLocationTranscript("");
-    setStudyLocationTranscript("");
-    setOccupationTranscript("");
   };
 
-  const handleSpeechToText = (setListening, setTranscript, setModalOpen, setInputValue) => {
+  const handleSpeechToText = (setListening, setModalOpen, setInputValue) => {
     if (!setListening) return;
 
     setListening(true);
@@ -41,7 +35,6 @@ const Step1 = ({ onNext }) => {
 
     recognition.onresult = (event) => {
       const result = event.results[0][0].transcript;
-      setTranscript(result);
       setInputValue(result);
     };
 
@@ -57,9 +50,8 @@ const Step1 = ({ onNext }) => {
     };
   };
 
-  const closeModal = (setListening, setTranscript, setModalOpen) => {
+  const closeModal = (setListening, setModalOpen) => {
     setListening(false);
-    setTranscript("");
     setModalOpen(false);
   };
 
@@ -71,168 +63,133 @@ const Step1 = ({ onNext }) => {
     },
   };
 
-  const buttonContainerStyle = {
-    textAlign: "center",
-    marginTop: "20px",
-  };
-
   return (
-    <div>
-      <h2>Step 1</h2>
-      <h3>What's your name?</h3>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button
-        onClick={() =>
-          handleSpeechToText(
-            setNameListening,
-            setNameTranscript,
-            setNameModalOpen,
-            setName
-          )
-        }
-      >
-        
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-6h2v6zm4 0h-2V7h2v12z" />
-        </svg>
-      </button>
-      {nameListening && (
-        <Modal
-          open={nameModalOpen}
-          onClose={() => closeModal(setNameListening, setNameTranscript, setNameModalOpen)}
-          styles={modalStyles}
-        >
-          <h2>{nameListening ? "Mic is On" : "Mic is Off"}</h2>
-          <div>{nameTranscript}</div>
-        </Modal>
-      )}
-
-      <h3>Where do you live?</h3>
-      <input
-        type="text"
-        placeholder="Enter your location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-      <button
-        onClick={() =>
-          handleSpeechToText(
-            setLocationListening,
-            setLocationTranscript,
-            setLocationModalOpen,
-            setLocation
-          )
-        }
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-6h2v6zm4 0h-2V7h2v12z" />
-        </svg>
-      </button>
-      {locationListening && (
-        <Modal
-          open={locationModalOpen}
-          onClose={() => closeModal(setLocationListening, setLocationTranscript, setLocationModalOpen)}
-          styles={modalStyles}
-        >
-          <h2>{locationListening ? "Mic is On" : "Mic is Off"}</h2>
-          <div>{locationTranscript}</div>
-        </Modal>
-      )}
-      <h3>Where do you study?</h3>
-      <input
-        type="text"
-        placeholder="Enter your study location"
-        value={studyLocation}
-        onChange={(e) => setStudyLocation(e.target.value)}
-      />
-      <button
-        onClick={() =>
-          handleSpeechToText(
-            setStudyLocationListening,
-            setStudyLocationTranscript,
-            setStudyLocationModalOpen,
-            setStudyLocation
-          )
-        }
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-6h2v6zm4 0h-2V7h2v12z" />
-        </svg>
-      </button>
-      {studyLocationListening && (
-        <Modal
-          open={studyLocationModalOpen}
-          onClose={() => closeModal(setStudyLocationListening, setStudyLocationTranscript, setStudyLocationModalOpen)}
-          styles={modalStyles}
-        >
-          <h2>{studyLocationListening ? "Mic is On" : "Mic is Off"}</h2>
-          <div>{studyLocationTranscript}</div>
-        </Modal>
-      )}
-
-      <h3>What do you do?</h3>
-      <input
-        type="text"
-        placeholder="Tell us about your occupation..."
-        value={occupation}
-        onChange={(e) => setOccupation(e.target.value)}
-      />
-      <button
-        onClick={() =>
-          handleSpeechToText(
-            setOccupationListening,
-            setOccupationTranscript,
-            setOccupationModalOpen,
-            setOccupation
-          )
-        }
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-6h2v6zm4 0h-2V7h2v12z" />
-        </svg>
-      </button>
-      {occupationListening && (
-        <Modal
-          open={occupationModalOpen}
-          onClose={() => closeModal(setOccupationListening, setOccupationTranscript, setOccupationModalOpen)}
-          styles={modalStyles}
-        >
-          <h2>{occupationListening ? "Mic is On" : "Mic is Off"}</h2>
-          <div>{occupationTranscript}</div>
-        </Modal>
-      )}
-
-      <div style={buttonContainerStyle}>
-        <button onClick={handleNext}>Next</button>
+    <div className="container">
+      <h2 className="title">Step 1</h2>
+      <div className="input-container">
+        <div>
+          <h3>What's your name?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
+          {nameListening && (
+            <Modal
+              open={nameModalOpen}
+              onClose={() => closeModal(setNameListening, setNameModalOpen)}
+              styles={modalStyles}
+            >
+              <h2>{nameListening ? "Mic is On" : "Mic is Off"}</h2>
+              <div>{name}</div>
+            </Modal>
+          )}
+        </div>
+        <div>
+          <h3>Where do you live?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
+          {locationListening && (
+            <Modal
+              open={locationModalOpen}
+              onClose={() => closeModal(setLocationListening, setLocationModalOpen)}
+              styles={modalStyles}
+            >
+              <h2>{locationListening ? "Mic is On" : "Mic is Off"}</h2>
+              <div>{location}</div>
+            </Modal>
+          )}
+        </div>
+        <div>
+          <h3>Where do you study?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Enter your study location"
+              value={studyLocation}
+              onChange={(e) => setStudyLocation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
+          {studyLocationListening && (
+            <Modal
+              open={studyLocationModalOpen}
+              onClose={() => closeModal(setStudyLocationListening, setStudyLocationModalOpen)}
+              styles={modalStyles}
+            >
+              <h2>{studyLocationListening ? "Mic is On" : "Mic is Off"}</h2>
+              <div>{studyLocation}</div>
+            </Modal>
+          )}
+        </div>
+        <div>
+          <h3>What do you do?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Tell us about your occupation..."
+              value={occupation}
+              onChange={(e) => setOccupation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+              }
+              className="round-button" 
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
+          {occupationListening && (
+            <Modal
+              open={occupationModalOpen}
+              onClose={() => closeModal(setOccupationListening, setOccupationModalOpen)}
+              styles={modalStyles}
+            >
+              <h2>{occupationListening ? "Mic is On" : "Mic is Off"}</h2>
+              <div>{occupation}</div>
+            </Modal>
+          )}
+        </div>
+      </div>
+      <div className="button-container">
+        <button onClick={handleNext} className="button">Next</button>
       </div>
     </div>
   );

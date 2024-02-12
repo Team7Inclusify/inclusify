@@ -1,44 +1,44 @@
 const resumeBuildingResources = [
     {
-      name: "Example Resume Resource 1",
-      link: "https://www.example1.com",
+      name: "Video Resume Tips",
+      link: "https://www.indeed.com/career-advice/resumes-cover-letters/how-to-make-a-video-resume",
     },
     {
-      name: "Example Resume Resource 2",
-      link: "https://www.example2.com",
+      name: "How to script & film a video resume",
+      link: "https://www.youtube.com/watch?v=eSs68R4zhLI",
     },
   ];
   
   const jobSearchResources = [
     {
-      name: "Example Job Search Resource 1",
-      link: "https://www.example3.com",
+      name: "Employment resoucres (Government & Private organizations",
+      link: "https://iacc.hhs.gov/resources/employment/websites/",
     },
     {
-      name: "Example Job Search Resource 2",
-      link: "https://www.example4.com",
+      name: "Job board (Autistic Adult NYC)",
+      link: "https://www.autisticadultsnyc.org/employment-resources/tag/Job+Board",
     },
   ];
   
   const youtubeLinks = [
     {
-      name: "YouTube Video 1",
-      link: "https://www.youtube.com/watch?v=video1",
+      name: "How to script & film a video resume",
+      link: "https://www.youtube.com/watch?v=eSs68R4zhLI",
     },
     {
-      name: "YouTube Video 2",
-      link: "https://www.youtube.com/watch?v=video2",
+      name: "How to make video resume",
+      link: "https://www.youtube.com/watch?v=lWFbwcjWtmg",
     },
   ];
   
   const events = [
     {
-      name: "Event 1",
-      link: "https://www.example.com/event1",
+      name: "Autism Speaks",
+      link: "https://www.autismspeaks.org/events",
     },
     {
-      name: "Event 2",
-      link: "https://www.example.com/event2",
+      name: "Autism Conferences 2024 ",
+      link: "https://www.autismlegalresourcecenter.com/resources/autism-aba-conferences-2024/",
     },
   ];
   
