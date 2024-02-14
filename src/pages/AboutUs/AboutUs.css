@@ -1,60 +1,88 @@
 .about-us-page {
-    background-color: #ffffff;
-    padding: 50px;
-    text-align: center;
+  background-color: #ffffff;
+  padding: 50px;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.content {
+  margin-bottom: 40px;
+}
+
+.description {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.team-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-member {
+  text-align: center;
+  margin: 0 30px;
+}
+
+.team-member-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 5px solid #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.member-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.member-role {
+  font-size: 18px;
+  color: #666;
+}
+.pop-up {
+  animation: popUpAnimation 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes popUpAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .header {
-    margin-bottom: 40px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .logo {
-    width: 200px;
-    margin-bottom: 20px;
-  }
-  
-  .heading {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .content {
-    margin-bottom: 40px;
-  }
-  
-  .description {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .team-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .team-member {
-    text-align: center;
-    margin: 0 30px;
-  }
-  
-  .team-member-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    border: 5px solid #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .member-name {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .member-role {
-    font-size: 18px;
-    color: #666;
-  }
-  
+}
+.about-us-page {
+  text-align: center;
+}
+
+.content {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.content.pop-up {
+  opacity: 1;
+}
+
+
