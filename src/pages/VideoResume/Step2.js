@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Modal } from "react-responsive-modal";
 import { Link, useNavigate } from "react-router-dom";
+import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import "./Steps.css"; 
+import MicIcon from "../../images/mic.svg";
 
 const Step2 = ({ onNext }) => {
   const [about, setAbout] = useState("");
@@ -75,57 +77,34 @@ const Step2 = ({ onNext }) => {
     },
   };
 
-  const buttonContainerStyle = {
-    textAlign: "center",
-    marginTop: "20px",
-  };
-
-  const backButtonStyle = {
-    backgroundColor: "#2196f3",
-    color: "white",
-    padding: "10px 20px",
-    borderRadius: "8px",
-    border: "none",
-    fontFamily: "Arial, sans-serif",
-    fontSize: "16px",
-    cursor: "pointer",
-    transition: "background-color 0.3s",
-    textDecoration: "none",
-    display: "inline-block",
-  };
-
   return (
-    <div style={{ backgroundColor: "#cbe6ef", padding: "30px", borderRadius: "15px", boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.1)", width: "60%", margin: "auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px", fontFamily: "Arial, sans-serif", color: "#333" }}>Step 2</h2>
-      <div style={{ marginBottom: "20px", textAlign: "center" }}>
-        <div style={{ display: "inline-block" }}>
-          <Link to="/step1" style={backButtonStyle}>Back to Step 1</Link>
-        </div>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Tell me about yourself</h3>
-          
-          <input
-            type="text"
-            placeholder="Tell us about yourself..."
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(
-                setAboutListening,
-                setAboutTranscript,
-                setAboutModalOpen,
-                setAbout
-              )
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+    <div className="container">
+      <h2 className="title">Step 2</h2>
+      <div className="input-container">
+        <div>
+          <h3>Tell me about yourself</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="Tell us about yourself..."
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(
+                  setAboutListening,
+                  setAboutTranscript,
+                  setAboutModalOpen,
+                  setAbout
+                )
+              }
+              className="round-button"
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {aboutListening && (
             <Modal
               open={aboutModalOpen}
@@ -138,28 +117,30 @@ const Step2 = ({ onNext }) => {
           )}
         </div>
 
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>What do you like to do?</h3>
-          <input
-            type="text"
-            placeholder="What do you like to do?"
-            value={interests}
-            onChange={(e) => setInterests(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(
-                setInterestsListening,
-                setInterestsTranscript,
-                setInterestsModalOpen,
-                setInterests
-              )
-            }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
-          >
-            Speak
-          </button>
+        <div>
+          <h3>What do you like to do?</h3>
+          <div className="input-with-button">
+            <input
+              type="text"
+              placeholder="What do you like to do?"
+              value={interests}
+              onChange={(e) => setInterests(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(
+                  setInterestsListening,
+                  setInterestsTranscript,
+                  setInterestsModalOpen,
+                  setInterests
+                )
+              }
+              className="round-button"
+            >
+              <img src={MicIcon} alt="Mic Icon" /> 
+            </button>
+          </div>
           {interestsListening && (
             <Modal
               open={interestsModalOpen}
@@ -172,14 +153,15 @@ const Step2 = ({ onNext }) => {
           )}
         </div>
 
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>What are you good at?</h3>
+        <div>
+          <h3>What are you good at?</h3>
+          <div className="input-with-button">
           <input
             type="text"
             placeholder="What are your skills?"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
+            className="input-field"
           />
           <button
             onClick={() =>
@@ -190,10 +172,11 @@ const Step2 = ({ onNext }) => {
                 setSkills
               )
             }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
+            className="round-button"
           >
-            Speak
+            <img src={MicIcon} alt="Mic Icon" /> 
           </button>
+          </div>
           {skillsListening && (
             <Modal
               open={skillsModalOpen}
@@ -206,14 +189,15 @@ const Step2 = ({ onNext }) => {
           )}
         </div>
 
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Tell me about your work experience</h3>
+        <div>
+          <h3>Tell me about your work experience</h3>
+          <div className="input-with-button">
           <input
             type="text"
             placeholder="Tell me about your work experience"
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
+            className="input-field"
           />
           <button
             onClick={() =>
@@ -224,10 +208,11 @@ const Step2 = ({ onNext }) => {
                 setExperience
               )
             }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
+            className="round-button"
           >
-            Speak
+            <img src={MicIcon} alt="Mic Icon" /> 
           </button>
+          </div>
           {experienceListening && (
             <Modal
               open={experienceModalOpen}
@@ -240,14 +225,15 @@ const Step2 = ({ onNext }) => {
           )}
         </div>
 
-        <div style={{ width: "70%", marginBottom: "20px" }}>
-          <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Tell me about your education</h3>
+        <div>
+          <h3>Tell me about your education</h3>
+          <div className="input-with-button">
           <input
             type="text"
             placeholder="Tell me about your education"
             value={education}
             onChange={(e) => setEducation(e.target.value)}
-            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", marginBottom: "10px", fontFamily: "Arial, sans-serif", fontSize: "16px" }}
+            className="input-field"
           />
           <button
             onClick={() =>
@@ -258,10 +244,11 @@ const Step2 = ({ onNext }) => {
                 setEducation
               )
             }
-            style={{ padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "16px", cursor: "pointer", transition: "background-color 0.3s" }}
+            className="round-button"
           >
-            Speak
+            <img src={MicIcon} alt="Mic Icon" /> 
           </button>
+          </div>
           {educationListening && (
             <Modal
               open={educationModalOpen}
@@ -275,8 +262,9 @@ const Step2 = ({ onNext }) => {
         </div>
       </div>
 
-      <div style={buttonContainerStyle}>
-        <button onClick={handleNext} style={{ padding: "15px 30px", borderRadius: "8px", border: "none", backgroundColor: "#4CAF50", color: "white", fontFamily: "Arial, sans-serif", fontSize: "18px", cursor: "pointer", transition: "background-color 0.3s" }}>Next</button>
+      <div className="button-container">
+        <Link to="/videoresume" className="backButtonStyle">Back</Link>
+        <button onClick={handleNext} className="button">Next</button>
       </div>
     </div>
   );

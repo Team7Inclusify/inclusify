@@ -66,6 +66,7 @@ function App() {
           <Route path="/template" element={<Template />} />
           {/* Route for the Record component */}
           <Route path="/record" element={<Record />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
         </Routes>
       </div>
     </div>
