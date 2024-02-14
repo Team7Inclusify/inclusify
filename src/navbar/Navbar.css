@@ -2,36 +2,23 @@
 
 .navbar-whole {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 4px #888888;
-  width: fit-content;
-  min-width: 100%;
-  max-width: 100vw;
+  width: 100vw;
   background-color: #001F3F; /* Sky blue background color */
-  padding: 20px; /* Add some padding for a better look */
 }
 
 .navbar_toggle {
   cursor: pointer;
 }
 
-.navbar-homeLink {
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
 .navbar-homeImage {
   height: 5rem;
-  margin-top: -15px;
 }
 
 .navbar-profileImage {
   height: 3rem;
   margin-right: 10px;
-  
 }
 .navbar-profileImage:hover {
   background-color: rgb(154, 220, 237);
@@ -41,10 +28,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-right: 25px;
 }
 
 .navbar-homeText {
-  margin-top: -5px; /* Adjust the margin-top to provide space between the image and text */
   font-size: 1.2rem; /* You can adjust the font size as needed */
   text-align: center; /* Center the text */
   font-weight: 400;
@@ -113,6 +103,7 @@
 .navbar-searchbar {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: auto;
   margin-right: 20px;
   border-radius: 5px;
@@ -124,7 +115,7 @@
 }
 
 .navbar-searchbar-input {
-  height: 2.5rem;
+  height: fit-content;
   width: 100px;
   background-color: white; /* Set background color to white */
   margin-right: 10px;
@@ -215,11 +206,6 @@
   margin-left: 50px;
 }
 
-.navbar-links {
-  display: flex;
-  align-items: center;
-}
-
 .navbar-link {
   margin-right: 20px; /* Adjust the margin as needed */
   cursor: pointer;
@@ -227,6 +213,7 @@
   color: #333537;
   text-decoration: none;
   color: white;
+  width: fit-content;
 }
 
 .navbar-link:hover {
