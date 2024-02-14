@@ -7,7 +7,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column; /* Align content in a column */
+  
 }
+
 
 .welcome-content {
   text-align: center;
@@ -47,3 +49,4 @@
   color: #333;
   text-align: center;
 }
+

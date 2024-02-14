@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
-import "./Steps.css"; 
+import "./Steps.css"
 import MicIcon from "../../images/mic.svg";
 
 const Step1 = ({ onNext }) => {
@@ -17,9 +18,11 @@ const Step1 = ({ onNext }) => {
   const [locationModalOpen, setLocationModalOpen] = useState(false);
   const [studyLocationModalOpen, setStudyLocationModalOpen] = useState(false);
   const [occupationModalOpen, setOccupationModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleNext = () => {
     onNext({ name, location, studyLocation, occupation });
+    navigate('/step2');
   };
 
   const handleSpeechToText = (setListening, setModalOpen, setInputValue) => {
@@ -109,7 +112,7 @@ const Step1 = ({ onNext }) => {
             />
             <button
               onClick={() =>
-                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+                handleSpeechToText(locationListening, setLocationModalOpen, setLocation)
               }
               className="round-button" 
             >
@@ -119,7 +122,7 @@ const Step1 = ({ onNext }) => {
           {locationListening && (
             <Modal
               open={locationModalOpen}
-              onClose={() => closeModal(setLocationListening, setLocationModalOpen)}
+              onClose={() => closeModal(locationListening, setLocationModalOpen)}
               styles={modalStyles}
             >
               <h2>{locationListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -139,7 +142,7 @@ const Step1 = ({ onNext }) => {
             />
             <button
               onClick={() =>
-                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+                handleSpeechToText(studyLocationListening, setStudyLocationModalOpen, setStudyLocation)
               }
               className="round-button" 
             >
@@ -149,7 +152,7 @@ const Step1 = ({ onNext }) => {
           {studyLocationListening && (
             <Modal
               open={studyLocationModalOpen}
-              onClose={() => closeModal(setStudyLocationListening, setStudyLocationModalOpen)}
+              onClose={() => closeModal(studyLocationListening, setStudyLocationModalOpen)}
               styles={modalStyles}
             >
               <h2>{studyLocationListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -169,7 +172,7 @@ const Step1 = ({ onNext }) => {
             />
             <button
               onClick={() =>
-                handleSpeechToText(setNameListening, setNameModalOpen, setName)
+                handleSpeechToText(occupationListening, setOccupationModalOpen, setOccupation)
               }
               className="round-button" 
             >
@@ -179,7 +182,7 @@ const Step1 = ({ onNext }) => {
           {occupationListening && (
             <Modal
               open={occupationModalOpen}
-              onClose={() => closeModal(setOccupationListening, setOccupationModalOpen)}
+              onClose={() => closeModal(occupationListening, setOccupationModalOpen)}
               styles={modalStyles}
             >
               <h2>{occupationListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -189,6 +192,7 @@ const Step1 = ({ onNext }) => {
         </div>
       </div>
       <div className="button-container">
+        <Link to="/videoresume" className="backButtonStyle">Back</Link>
         <button onClick={handleNext} className="button">Next</button>
       </div>
     </div>

@@ -58,10 +58,10 @@ const Template = () => {
 
 // Define buttonStyle for the button
 const buttonStyle = {
-  padding: "15px 30px",
+  padding: "5px 5px",
   fontSize: "1.2rem",
   backgroundColor: "skyblue",
-  color: "white",
+  color: "#001F3F",
   border: "none",
   borderRadius: "8px",
   cursor: "pointer",
