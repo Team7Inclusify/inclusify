@@ -4,7 +4,22 @@
     margin-right: 20px;
 }
 
-.navbar-dropdown-container {
+.dropCoverImg:hover{
+    background-color: rgb(154, 220, 237);
+    border-radius: 100px;
+}
+
+.dropCoverImgNotCircular {
+    height: 40px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.dropCoverImgNotCircular:hover{
+    background-color: rgb(154, 220, 237);
+}
+
+.dropdown-container {
     position: relative;
     display: inline-block;
 }

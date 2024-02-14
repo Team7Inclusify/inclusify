@@ -157,6 +157,7 @@ const Navbar = () => {
         <>
           {/* More Info in Dropdown*/}
           <Dropdown
+            isCircular
             coverIsImg
             coverImg={more_info_icon}
             content={
@@ -170,6 +171,7 @@ const Navbar = () => {
           />
           {/* Profile Dropdown*/}
           <Dropdown
+            isCircular
             coverIsImg
             coverImg={profile_icon}
             content={
