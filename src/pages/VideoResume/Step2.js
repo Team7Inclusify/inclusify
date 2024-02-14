@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-responsive-modal";
+import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-modal/styles.css";
 
 const Step2 = ({ onNext }) => {
@@ -79,12 +80,32 @@ const Step2 = ({ onNext }) => {
     marginTop: "20px",
   };
 
+  const backButtonStyle = {
+    backgroundColor: "#2196f3",
+    color: "white",
+    padding: "10px 20px",
+    borderRadius: "8px",
+    border: "none",
+    fontFamily: "Arial, sans-serif",
+    fontSize: "16px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    textDecoration: "none",
+    display: "inline-block",
+  };
+
   return (
-    <div style={{ backgroundColor: "#87CEEB", padding: "30px", borderRadius: "15px", boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.1)", width: "60%", margin: "auto" }}>
+    <div style={{ backgroundColor: "#cbe6ef", padding: "30px", borderRadius: "15px", boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.1)", width: "60%", margin: "auto" }}>
       <h2 style={{ textAlign: "center", marginBottom: "20px", fontFamily: "Arial, sans-serif", color: "#333" }}>Step 2</h2>
+      <div style={{ marginBottom: "20px", textAlign: "center" }}>
+        <div style={{ display: "inline-block" }}>
+          <Link to="/step1" style={backButtonStyle}>Back to Step 1</Link>
+        </div>
+      </div>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ width: "70%", marginBottom: "20px" }}>
           <h3 style={{ marginBottom: "10px", fontFamily: "Arial, sans-serif", color: "#333" }}>Tell me about yourself</h3>
+          
           <input
             type="text"
             placeholder="Tell us about yourself..."
