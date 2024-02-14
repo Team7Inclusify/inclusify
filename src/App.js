@@ -16,7 +16,7 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 import Welcome from "./pages/Welcome/Welcome";
 import Step1 from "./pages/VideoResume/Step1";
 import Step2 from "./pages/VideoResume/Step2";
-import Summary from "./pages/VideoResume/Summary";
+import Summary from "./pages/VideoResume/summary";
 import VideoResume from "./pages/VideoResume/VideoResume";
 import Template from "./pages/VideoResume/Template";
 import Record from "./pages/VideoResume/Record";
