@@ -1,8 +1,9 @@
 /* Post.css */
 .post {
     border-bottom: 1px solid #ccc; /* Add a border between posts */
-    padding: 16px;
-    margin-left: 200px;
+    margin-left: 100px;
+    margin-right: 10px;
+
   }
   
   .post-header {
@@ -35,7 +36,7 @@
     background-color: #3498db;
     color: white;
     border: none;
-    padding: 8px;
+    /* padding: 8px; */
     cursor: pointer;
     border-radius: 4px;
     margin-right: 8px;
@@ -43,7 +44,7 @@
   
   .comment-input {
     flex: 1;
-    padding: 8px;
+    /* padding: 8px; */
     margin-right: 8px;
   }
   
@@ -51,7 +52,7 @@
     background-color: #3498db;
     color: white;
     border: none;
-    padding: 8px;
+    /* padding: 8px; */
     cursor: pointer;
     border-radius: 4px;
   }

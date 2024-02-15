@@ -31,7 +31,6 @@
     right: 0;
     width: fit-content;
     min-width: 80px;
-    padding-right: 5px;
     background-color: white;
     box-shadow: 2px 2px 5px 1px rgba(0,0,0,.8);
     z-index: 1;

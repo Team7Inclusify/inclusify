@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Summary from "./Summary";
-import './VideoResume.css'; // Import your CSS file for styling
+import "./VideoResume.css"; // Import your CSS file for styling
 
 const VideoResume = () => {
   const [step, setStep] = useState(0); // Initialize step to 0 for user interaction options
@@ -37,10 +37,11 @@ const VideoResume = () => {
             <h3>Help me generate a pitch.</h3>
             <p>Click here if you need assistance crafting your pitch.</p>
           </div>
-          <div className="or-divider">OR</div> {/* Divider element */}
           <div className="option-card" onClick={handleSkipToRecording}>
             <h3>I am ready! Skip to the recording.</h3>
-            <p>Click here if you're ready to move directly to the recording step.</p>
+            <p>
+              Click here if you're ready to move directly to the recording step.
+            </p>
           </div>
         </div>
       )}
