@@ -1,0 +1,95 @@
+.container {
+    background-color: #87CEEB;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    width: 60%;
+    margin: auto;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-container > div {
+    width: 70%;
+    margin-bottom: 20px;
+  }
+  
+  .input-with-button {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-field {
+    width: calc(100% - 100px); /* Adjusted width to accommodate the button */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .round-button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .round-button img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .backButtonStyle {
+    background-color: #2196f3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+  
