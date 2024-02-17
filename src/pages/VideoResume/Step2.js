@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./Steps.css"; 
@@ -262,6 +263,7 @@ const Step2 = ({ onNext }) => {
       </div>
 
       <div className="button-container">
+        <Link to="/videoresume" className="backButtonStyle">Back</Link>
         <button onClick={handleNext} className="button">Next</button>
       </div>
     </div>

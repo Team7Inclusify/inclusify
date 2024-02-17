@@ -1,10 +1,67 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Import Link from React Router
+import { useLocation } from "react-router-dom";
 
-const Summary = ({ data }) => {
+const Summary = () => {
+  const location = useLocation();
+  const { data } = location.state;
+
+  // CSS Styles
+  const summaryContainerStyle = {
+    backgroundColor: "#cbe6ef",
+    padding: "30px",
+    borderRadius: "15px",
+    boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
+    maxWidth: "800px",
+    margin: "auto",
+    textAlign: "center",
+  };
+
+  const headingStyle = {
+    color: "#333",
+    fontSize: "28px",
+    marginBottom: "30px",
+  };
+
+  const paragraphStyle = {
+    fontSize: "20px",
+    lineHeight: "1.6",
+    marginBottom: "20px",
+  };
+
+  const linkStyle = {
+    textDecoration: "none",
+    marginRight: "10px", // Add space between buttons
+  };
+
+  const buttonStyle = {
+    padding: "15px 15px",
+    borderRadius: "10px",
+    border: "none",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    fontFamily: "Arial, sans-serif",
+    fontSize: "20px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    marginRight: "10px", // Add space between buttons
+  };
+
+  const restartButtonStyle = {
+    padding: "15px 30px",
+    borderRadius: "10px",
+    border: "none",
+    backgroundColor: "#2196F3", // Change color to blue
+    color: "white",
+    fontFamily: "Arial, sans-serif",
+    fontSize: "20px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+  };
+
   return (
     <div style={summaryContainerStyle}>
-      <h2 style={headingStyle}>Personal Story</h2>
+      <h2 style={headingStyle}>Your Personal Story is Ready!</h2>
       <p style={paragraphStyle}>
         Hi, my name is <strong>{data.name}</strong>. I live in{" "}
         <strong>{data.location}</strong> and work as a{" "}
@@ -25,47 +82,11 @@ const Summary = ({ data }) => {
       <Link to="/record" style={linkStyle}>
         <button style={buttonStyle}>I am ready!</button>
       </Link>
+      <Link to="/videoresume" style={linkStyle}>
+        <button style={restartButtonStyle}>Restart!</button>
+      </Link>
     </div>
   );
-};
-
-// CSS Styles
-const summaryContainerStyle = {
-  backgroundColor: "#f9f9f9",
-  padding: "30px",
-  borderRadius: "15px",
-  boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
-  maxWidth: "800px",
-  margin: "auto",
-  textAlign: "center",
-};
-
-const headingStyle = {
-  color: "#333",
-  fontSize: "28px",
-  marginBottom: "30px",
-};
-
-const paragraphStyle = {
-  fontSize: "20px",
-  lineHeight: "1.6",
-  marginBottom: "20px",
-};
-
-const linkStyle = {
-  textDecoration: "none",
-};
-
-const buttonStyle = {
-  padding: "15px 30px",
-  borderRadius: "10px",
-  border: "none",
-  backgroundColor: "#4CAF50",
-  color: "white",
-  fontFamily: "Arial, sans-serif",
-  fontSize: "20px",
-  cursor: "pointer",
-  transition: "background-color 0.3s",
 };
 
 export default Summary;
