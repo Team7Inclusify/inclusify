@@ -1,7 +1,7 @@
 // Discussion.js
 import React, { useState } from "react";
 import Post from "./Post";
-import EditPostModal from "./EditModal"; // Import the EditPostModal component
+import EditModal from "./EditModal"; // Import the EditPostModal component
 import "./Discussion.css";
 import dp from "../../images/dp.jpg";
 
@@ -86,7 +86,7 @@ const Discussion = () => {
         <button onClick={handleCreatePost} style={{ backgroundColor: '#001F3F', color: 'white' }}>Create Post</button>
       </div>
       {showEditModal && (
-        <EditPostModal
+        <EditModal
           post={posts.find((post) => post.id === editedPost)}
           onSave={handleEditPost}
           onRequestClose={closeEditModal}
