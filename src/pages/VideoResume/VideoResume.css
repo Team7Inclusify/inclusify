@@ -90,6 +90,10 @@ p {
   font-size: 16px;
   color: #666;
 }
+.option-card.generate-pitch {
+  background: #87ceeb; /* Sky blue color */
+}
+
 
 /*******StepCard******************/
 .step-card {
@@ -104,10 +108,13 @@ p {
 }
 
 .step-title {
-  background-color: #f0f0f0;
+  background-color: #001F3F;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 15px 30px;
+}
+.step-card .step-title h2 {
+  color: white;
 }
 
 .step-title h2 {
