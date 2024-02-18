@@ -84,10 +84,12 @@ export default function SignUp() {
           type={showPassword ? "text" : "password"}
           onChange={(event) => setConfirmPassword(event.target.value)}
         />
-        
+
         <button onClick={signUp}>Sign Up</button>
-        
-        <p>Already have an account? <Link to="/login">Login</Link></p>
+
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );

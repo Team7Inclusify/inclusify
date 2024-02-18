@@ -85,28 +85,28 @@ const Navbar = () => {
     });
 
   useEffect(() => {
-    return () => checkAuth();
-  }, []);
+    checkAuth();
+    console.log("changeInLogIn");
+  }, [loggedIn]);
 
   return (
     <div className="navbar-whole">
       {/* Inclusify Logo */}
       <div className="navbar-homeLink" onClick={() => navigate("/")}>
         <div className="navbar-homeImageContainer">
-        <img
+          <img
             className="navbar-homeImage"
             src={inclusify_image}
             alt="Inclusify Logo"
           />
           <div className="navbar-homeText">Inclusify</div>
         </div>
-          
-        </div>
+      </div>
       {/* Left Side of Navbar */}
       <div className="navbar-links-container">
         {/* Navigation Menu */}
         <div className="navbar-links">
-        <div className="navbar-link" onClick={() => navigate("/videoresume")}>
+          <div className="navbar-link" onClick={() => navigate("/videoresume")}>
             Video Resume
           </div>
           <div className="navbar-link" onClick={() => navigate("/discussion")}>
@@ -121,38 +121,37 @@ const Navbar = () => {
         </div>
       </div>
 
-
       {/* Right Side of Navbar */}
-      
+
       <div className="navbar-otherLinks">
         {/* Search Bar */}
-      <div className="navbar-searchbar">
-        <img
-          className="navbar-searchbar-icon"
-          src={search_icon}
-          alt="Search Icon"
-        />
-        <input
-          className="navbar-searchbar-input"
-          placeholder="Search Here"
-          id="navBarSearchInput"
-          onKeyDown={(key) => newSearch(key)}
-        />
-        <img
-          className="navbar-clear-icon"
-          src={close_button}
-          alt="Clear Icon"
-          onClick={clearSearchInput}
-        />
-        {browserSupportsSpeechRecognition && (
+        <div className="navbar-searchbar">
           <img
-            className="navbar-mic-icon"
-            src={mic_icon}
-            alt="Mic Icon"
-            onClick={onOpenMicModal}
+            className="navbar-searchbar-icon"
+            src={search_icon}
+            alt="Search Icon"
           />
-        )}
-      </div>
+          <input
+            className="navbar-searchbar-input"
+            placeholder="Search Here"
+            id="navBarSearchInput"
+            onKeyDown={(key) => newSearch(key)}
+          />
+          <img
+            className="navbar-clear-icon"
+            src={close_button}
+            alt="Clear Icon"
+            onClick={clearSearchInput}
+          />
+          {browserSupportsSpeechRecognition && (
+            <img
+              className="navbar-mic-icon"
+              src={mic_icon}
+              alt="Mic Icon"
+              onClick={onOpenMicModal}
+            />
+          )}
+        </div>
         {/* More Info Dropdown */}
         <NavbarDropdown>
           <NavbarDropdown.Toggle className="navbar_toggle">
@@ -233,6 +232,11 @@ const Navbar = () => {
               classNames="navbar-dropdown-menu"
               timeout={200}
             >
+              {/*
+
+                  USER IS ---NOT--- LOGGED IN BELOW
+
+              */}
               <NavbarDropdown.Item
                 className="navbar-dropdown-menu-item"
                 onClick={() => navigate("/login")}

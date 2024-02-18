@@ -51,7 +51,9 @@ export default function LogIn() {
           <div className="passwordSpace" />
         </div>
         <button onClick={logIn}>Log In</button>
-        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+        <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
       </div>
     </div>
   );

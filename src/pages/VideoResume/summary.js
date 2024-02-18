@@ -68,13 +68,15 @@ const Summary = () => {
         <strong>{data.occupation}</strong>. Let me tell you a bit about myself.
       </p>
       <p style={paragraphStyle}>
-        In my free time, I enjoy <strong>{data.interests}</strong>. I've developed a set of
-        skills that include <strong>{data.skills}</strong>. Over the years, I've gained valuable
-        experience in <strong>{data.experience}</strong>.
+        In my free time, I enjoy <strong>{data.interests}</strong>. I've
+        developed a set of skills that include <strong>{data.skills}</strong>.
+        Over the years, I've gained valuable experience in{" "}
+        <strong>{data.experience}</strong>.
       </p>
       <p style={paragraphStyle}>
-        Currently, I'm pursuing <strong>{data.education}</strong> to further enhance my
-        knowledge. Here's a bit more about me: <strong>{data.about}</strong>
+        Currently, I'm pursuing <strong>{data.education}</strong> to further
+        enhance my knowledge. Here's a bit more about me:{" "}
+        <strong>{data.about}</strong>
       </p>
       {/* Button to navigate to Record.js */}
       <Link to="/record" style={linkStyle}>

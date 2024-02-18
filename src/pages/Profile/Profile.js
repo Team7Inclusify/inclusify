@@ -18,22 +18,22 @@ export default function Profile() {
       console.error(error);
     }
   };
+  const setUserInfo = () =>
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log("Auth User test count log");
+        setUser(authUser);
+        getUserInfo(authUser.uid);
+      } else {
+        setUser(null);
+      }
+      console.log("Test count log");
+    });
+
   useEffect(() => {
     // Seems to run 3 times on intial run
-    const unsubscribe = () =>
-      auth.onAuthStateChanged((authUser) => {
-        if (authUser) {
-          console.log("Auth User test count log");
-          setUser(authUser);
-          getUserInfo(authUser.uid);
-        } else {
-          setUser(null);
-        }
-        console.log("Test count log");
-      });
-
-    return () => unsubscribe();
-  }, []);
+    setUserInfo();
+  }, [user]);
 
   return (
     <>
