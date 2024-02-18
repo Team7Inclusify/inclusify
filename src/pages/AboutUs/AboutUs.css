@@ -41,8 +41,37 @@
   overflow-x: hidden;
 }
   
-.member-role {
-  font-size: 18px;
-  color: #666;
-  overflow-x: hidden;
-}
+  .member-role {
+    font-size: 18px;
+    color: #666;
+  }
+  .pop-up {
+    animation: popUpAnimation 1s ease forwards;
+    opacity: 0;
+  }
+  
+  @keyframes popUpAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .about-us-page {
+    text-align: center;
+  }
+  
+  .content {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .content.pop-up {
+    opacity: 1;
+  }
+  
+  
+  

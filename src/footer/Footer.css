@@ -1,18 +1,22 @@
 /* Footer.css */
 .footer-container {
-    background-color: #001F3F;
-    color: white;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 0; /* Set a lower z-index value */
-  }
+  margin: 0;
+  background-color: #001F3F;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 0; /* Set a lower z-index value */
+}
+
   
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
   }
+  
   
   /* Add more styles as needed */
   

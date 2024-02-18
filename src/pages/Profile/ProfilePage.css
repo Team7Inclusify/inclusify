@@ -15,7 +15,46 @@
     border-radius: 10px; /* Rounded corners */
     padding: 20px; /* Padding around content */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+    position: relative;
   }
+  
+.profile-section h3 {
+    display: inline-block; /* Make the title inline-block */
+    font-size: 18px; /* Increase font size */
+    color: #333;
+  }
+  
+  .editable-content {
+    position: relative; /* Required for absolute positioning */
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    cursor: pointer;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius for button appearance */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .edit-button:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+  }
+  
+  .edit-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+  }
+  
+
+  
   
   .profile-section h2,
   .profile-section h3,
@@ -124,4 +163,19 @@
   .option:hover {
     background-color: #97c9e0;
   }
+
+  .upload-video-button {
+    background-color: #4c61af;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-video-button:hover {
+    background-color: #45a049;
+  }
+  
   
