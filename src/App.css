@@ -1,11 +1,23 @@
 .App-Page {
-    width: 100vw;
-    height: 100vh;
+    width: 100vw; /* Use full viewport width */
+    height: 100vh; /* Use full viewport height */
+    overflow-x: hidden; /* Hide horizontal overflow */
     display: flex;
     flex-direction: column;
-}
+  }
+  
 
-.Rest-App-Page {
-    width: 100%;
-    height: 100%;
-}
+  
+  /* Adjust the padding or margin of the content container to make space for the footer */
+  .Rest-App-Page {
+    padding-bottom: 60px; /* Adjust according to the height of your footer */
+  }
+  
+  
+  /* Media query for mobile screens */
+  @media only screen and (max-width: 768px) {
+    .App-Page {
+      align-items: center; /* Center content vertically */
+    }
+  }
+  

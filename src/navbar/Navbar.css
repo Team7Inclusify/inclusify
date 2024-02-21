@@ -232,3 +232,30 @@
 .navbar-link:hover {
   color: rgb(154, 220, 237) /* Adjust the hover color as needed */
 }
+
+/* Add media query for mobile screens */
+@media (max-width: 768px) {
+  .navbar-whole {
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  .navbar-links-container {
+    width: 100%; /* Make the container full width */
+  }
+
+  .navbar-links {
+    width: 100%; /* Make the links full width */
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center;
+    margin-bottom: 20px; /* Add some space at the bottom */
+  }
+
+  .navbar-otherLinks {
+    width: 100%; /* Make the otherLinks container full width */
+    display: flex;
+    justify-content: space-between; /* Space out items evenly */
+    align-items: center; /* Align items to the center vertically */
+    margin-bottom: 20px; /* Add some space at the bottom */
+  }
+}

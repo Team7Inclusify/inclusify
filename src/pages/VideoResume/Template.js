@@ -44,30 +44,16 @@ const Template = () => {
           points={step.points}
         />
       ))}
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <div className="button-container">
         <Link to="/record" style={{ textDecoration: "none" }}>
-          <button style={buttonStyle}>
-            Lets Go!
-            <img src={arrow} alt="right-arrow" style={{ marginLeft: "5px", height:"70px" }} /> {/* Include arrow icon */}
+          <button className="buttonStyle">
+            <span>Lets Go!</span>
+            <img src={arrow} alt="right-arrow" style={{ marginLeft: "5px", height: "70px" }} /> {/* Include arrow icon */}
           </button>
         </Link>
       </div>
     </div>
   );
-};
-
-// Define buttonStyle for the button
-const buttonStyle = {
-  padding: "5px 5px",
-  fontSize: "1.2rem",
-  backgroundColor: "skyblue",
-  color: "#001F3F",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-  transition: "transform 0.3s ease-in-out",
-  outline: "none",
 };
 
 export default Template;

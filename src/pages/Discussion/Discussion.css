@@ -2,30 +2,88 @@
 .discussion-container {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center items horizontally */
 }
 
 .post-container {
-  display: flex;
-  flex-direction: column;
+  width: 100%; /* Take full width */
 }
 
 .post {
-  /* Your existing styles for a single post */
+  width: 100%; /* Take full width */
+  margin-bottom: 20px; /* Add margin bottom between posts */
+  padding: 12px; /* Reduce padding for smaller screens */
 }
 
 .create-post-container {
-  margin-top: 20px;
-}
-
-/* Additional styles to position the create post container to the top left */
-.create-post-container {
-  align-self: flex-start;
-  width: 100%;
-  max-width: 500px; /* Adjust as needed */
-  margin: 0 auto; /* Center horizontally */
+  width: 100%; /* Take full width */
+  max-width: 500px; /* Limit maximum width */
 }
 
 .create-post-container textarea {
-  width: 100%;
+  width: 100%; /* Take full width */
   resize: vertical;
+}
+
+/* Post.css */
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.post-content {
+  margin-top: 8px;
+}
+
+.post-actions {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align actions evenly */
+}
+
+.like-button,
+.comment-input,
+.comment-submit {
+  flex-grow: 1; /* Grow to take remaining space */
+  margin-right: 8px; /* Add margin right between buttons */
+}
+
+.comment-submit {
+  margin-left: 0; /* Remove left margin for submit button */
+}
+
+.post-comments {
+  margin-top: 8px;
+}
+
+.comment {
+  margin-top: 4px;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 768px) {
+  .post-profile-picture {
+    width: 30px; /* Reduce profile picture size */
+    height: 30px;
+    margin-right: 8px; /* Reduce margin */
+  }
+
+  .like-button,
+  .comment-input,
+  .comment-submit {
+    width: calc(50% - 4px); /* Make buttons and input 50% width with margin */
+  }
+
+  .comment-submit {
+    margin-top: 8px; /* Add margin top to submit button */
+  }
 }

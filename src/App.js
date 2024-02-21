@@ -19,7 +19,8 @@ import Step2 from "./pages/VideoResume/Step2";
 import VideoResume from "./pages/VideoResume/VideoResume";
 import Template from "./pages/VideoResume/Template";
 import Record from "./pages/VideoResume/Record";
-import Summary from "./pages/VideoResume/summary"; // Import the Summary component
+import Summary from "./pages/VideoResume/summary"; 
+import Footer from "./footer/Footer";
 
 function App() {
   const [step1Data, setStep1Data] = useState({});
@@ -69,6 +70,7 @@ function App() {
           <Route path="/profilepage" element={<ProfilePage />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }

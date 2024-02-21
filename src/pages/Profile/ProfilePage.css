@@ -177,5 +177,23 @@
   .upload-video-button:hover {
     background-color: #45a049;
   }
+
   
   
+  /* Responsive design */
+@media only screen and (max-width: 768px) {
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+  }
+
+  .upload-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .centered-prompt {
+    width: 90%;
+    max-width: 300px;
+  }
+}

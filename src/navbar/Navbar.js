@@ -216,7 +216,7 @@ const Navbar = () => {
             >
               <NavbarDropdown.Item
                 className="navbar-dropdown-menu-item"
-                onClick={() => navigate("/profile")}
+                onClick={() => navigate("/profilepage")}
               >
                 Profile
               </NavbarDropdown.Item>
