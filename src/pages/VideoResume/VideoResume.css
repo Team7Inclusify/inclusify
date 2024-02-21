@@ -27,20 +27,23 @@ p {
 }
 
 .option-card {
-  width: 50%; /* Increase the width of the cards */
-  height: 100%;
-  min-height: 350px;
-  min-width: 200px;
-  background: #012548;
+  width: 600px; /* Increase the width of the cards */
+  height: 300px; /* Increase the height of the cards */
+  padding: 40px;
   border-radius: 30px; /* Increase border radius for rounded corners */
   box-shadow: 0px 0px 30px rgba(135, 206, 235, 0.3); /* Adjust box-shadow color */
   cursor: pointer;
   transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+}
+.generate-pitch {
+  background-color: #2294b1; /* Background color for the first card */
+  color: #fff; /* Text color for the first card */
 }
 
+.skip-recording {
+  background-color: #012548; /* Background color for the second card */
+  color: #333; /* Text color for the second card */
+}
 .option-card:hover {
   transform: translateY(-5px);
 }
@@ -96,28 +99,34 @@ p {
 /*******StepCard******************/
 .step-card {
   width: 350px;
+  height: 500px; /* Keep the height fixed */
+
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   margin: 20px auto;
+  overflow: hidden; /* Hide overflow content */
 }
 
-.step-title {
-  background-color: #001F3F;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+.step-description {
+  max-height: calc(100% - 120px); /* Adjust the max-height to fit within the StepCard */
+  padding: 20px 30px;
+  overflow: auto; /* Add overflow property to handle long content */
 }
-.step-card .step-title h2 {
-  color: white;
+
+
+.step-title {
+  background-color: #3c3381;
 }
 
 .step-title h2 {
   font-size: 28px;
-  color: #333333;
+  color: #ffffff;
   margin: 0;
 }
+
 
 
 .step-description h3 {
@@ -143,6 +152,19 @@ p {
   left: 0;
   color: #4caf50;
 }
+.buttonStyle {
+  padding: 5px 5px;
+  font-size: 1.2rem;
+  background-color: skyblue;
+  color: #001F3F;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  outline: none;
+}
+
 
 /***************Record page******************/
 .container {
@@ -249,4 +271,89 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2; /* Ensure the triangle is above the background */
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  margin-bottom: 20px; /* Add some spacing between videos */
+}
+
+.video-frame {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  .video-resume-container {
+    padding: 20px; /* Add padding */
+    height: auto; /* Remove fixed height */
+  }
+
+  .option-cards-container {
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center; /* Center cards horizontally */
+  }
+
+  .option-card {
+    width: 90%; /* Adjust width for smaller screens */
+    height: auto; /* Allow height to adjust based on content */
+    padding: 20px; /* Adjust padding */
+    margin-bottom: 20px; /* Add margin between cards */
+  }
+
+  .or-divider {
+    font-size: 18px; /* Reduce font size */
+    margin: 10px 0; /* Adjust margin */
+  }
+
+  .option-card h3 {
+    font-size: 24px; /* Adjust font size for heading */
+  }
+
+  .option-card p {
+    font-size: 18px; /* Adjust font size for paragraph */
+  }
+
+
+}
+
+/* Add media queries for template page */
+@media only screen and (max-width: 768px) {
+  .template-page {
+    align-items: flex-start; /* Align items to the start */
+    flex-direction: column; /* Display StepCards vertically */
+  }
+
+  .step-card {
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: 90%; /* Set maximum width */
+    margin: 20px auto; /* Add margin and center horizontally */
+  }
+
+  .step-title h2 {
+    font-size: 24px; /* Adjust font size for heading */
+  }
+
+  .step-description h3 {
+    font-size: 20px; /* Adjust font size for subheading */
+    margin-bottom: 10px; /* Adjust margin */
+  }
+
+  .bullet-list {
+    font-size: 16px; /* Adjust font size for bullet points */
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+
+    width: 100%; /* Set width to 100% */
+    bottom: 0; /* Align to the bottom */
+    left: 0; /* Align to the left */
+
+  }
+
 }

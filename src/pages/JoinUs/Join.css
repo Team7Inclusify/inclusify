@@ -1,65 +1,73 @@
 /* Join.css */
 .join-container {
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #c6d8de; /* Sky blue color */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #c6d8de;
+  height: 100vh; /* Set height to cover the entire viewport */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.join-content {
+  text-align: center;
+  color: #333;
+  width: 90%;
+  max-width: 600px;
+}
+
+.signup-box,
+.login-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.signup-button,
+.login-button {
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.signup-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.login-button {
+  background-color: #3a8a3c;
+  color: white;
+}
+
+.signup-button:hover,
+.login-button:hover {
+  filter: brightness(90%);
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
   .join-content {
-    text-align: center;
-    color: #333; /* Dark text color */
-    width: 70%; /* Adjust the width as needed */
-    flex:1;
-  }
-  
-  .buttons-container {
-    margin-top: 20px;
+    width: 100%;
   }
 
   .signup-box,
-.login-box {
-  background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
-}
-  
-  .signup-button,
-  .login-button,
-  .join-us-button {
-    padding: 18px 36px;
-    font-size: 24px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .signup-button {
-    background-color: #4CAF50; /* Green background color, you can customize */
-    color: white;
-  }
-  
-  .login-button {
-    background-color:  #3a8a3c; /* Dark gray background color, you can customize */
-    color: white;
-  }
-  
-  .join-us-button {
-    background-color: #001F3F; /* Deep dark blue color */
-    color: white;
+  .login-box {
+    padding: 15px;
+    margin: 10px 0;
   }
 
-  .signup-button:hover,
-.login-button:hover {
-  background-color:  #0b550d; /* Darker shade on hover, you can customize */
-}
-  
-  .join-us-button:hover {
-    background-color: #003366; /* Darker shade on hover, you can customize */
+  .signup-button,
+  .login-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    margin-top: 10px;
   }
-  
+}

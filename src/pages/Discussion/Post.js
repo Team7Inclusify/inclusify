@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Post.css";
+import "./Discussion.css";
 import EditPostModal from "./EditModal"; // Import the EditPostModal component
 import ThumbsUp from "../../images/ThumbsUp.png"
 
