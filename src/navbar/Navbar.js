@@ -178,12 +178,32 @@ const Navbar = () => {
             coverImg={more_info_icon}
             content={
               <>
-                <p onClick={() => navigate("/tutorials")}>Tutorials</p>
-                <p onClick={() => navigate("/faq")}>FAQ</p>
+                <div
+                  className="dropdown-child"
+                  onClick={() => navigate("/tutorials")}
+                >
+                  Tutorials
+                </div>
+                <div
+                  className="dropdown-child"
+                  onClick={() => navigate("/faq")}
+                >
+                  FAQ
+                </div>
                 {windowWidth < 820 && (
                   <>
-                    <p onClick={() => navigate("/resources")}>Resources</p>
-                    <p onClick={() => navigate("/about_us")}>About Us</p>
+                    <div
+                      className="dropdown-child"
+                      onClick={() => navigate("/resources")}
+                    >
+                      Resources
+                    </div>
+                    <div
+                      className="dropdown-child"
+                      onClick={() => navigate("/about_us")}
+                    >
+                      About Us
+                    </div>
                   </>
                 )}
               </>
@@ -197,13 +217,30 @@ const Navbar = () => {
             content={
               loggedIn ? (
                 <>
-                  <p onClick={() => navigate("/profile")}>Profile</p>
-                  <p onClick={logOut}>Log Out</p>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/profile")}
+                  >
+                    Profile
+                  </div>
+                  <div className="dropdown-child" onClick={logOut}>
+                    Log Out
+                  </div>
                 </>
               ) : (
                 <>
-                  <p onClick={() => navigate("/login")}>Log In</p>
-                  <p onClick={() => navigate("/signup")}>Sign Up</p>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/login")}
+                  >
+                    Log In
+                  </div>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign Up
+                  </div>
                 </>
               )
             }
@@ -216,21 +253,65 @@ const Navbar = () => {
           coverImg={nav_drop}
           content={
             <>
-              <p onClick={() => navigate("/videoresume")}>Video Resume</p>
-              <p onClick={() => navigate("/discussion")}>Discussion</p>
-              <p onClick={() => navigate("/resources")}>Resources</p>
-              <p onClick={() => navigate("/tutorials")}>Tutorials</p>
-              <p onClick={() => navigate("/faq")}>FAQ</p>
-              <p onClick={() => navigate("/about_us")}>About Us</p>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/videoresume")}
+              >
+                Video Resume
+              </div>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/discussion")}
+              >
+                Discussion
+              </div>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/resources")}
+              >
+                Resources
+              </div>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/tutorials")}
+              >
+                Tutorials
+              </div>
+              <div className="dropdown-child" onClick={() => navigate("/faq")}>
+                FAQ
+              </div>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/about_us")}
+              >
+                About Us
+              </div>
               {loggedIn ? (
                 <>
-                  <p onClick={() => navigate("/profile")}>Profile</p>
-                  <p onClick={logOut}>Log Out</p>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/profile")}
+                  >
+                    Profile
+                  </div>
+                  <div className="dropdown-child" onClick={logOut}>
+                    Log Out
+                  </div>
                 </>
               ) : (
                 <>
-                  <p onClick={() => navigate("/login")}>Log In</p>
-                  <p onClick={() => navigate("/signup")}>Sign Up</p>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/login")}
+                  >
+                    Log In
+                  </div>
+                  <div
+                    className="dropdown-child"
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign Up
+                  </div>
                 </>
               )}
             </>

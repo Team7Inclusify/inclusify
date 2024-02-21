@@ -30,16 +30,21 @@
     top: 100%;
     right: 0;
     width: fit-content;
-    min-width: 80px;
+    min-width: 110px;
     background-color: white;
     box-shadow: 2px 2px 5px 1px rgba(0,0,0,.8);
     z-index: 1;
     text-align: center;
 }
-  
-.dropdown-content p {
-    cursor: pointer;
+.dropdown-child:first-child {
+    margin-top: 10px;
 }
-.dropdown-content p:hover {
+  
+.dropdown-child {
+    cursor: pointer;
+    margin-bottom: 5px;
+    height: 30px;
+}
+.dropdown-child:hover {
     background-color: gainsboro;
 }
