@@ -127,13 +127,13 @@ const Navbar = () => {
             <>
               <div
                 className="navbar-link"
-                onClick={() => navigate("/discussion")}
+                onClick={() => navigate("/about_us")}
               >
                 About Us
               </div>
               <div
                 className="navbar-link"
-                onClick={() => navigate("/discussion")}
+                onClick={() => navigate("/resources")}
               >
                 Resources
               </div>
