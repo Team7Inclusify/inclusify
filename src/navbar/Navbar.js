@@ -123,6 +123,22 @@ const Navbar = () => {
           <div className="navbar-link" onClick={() => navigate("/discussion")}>
             Discussion
           </div>
+          {windowWidth >= 820 && (
+            <>
+              <div
+                className="navbar-link"
+                onClick={() => navigate("/discussion")}
+              >
+                About Us
+              </div>
+              <div
+                className="navbar-link"
+                onClick={() => navigate("/discussion")}
+              >
+                Resources
+              </div>
+            </>
+          )}
         </>
       )}
       {/* Search Bar */}
@@ -162,10 +178,14 @@ const Navbar = () => {
             coverImg={more_info_icon}
             content={
               <>
-                <p onClick={() => navigate("/resources")}>Resources</p>
                 <p onClick={() => navigate("/tutorials")}>Tutorials</p>
                 <p onClick={() => navigate("/faq")}>FAQ</p>
-                <p onClick={() => navigate("/about_us")}>About Us</p>
+                {windowWidth < 820 && (
+                  <>
+                    <p onClick={() => navigate("/resources")}>Resources</p>
+                    <p onClick={() => navigate("/about_us")}>About Us</p>
+                  </>
+                )}
               </>
             }
           />
