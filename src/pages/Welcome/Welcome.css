@@ -1,6 +1,7 @@
 /* Welcome.css */
 .welcome-container {
-  height: 90vh; /* Set the container height to full viewport height */
+  height: fit-content;
+  min-height: 100%; /* Set the container height to full viewport height */
   background-image: url('../../images/wallpaper.jpg'); /* Replace with the path to your wallpaper image */
   background-size: cover; /* Cover the entire container with the background image */
   display: flex;
@@ -14,8 +15,10 @@
 .welcome-content {
   text-align: center;
   color: white; /* Set text color to white or a suitable contrast */
+  flex:1;
+  min-height: 100px;
+  background-color: #4CAF50;
 }
-
 .buttons-container {
   margin-top: 20px;
 }
@@ -38,8 +41,6 @@
   background-color: #a6d1e2;
   color: rgb(255, 255, 255);
   text-align: center;
-  padding: 50px;
-  margin-bottom: -550px;
 
 }
 .custom-title {
@@ -49,4 +50,3 @@
   color: #333;
   text-align: center;
 }
-

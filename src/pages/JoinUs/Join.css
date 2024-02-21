@@ -1,9 +1,10 @@
 /* Join.css */
 .join-container {
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: #c6d8de; /* Sky blue color */
   }
   
@@ -11,7 +12,7 @@
     text-align: center;
     color: #333; /* Dark text color */
     width: 70%; /* Adjust the width as needed */
-    height: 500px;
+    flex:1;
   }
   
   .buttons-container {

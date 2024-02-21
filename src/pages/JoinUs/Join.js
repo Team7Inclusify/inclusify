@@ -7,16 +7,6 @@ import Footer from "../../footer/Footer";
 const Join = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Disable scrolling when the component mounts
-    document.body.style.overflow = "hidden";
-
-    // Re-enable scrolling when the component unmounts
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
-
   const goToSignUp = () => {
     navigate("/signup");
   };
