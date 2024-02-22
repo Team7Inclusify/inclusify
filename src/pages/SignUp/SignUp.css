@@ -1,95 +1,120 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
 
 .signup-page {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-content {
+  width: 80%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #cadce5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 28px;
+}
+
+h3 {
+  margin-top: 24px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.passwordDiv {
+  display: flex;
+  align-items: center;
+}
+
+.signup-password {
+  flex: 1;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.passwordSpace {
+  width: 10px;
+}
+
+.showPasswordIcon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+p a {
+  color: #0b456c;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .signup-page{
+    height: 90vh;
   }
-  
   .signup-content {
-    display: flex;
-    flex-direction: column;
-    width: 700px; 
-    padding: 20px;
-    background-color: #cbf1fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjusted width for smaller screens */
   }
-  
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  h3 {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  input {
-    width: 50%;
-    height: 30px; 
-    padding: 5px; 
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-  }
-  
-  .passwordDiv {
-    display: flex;
-    align-items: center;
-  }
-  
+
+  input,
   .signup-password {
-    flex: 1;
-    height: 30px; 
-    width: 50%;
-    padding: 5px; 
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+    font-size: 16px; /* Decreased font size for smaller screens */
+    height: 35px; /* Decreased height for smaller screens */
+    margin-bottom: 10px; /* Adjusted margin for smaller screens */
   }
-  
-  .passwordSpace {
-    width: 10px;
-  }
-  
-  .showPasswordIcon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-  
+
   button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    width: 150px;
-    cursor: pointer;
-    margin: 0 auto;
+    padding: 12px; /* Adjusted padding for smaller screens */
   }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  p {
-    text-align: center; 
-    margin-top: 15px; 
-  }
-  
-  p a {
-    color: #0b456c;
-    text-decoration: none;
-  }
-  
-  p a:hover {
-    text-decoration: underline;
-  }
-
-  
-
-  
+}
