@@ -1,5 +1,4 @@
 .video-resume-page {
-  padding: 20px;
   width: 70%; 
   margin: 0 auto; 
 }
@@ -15,13 +14,16 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .option-cards-container {
   display: flex;
-  justify-content: space-around;
   gap: 50px; /* Increase the gap between cards */
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  flex: 1 0 auto;
 }
 
 .option-card {
@@ -60,13 +62,6 @@ p {
   font-family: "Arial", sans-serif; /* Change font family */
 }
 
-.or-divider {
-  font-size: 24px; /* Make the text bigger */
-  font-weight: bold; /* Make the text bold */
-  text-align: center; /* Center the text horizontally */
-  margin: 20px 0; /* Add margin for spacing */
-}
-
 
 /*************template page**********/
 .template-page {
@@ -79,7 +74,6 @@ p {
 
 .card {
   width: 200px;
-  padding: 20px;
   margin: 20px;
   text-align: center;
   background-color: #fff;
@@ -97,6 +91,10 @@ p {
   font-size: 16px;
   color: #666;
 }
+.option-card.generate-pitch {
+  background: #2294b1;
+}
+
 
 /*******StepCard******************/
 .step-card {
@@ -141,12 +139,10 @@ p {
   font-size: 18px;
   color: #666666;
   list-style-type: none;
-  padding-left: 20px;
 }
 
 .bullet-list li {
   position: relative;
-  padding-left: 10px;
   margin-bottom: 10px;
 }
 
@@ -174,7 +170,6 @@ p {
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .heading {
@@ -189,7 +184,6 @@ p {
 }
 
 .record-button {
-  padding: 10px 20px;
   font-size: 16px;
   background-color: #007bff;
   color: #fff;
@@ -226,7 +220,6 @@ p {
 .download-button {
   display: block;
   margin-top: 10px;
-  padding: 10px 20px;
   font-size: 16px;
   background-color: #28a745;
   color: #fff;
@@ -249,7 +242,6 @@ p {
   color: #fff;
   background-color: #007bff; /* Blue color */
   border-radius: 50%;
-  padding: 10px;
   width: 80px;
   height: 80px;
   display: flex;
