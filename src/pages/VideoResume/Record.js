@@ -14,7 +14,7 @@ const Record = () => {
     let interval;
     if (isRecording && !isPaused) {
       interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer + 1);
+        setTimer((prevTimer) => prevTimer + 1);
       }, 1000);
     } else {
       clearInterval(interval);
@@ -24,7 +24,10 @@ const Record = () => {
 
   const startRecording = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
 
       videoRef.current.srcObject = stream;
 
@@ -54,7 +57,7 @@ const Record = () => {
       setIsRecording(false);
       const stream = videoRef.current.srcObject;
       const tracks = stream.getTracks();
-      tracks.forEach(track => track.stop());
+      tracks.forEach((track) => track.stop());
       videoRef.current.srcObject = null;
       setTimer(0); // Reset timer
     }
@@ -72,19 +75,21 @@ const Record = () => {
   };
 
   const downloadVideo = () => {
-    const blob = new Blob(recordedChunks, { type: "video/webm" });
+    const blob = new Blob(recordedChunks, { type: "video/mp4" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     document.body.appendChild(a);
     a.style = "display: none";
     a.href = url;
-    a.download = "recorded-video.webm";
+    a.download = "recorded-video.mp4";
     a.click();
     window.URL.revokeObjectURL(url);
   };
 
   const formatTime = (time) => {
-    const minutes = Math.floor(time / 60).toString().padStart(2, "0");
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(2, "0");
     const seconds = (time % 60).toString().padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
@@ -97,7 +102,10 @@ const Record = () => {
     <div className="container">
       <h2 className="heading">Record Video</h2>
       <div className="button-container">
-        <button className={`record-button ${isRecording ? "recording" : ""}`} onClick={isRecording ? stopRecording : startRecording}>
+        <button
+          className={`record-button ${isRecording ? "recording" : ""}`}
+          onClick={isRecording ? stopRecording : startRecording}
+        >
           {isRecording ? "Stop Recording" : "Start Recording"}
         </button>
         {isRecording && (
@@ -107,7 +115,13 @@ const Record = () => {
         )}
       </div>
       <div className="video-container">
-        <video ref={videoRef} className="video" autoPlay playsInline controls={!isRecording}></video>
+        <video
+          ref={videoRef}
+          className="video"
+          autoPlay
+          playsInline
+          controls={!isRecording}
+        ></video>
       </div>
       {showTimer && isRecording && (
         <div className="timer-container">
@@ -116,7 +130,11 @@ const Record = () => {
       )}
       <div className="option-container">
         <label>
-          <input type="checkbox" checked={showTimer} onChange={() => setShowTimer(!showTimer)} />
+          <input
+            type="checkbox"
+            checked={showTimer}
+            onChange={() => setShowTimer(!showTimer)}
+          />
           Show Timer
         </label>
       </div>
@@ -125,11 +143,19 @@ const Record = () => {
           <h3 className="heading">Recorded Video:</h3>
           <video className="recorded-video" controls>
             {recordedChunks.map((chunk, index) => (
-              <source key={index} src={URL.createObjectURL(chunk)} type="video/webm" />
+              <source
+                key={index}
+                src={URL.createObjectURL(chunk)}
+                type="video/mp4"
+              />
             ))}
           </video>
-          <button className="download-button" onClick={downloadVideo}>Download Video</button>
-          <button className="rerecord-button" onClick={handleReRecord}>Re-record</button>
+          <button className="download-button" onClick={downloadVideo}>
+            Download Video
+          </button>
+          <button className="rerecord-button" onClick={handleReRecord}>
+            Re-record
+          </button>
         </div>
       )}
     </div>
