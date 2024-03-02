@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LogIn.css";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../config/firebase";
@@ -11,8 +11,27 @@ export default function LogIn() {
   const [showPassword, changeShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(null);
 
   const navigate = useNavigate();
+
+  const checkAuth = () =>
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(user);
+      } else {
+        setLoggedIn(null);
+      }
+    });
+
+  useEffect(() => {
+    checkAuth();
+    console.log("changeInLogIn");
+  }, [loggedIn]);
+
+  if (loggedIn) {
+    navigate("/");
+  }
 
   const logIn = async () => {
     try {
