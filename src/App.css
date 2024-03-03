@@ -6,12 +6,36 @@
     flex-direction: column;
   }
   
-
   
   /* Adjust the padding or margin of the content container to make space for the footer */
   .Rest-App-Page {
     padding-bottom: 60px; /* Adjust according to the height of your footer */
   }
+  .night-mode {
+    background-color: black;
+    color: white;
+  }
+/* App.css */
+
+.night-mode-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.night-mode-toggle img {
+  width: 24px; /* Adjust the size of the icon as needed */
+  height: 24px;
+}
+
+/* Styles for the night mode */
+.night-mode .night-mode-toggle {
+  background-color: #222; /* Set background color to dark */
+}
+
+.night-mode .night-mode-toggle svg {
+  fill: #fff; /* Set the icon color to white */
+}
   
   
   /* Media query for mobile screens */

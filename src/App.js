@@ -21,11 +21,20 @@ import Template from "./pages/VideoResume/Template";
 import Record from "./pages/VideoResume/Record";
 import Summary from "./pages/VideoResume/summary"; 
 import Footer from "./footer/Footer";
+import AdditionalVideos from "./pages/AdditionalVideos/AdditionalVideos";
+
+// Import the dark mode SVG icon
+import DarkIcon from "./images/dark.svg";
 
 function App() {
+  const [isNightMode, setIsNightMode] = useState(false); // State for night mode
   const [step1Data, setStep1Data] = useState({});
   const [step2Data, setStep2Data] = useState({});
   const navigate = useNavigate();
+
+  const toggleNightMode = () => {
+    setIsNightMode(!isNightMode);
+  };
 
   const handleStep1Next = (data) => {
     setStep1Data(data);
@@ -39,8 +48,11 @@ function App() {
   };
 
   return (
-    <div className="App-Page">
+    <div className={isNightMode ? "App-Page night-mode" : "App-Page"}>
       <Navbar />
+      <button className="night-mode-toggle" onClick={toggleNightMode}>
+        <img src={DarkIcon} alt="Dark Mode" />
+      </button>
       <div className="Rest-App-Page">
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -55,17 +67,12 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/profile" element={<Profile />} />
-          {/* Route for the VideoResume component */}
           <Route path="/videoresume" element={<VideoResume />} />
-          {/* Route for the Step1 component */}
+          <Route path="/additionalvideos" element={<AdditionalVideos />} />
           <Route path="/step1" element={<Step1 onNext={handleStep1Next} />} />
-          {/* Route for the Step2 component */}
           <Route path="/step2" element={<Step2 onNext={handleStep2Next} />} />
-          {/* Route for the Summary component */}
           <Route path="/summary" element={<Summary />} />
-          {/* Route for the Template component */}
           <Route path="/template" element={<Template />} />
-          {/* Route for the Record component */}
           <Route path="/record" element={<Record />} />
           <Route path="/profilepage" element={<ProfilePage />} />
         </Routes>

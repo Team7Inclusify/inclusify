@@ -68,8 +68,22 @@ export default function ProfilePage() {
 
   // Function to handle uploading additional video
   const handleVideoUpload = () => {
-    // Implement video upload functionality
-    console.log("Uploading additional video...");
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "video/*";
+    input.onchange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          // Handle the uploaded video here
+          // For example, you can set it in user state or display it directly
+          setUser({ ...user, videoResume: reader.result });
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    input.click();
   };
 
   return (
@@ -192,15 +206,13 @@ export default function ProfilePage() {
         </div>
         <div className="profile-section">
           <h3 className="section-title">Video Resume</h3>
-          <iframe
-            src={user.videoResume}
-            title="Video Resume"
-            width="560"
-            height="315"
-            frameBorder="0"
-            allowFullScreen
+          <video
+            controls
             className="video-frame"
-          ></iframe>
+          >
+            <source src={user.videoResume} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <button className="upload-video-button" onClick={handleVideoUpload}>Upload a Video</button>
         </div>
         <div className="profile-section">

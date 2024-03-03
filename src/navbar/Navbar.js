@@ -127,6 +127,12 @@ const Navbar = () => {
             <>
               <div
                 className="navbar-link"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Additional Videos
+              </div>
+              <div
+                className="navbar-link"
                 onClick={() => navigate("/about_us")}
               >
                 About Us
