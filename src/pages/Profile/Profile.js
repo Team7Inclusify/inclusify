@@ -5,15 +5,13 @@ import { database } from "../../config/firebase";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [userInfoJSON, setUserInfoJSON] = useState({});
   const getUserInfo = async (userID) => {
     try {
       const userRef = doc(database, "user", userID);
       const userInfo = await getDoc(userRef);
       const userInfoData = userInfo.data();
-      setFirstName(userInfoData.firstName);
-      setLastName(userInfoData.lastName);
+      setUserInfoJSON(userInfoData);
     } catch (error) {
       console.error(error);
     }
@@ -27,7 +25,6 @@ export default function Profile() {
       } else {
         setUser(null);
       }
-      console.log("Test count log");
     });
 
   useEffect(() => {
@@ -37,7 +34,7 @@ export default function Profile() {
 
   return (
     <>
-      {firstName} {lastName}
+      {userInfoJSON.firstName} {userInfoJSON.lastName}
     </>
   );
 }

@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./VideoResume.css"; // Import CSS file for styling
+import "./VideoResume.css";
+import AWS from "aws-sdk";
+import { auth } from "../../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { database } from "../../config/firebase";
 
 const Record = () => {
   const videoRef = useRef(null);
@@ -9,6 +13,33 @@ const Record = () => {
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [timer, setTimer] = useState(0);
   const [showTimer, setShowTimer] = useState(true); // Option to show/hide timer
+
+  const [user, setUser] = useState(null);
+  const [userInfoJSON, setUserInfoJSON] = useState({});
+  const getUserInfo = async (userID) => {
+    try {
+      const userRef = doc(database, "user", userID);
+      const userInfo = await getDoc(userRef);
+      const userInfoData = userInfo.data();
+      setUserInfoJSON(userInfoData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const setUserInfo = () =>
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log("Auth User test count log");
+        setUser(authUser);
+        getUserInfo(authUser.uid);
+      } else {
+        setUser(null);
+      }
+    });
+
+  useEffect(() => {
+    setUserInfo();
+  }, [user]);
 
   useEffect(() => {
     let interval;
@@ -81,7 +112,8 @@ const Record = () => {
     document.body.appendChild(a);
     a.style = "display: none";
     a.href = url;
-    a.download = "recorded-video.mp4";
+    console.log(JSON.stringify(userInfoJSON));
+    a.download = `Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -96,6 +128,43 @@ const Record = () => {
 
   const handleReRecord = () => {
     setRecordedChunks([]);
+  };
+
+  const uploadFile = async () => {
+    const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
+
+    const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
+    const REGION = "us-east-2";
+
+    AWS.config.update({
+      accessKeyId: "AKIA3642LHQUWWHZSHP6",
+      secretAccessKey: "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",
+    });
+    const s3 = new AWS.S3({
+      params: { Bucket: S3_BUCKET },
+      region: REGION,
+    });
+
+    const params = {
+      Bucket: S3_BUCKET,
+      Key: `video-resume/Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`,
+      Body: videoBlob,
+      ContentType: "video/mp4",
+    };
+
+    var upload = s3
+      .putObject(params)
+      .on("httpUploadProgress", (evt) => {
+        console.log(
+          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
+        );
+      })
+      .promise();
+
+    await upload.then((err, data) => {
+      console.log(err);
+      alert("File uploaded successfully.");
+    });
   };
 
   return (
@@ -155,6 +224,9 @@ const Record = () => {
           </button>
           <button className="rerecord-button" onClick={handleReRecord}>
             Re-record
+          </button>
+          <button className="download-button" onClick={uploadFile}>
+            Upload
           </button>
         </div>
       )}
