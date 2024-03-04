@@ -1,11 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./Record.css";
-import AWS from "aws-sdk";
-import { auth } from "../../config/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { database } from "../../config/firebase";
+import "./AdditionalVideos.css"; // Import CSS file for styling
 
-const Record = () => {
+const AdditionalVideos = () => {
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -13,34 +9,6 @@ const Record = () => {
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [timer, setTimer] = useState(0);
   const [showTimer, setShowTimer] = useState(true); // Option to show/hide timer
-
-  const [user, setUser] = useState(null);
-  const [userInfoJSON, setUserInfoJSON] = useState({});
-  const getUserInfo = async (userID) => {
-    try {
-      const userRef = doc(database, "user", userID);
-      const userInfo = await getDoc(userRef);
-      const userInfoData = userInfo.data();
-      userInfoData.id = userID;
-      setUserInfoJSON(userInfoData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const setUserInfo = () =>
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        console.log("Auth User test count log");
-        setUser(authUser);
-        getUserInfo(authUser.uid);
-      } else {
-        setUser(null);
-      }
-    });
-
-  useEffect(() => {
-    setUserInfo();
-  }, [user]);
 
   useEffect(() => {
     let interval;
@@ -106,17 +74,9 @@ const Record = () => {
     }
   };
 
-  const downloadVideo = () => {
-    const blob = new Blob(recordedChunks, { type: "video/mp4" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    a.href = url;
-    console.log(JSON.stringify(userInfoJSON));
-    a.download = `Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+  const uploadVideos = (event) => {
+    const files = event.target.files;
+    // Handle uploaded files
   };
 
   const formatTime = (time) => {
@@ -131,66 +91,39 @@ const Record = () => {
     setRecordedChunks([]);
   };
 
-  const uploadFile = async () => {
-    const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
-
-    const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
-    const REGION = "us-east-2";
-
-    AWS.config.update({
-      accessKeyId: "AKIA3642LHQUWWHZSHP6",
-      secretAccessKey: "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",
-    });
-    const s3 = new AWS.S3({
-      params: { Bucket: S3_BUCKET },
-      region: REGION,
-    });
-    const key = `video-resume/${auth?.currentUser?.uid}/Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
-    const params = {
-      Bucket: S3_BUCKET,
-      Key: key,
-      Body: videoBlob,
-      ContentType: "video/mp4",
-    };
-
-    var upload = s3
-      .putObject(params)
-      .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
-      })
-      .promise();
-
-    await upload.then((err, data) => {
-      console.log(err);
-      alert("File uploaded successfully.");
-    });
-
-    let currentDate = new Date();
-    let iso8601Date = currentDate.toISOString();
-
-    try {
-      const userDoc = doc(database, "video-resume", auth?.currentUser?.uid);
-      await setDoc(userDoc, {
-        uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
-        uploadDate: iso8601Date,
-        link: `https://inclusify-bucket.s3.us-east-2.amazonaws.com/${key}`,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  const downloadVideo = () => {
+    const blob = new Blob(recordedChunks, { type: "video/mp4" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    a.href = url;
+    a.download = "recorded-video.mp4";
+    a.click();
+    window.URL.revokeObjectURL(url);
   };
 
   return (
     <div className="container">
-      <h2 className="heading">Record Video</h2>
-      <div className="button-container">
+      <h2 className="heading">Add Additional Videos</h2>
+      
+      <div className="options-container">
+      <h3>Upload a video</h3>
+        <div className="upload-option">
+          <input
+            type="file"
+            accept="video/*"
+            onChange={uploadVideos}
+            multiple
+          />
+          <p>or</p>
+        </div>
+        <h2 className="heading">Record a new one</h2>
         <button
           className={`record-button ${isRecording ? "recording" : ""}`}
           onClick={isRecording ? stopRecording : startRecording}
         >
-          {isRecording ? "Stop Recording" : "Start Recording"}
+          {isRecording ? "Stop Recording" : "Record"}
         </button>
         {isRecording && (
           <button className="pause-button" onClick={togglePause}>
@@ -246,4 +179,4 @@ const Record = () => {
   );
 };
 
-export default Record;
+export default AdditionalVideos;
