@@ -103,10 +103,18 @@ export default function Profile() {
   return (
     <>
       <div className="viewTypeBar">
-        <div className="viewTypeChoice" onClick={handleUserViewClick}>
+        <div
+          className={`viewTypeChoice ${viewType === "user" && "selectedView"}`}
+          onClick={handleUserViewClick}
+        >
           User View
         </div>
-        <div className="viewTypeChoice" onClick={handleEmployerViewClick}>
+        <div
+          className={`viewTypeChoice ${
+            viewType === "employer" && "selectedView"
+          }`}
+          onClick={handleEmployerViewClick}
+        >
           Employer View
         </div>
       </div>
