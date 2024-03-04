@@ -30,7 +30,7 @@
     top: 100%;
     right: 0;
     width: fit-content;
-    min-width: 110px;
+    min-width: 135px;
     background-color: white;
     box-shadow: 2px 2px 5px 1px rgba(0,0,0,.8);
     z-index: 1;
@@ -47,4 +47,9 @@
 }
 .dropdown-child:hover {
     background-color: gainsboro;
+    font-weight: bold;
+}
+.dropdown-child:last-child:hover {
+    background-color: #dc3545;
+    font-weight: bold;
 }

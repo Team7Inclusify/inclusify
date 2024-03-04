@@ -115,22 +115,22 @@ const Navbar = () => {
         />
         <div className="navbar-homeText">Inclusify</div>
       </div>
-      {windowWidth >= 700 && (
+      {windowWidth >= 750 && (
         <>
           <div className="navbar-link" onClick={() => navigate("/videoresume")}>
             Video Resume
           </div>
+          <div
+            className="navbar-link"
+            onClick={() => navigate("/additionalvideos")}
+          >
+            Additional Videos
+          </div>
           <div className="navbar-link" onClick={() => navigate("/discussion")}>
             Discussion
           </div>
-          {windowWidth >= 820 && (
+          {windowWidth >= 950 && (
             <>
-              <div
-                className="navbar-link"
-                onClick={() => navigate("/additionalvideos")}
-              >
-                Additional Videos
-              </div>
               <div
                 className="navbar-link"
                 onClick={() => navigate("/about_us")}
@@ -175,7 +175,7 @@ const Navbar = () => {
           />
         )}
       </div>
-      {windowWidth >= 700 && (
+      {windowWidth >= 750 && (
         <>
           {/* More Info in Dropdown*/}
           <Dropdown
@@ -196,7 +196,7 @@ const Navbar = () => {
                 >
                   FAQ
                 </div>
-                {windowWidth < 820 && (
+                {windowWidth < 950 && (
                   <>
                     <div
                       className="dropdown-child"
@@ -253,7 +253,7 @@ const Navbar = () => {
           />
         </>
       )}
-      {windowWidth < 700 && (
+      {windowWidth < 750 && (
         <Dropdown
           coverIsImg
           coverImg={nav_drop}
@@ -264,6 +264,12 @@ const Navbar = () => {
                 onClick={() => navigate("/videoresume")}
               >
                 Video Resume
+              </div>
+              <div
+                className="dropdown-child"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Additional Videos
               </div>
               <div
                 className="dropdown-child"

@@ -11,6 +11,7 @@ const Record = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+  const [chunksChanged, setChunksChanged] = useState(false);
   const [timer, setTimer] = useState(0);
   const [showTimer, setShowTimer] = useState(true); // Option to show/hide timer
 
@@ -53,6 +54,13 @@ const Record = () => {
     }
     return () => clearInterval(interval);
   }, [isRecording, isPaused]);
+
+  useEffect(() => {
+    if (recordedChunks.length === 0) {
+      // Update chunksChanged state when recordedChunks array is emptied
+      setChunksChanged(false);
+    }
+  }, [recordedChunks]);
 
   const startRecording = async () => {
     try {
@@ -129,6 +137,7 @@ const Record = () => {
 
   const handleReRecord = () => {
     setRecordedChunks([]);
+    setChunksChanged(true);
   };
 
   const uploadFile = async () => {
@@ -184,47 +193,50 @@ const Record = () => {
 
   return (
     <div className="container">
-      <h2 className="heading">Record Video</h2>
-      <div className="button-container">
-        <button
-          className={`record-button ${isRecording ? "recording" : ""}`}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          {isRecording ? "Stop Recording" : "Start Recording"}
-        </button>
-        {isRecording && (
-          <button className="pause-button" onClick={togglePause}>
-            {isPaused ? "Resume" : "Pause"}
-          </button>
-        )}
-      </div>
-      {showTimer && isRecording && (
-        <div className="timer-container">
-          <span className="timer">{formatTime(timer)}</span>
-        </div>
-      )}
-      <div className="video-container">
-        <video
-          ref={videoRef}
-          className="video"
-          autoPlay
-          playsInline
-          controls={!isRecording}
-        ></video>
-      </div>
-      <div className="option-container">
-        <label>
-          <input
-            type="checkbox"
-            checked={showTimer}
-            onChange={() => setShowTimer(!showTimer)}
-          />
-          Show Timer
-        </label>
-      </div>
-      {recordedChunks.length > 0 && (
+      {recordedChunks.length === 0 ? (
+        <>
+          <h2 className="heading">Record Video</h2>
+          <div className="button-container">
+            <button
+              className={`record-button ${isRecording ? "recording" : ""}`}
+              onClick={isRecording ? stopRecording : startRecording}
+            >
+              {isRecording ? "Stop Recording" : "Start Recording"}
+            </button>
+            {isRecording && (
+              <button className="pause-button" onClick={togglePause}>
+                {isPaused ? "Resume" : "Pause"}
+              </button>
+            )}
+          </div>
+          {showTimer && isRecording && (
+            <div className="timer-container">
+              <span className="timer">{formatTime(timer)}</span>
+            </div>
+          )}
+          <div className="video-container">
+            <video
+              ref={videoRef}
+              className="video"
+              autoPlay
+              playsInline
+              controls={!isRecording}
+            ></video>
+          </div>
+          <div className="option-container">
+            <label>
+              <input
+                type="checkbox"
+                checked={showTimer}
+                onChange={() => setShowTimer(!showTimer)}
+              />
+              Show Timer
+            </label>
+          </div>
+        </>
+      ) : (
         <div className="recorded-video-container">
-          <h3 className="heading">Recorded Video:</h3>
+          <h3 className="heading">Recorded Video</h3>
           <video className="recorded-video" controls>
             {recordedChunks.map((chunk, index) => (
               <source
@@ -234,12 +246,17 @@ const Record = () => {
               />
             ))}
           </video>
-          <button className="download-button" onClick={downloadVideo}>
-            Download Video
-          </button>
-          <button className="rerecord-button" onClick={handleReRecord}>
-            Re-record
-          </button>
+          <div className="button-container">
+            <button className="download-button" onClick={downloadVideo}>
+              Download Video
+            </button>
+            <button className="upload-button" onClick={handleReRecord}>
+              Upload Video
+            </button>
+            <button className="rerecord-button" onClick={handleReRecord}>
+              Re-Record Video
+            </button>
+          </div>
         </div>
       )}
     </div>
