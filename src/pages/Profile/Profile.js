@@ -122,7 +122,7 @@ export default function Profile() {
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
           resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume.pdf"
+            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
           }
         />
       ) : (
@@ -137,7 +137,7 @@ export default function Profile() {
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
           resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume.pdf"
+            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
           }
         />
       )}
