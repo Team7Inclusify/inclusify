@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./VideoResume.css"; // Import CSS file for styling
+import "./Record.css"; // Import CSS file for styling
 
 const Record = () => {
   const videoRef = useRef(null);
@@ -100,65 +100,66 @@ const Record = () => {
 
   return (
     <div className="container">
-      <h2 className="heading">Record Video</h2>
-      <div className="button-container">
-        <button
-          className={`record-button ${isRecording ? "recording" : ""}`}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          {isRecording ? "Stop Recording" : "Start Recording"}
-        </button>
-        {isRecording && (
-          <button className="pause-button" onClick={togglePause}>
-            {isPaused ? "Resume" : "Pause"}
-          </button>
-        )}
-      </div>
-      <div className="video-container">
-        <video
-          ref={videoRef}
-          className="video"
-          autoPlay
-          playsInline
-          controls={!isRecording}
-        ></video>
-      </div>
-      {showTimer && isRecording && (
-        <div className="timer-container">
-          <span className="timer">{formatTime(timer)}</span>
-        </div>
-      )}
-      <div className="option-container">
-        <label>
-          <input
-            type="checkbox"
-            checked={showTimer}
-            onChange={() => setShowTimer(!showTimer)}
-          />
-          Show Timer
-        </label>
-      </div>
-      {recordedChunks.length > 0 && (
-        <div className="recorded-video-container">
-          <h3 className="heading">Recorded Video:</h3>
-          <video className="recorded-video" controls>
-            {recordedChunks.map((chunk, index) => (
-              <source
-                key={index}
-                src={URL.createObjectURL(chunk)}
-                type="video/mp4"
-              />
-            ))}
-          </video>
-          <button className="download-button" onClick={downloadVideo}>
-            Download Video
-          </button>
-          <button className="rerecord-button" onClick={handleReRecord}>
-            Re-record
-          </button>
-        </div>
-      )}
+  <h2 className="heading">Record Video</h2>
+  <div className="button-container">
+    <button
+      className={`record-button ${isRecording ? "recording" : ""}`}
+      onClick={isRecording ? stopRecording : startRecording}
+    >
+      {isRecording ? "Stop Recording" : "Start Recording"}
+    </button>
+    {isRecording && (
+      <button className="pause-button" onClick={togglePause}>
+        {isPaused ? "Resume" : "Pause"}
+      </button>
+    )}
+  </div>
+  {showTimer && isRecording && (
+    <div className="timer-container">
+      <span className="timer">{formatTime(timer)}</span>
     </div>
+  )}
+  <div className="video-container">
+    <video
+      ref={videoRef}
+      className="video"
+      autoPlay
+      playsInline
+      controls={!isRecording}
+    ></video>
+  </div>
+  <div className="option-container">
+    <label>
+      <input
+        type="checkbox"
+        checked={showTimer}
+        onChange={() => setShowTimer(!showTimer)}
+      />
+      Show Timer
+    </label>
+  </div>
+  {recordedChunks.length > 0 && (
+    <div className="recorded-video-container">
+      <h3 className="heading">Recorded Video:</h3>
+      <video className="recorded-video" controls>
+        {recordedChunks.map((chunk, index) => (
+          <source
+            key={index}
+            src={URL.createObjectURL(chunk)}
+            type="video/mp4"
+          />
+        ))}
+      </video>
+      <button className="download-button" onClick={downloadVideo}>
+        Download Video
+      </button>
+      <button className="rerecord-button" onClick={handleReRecord}>
+        Re-record
+      </button>
+    </div>
+  )}
+</div>
+
   );
 };
 
