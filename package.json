@@ -20,6 +20,7 @@
         "nodemon": "^3.1.0",
         "path-browserify": "^1.0.1",
         "react": "^18.2.0",
+        "react-doc-viewer": "^0.1.5",
         "react-dom": "^18.2.0",
         "react-dropdown-select": "^4.10.0",
         "react-media-recorder": "^1.6.6",

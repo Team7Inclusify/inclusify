@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { auth } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import "./Profile.css";
 import ProfilePage from "./ProfilePage";
+import EmployerView from "./EmployerView/EmployerView";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -89,19 +91,56 @@ export default function Profile() {
     setUserInfo();
   }, [user]);
 
+  const [viewType, setViewType] = useState("user");
+  const handleUserViewClick = useCallback(() => {
+    setViewType("user");
+  }, []);
+
+  const handleEmployerViewClick = useCallback(() => {
+    setViewType("employer");
+  }, []);
+
   return (
     <>
-      <ProfilePage
-        firstName={userInfoJSON.firstName}
-        lastName={userInfoJSON.lastName}
-        videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
-        videoResumeUploadDate={
-          videoResumeJSON ? videoResumeJSON.uploadDate : null
-        }
-        videoTimeSinceUpload={
-          videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
-        }
-      />
+      <div className="viewTypeBar">
+        <div className="viewTypeChoice" onClick={handleUserViewClick}>
+          User View
+        </div>
+        <div className="viewTypeChoice" onClick={handleEmployerViewClick}>
+          Employer View
+        </div>
+      </div>
+      {viewType === "user" ? (
+        <ProfilePage
+          firstName={userInfoJSON.firstName}
+          lastName={userInfoJSON.lastName}
+          videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
+          videoResumeUploadDate={
+            videoResumeJSON ? videoResumeJSON.uploadDate : null
+          }
+          videoTimeSinceUpload={
+            videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
+          }
+          resume={
+            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume.pdf"
+          }
+        />
+      ) : (
+        <EmployerView
+          firstName={userInfoJSON.firstName}
+          lastName={userInfoJSON.lastName}
+          videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
+          videoResumeUploadDate={
+            videoResumeJSON ? videoResumeJSON.uploadDate : null
+          }
+          videoTimeSinceUpload={
+            videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
+          }
+          resume={
+            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume.pdf"
+          }
+        />
+      )}
     </>
   );
 }

@@ -4,6 +4,9 @@ import "./ProfilePage.css";
 import dp from "../../images/dp.jpg";
 import uploadIcon from "../../images/upload_dp.svg";
 import editIcon from "../../images/edit_icon.svg"; // Import the edit icon
+import DocViewer from "react-doc-viewer";
+
+//  https://www.npmjs.com/package/react-doc-viewer
 
 export default function ProfilePage(props) {
   // Mock user data
@@ -257,9 +260,9 @@ export default function ProfilePage(props) {
               </video>
               <button
                 className="upload-video-button"
-                onClick={handleVideoUpload}
+                onClick={() => navigate("/videoresume")}
               >
-                Upload a Video
+                Update Video
               </button>
             </>
           ) : (
@@ -275,24 +278,8 @@ export default function ProfilePage(props) {
           )}
         </div>
         <div className="profile-section">
-          <h3 className="section-title">Additional Videos</h3>
-          <div className="additional-videos-container">
-            {user.additionalVideos.map((video, index) => (
-              <iframe
-                key={index}
-                src={video}
-                title={`Additional Video ${index + 1}`}
-                width="320"
-                height="180"
-                frameBorder="0"
-                allowFullScreen
-                className="video-frame"
-              ></iframe>
-            ))}
-          </div>
-          <button className="upload-video-button" onClick={handleVideoUpload}>
-            Upload a Video
-          </button>
+          <h3 className="section-title">Resume</h3>
+          <iframe src={props.resume} width="100%" height="600px" />
         </div>
       </div>
     </div>
