@@ -223,3 +223,10 @@
       max-width: 250px;
   }
 }
+
+
+.uploadTimeDiv {
+  float: right;
+  font-weight: normal;
+  font-size: medium;
+}

@@ -1,0 +1,18 @@
+.filterSearchBar {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.filterSearchChoice {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.filterSearchChoice:hover {
+    font-weight: bold;
+}

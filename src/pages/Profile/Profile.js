@@ -2,16 +2,73 @@ import React, { useEffect, useState } from "react";
 import { auth } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import ProfilePage from "./ProfilePage";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
+  const [videoResumeJSON, setVideoResumeJSON] = useState(null);
+
+  function calculateTimeDifference(dateString) {
+    const providedDate = new Date(dateString);
+    const currentDate = new Date();
+    const timeDifference = currentDate - providedDate;
+    const secondsDifference = timeDifference / 1000;
+    const minutesDifference = secondsDifference / 60;
+    const hoursDifference = minutesDifference / 60;
+    const daysDifference = hoursDifference / 24;
+
+    if (daysDifference >= 1) {
+      return (
+        Math.floor(daysDifference) +
+        " day" +
+        (Math.floor(daysDifference) > 1 ? "s" : "") +
+        " ago"
+      );
+    } else if (hoursDifference >= 1) {
+      return (
+        Math.floor(hoursDifference) +
+        " hour" +
+        (Math.floor(hoursDifference) > 1 ? "s" : "") +
+        " ago"
+      );
+    } else if (minutesDifference >= 1) {
+      return (
+        Math.floor(minutesDifference) +
+        " minute" +
+        (Math.floor(minutesDifference) > 1 ? "s" : "") +
+        " ago"
+      );
+    } else {
+      return (
+        Math.floor(secondsDifference) +
+        " second" +
+        (Math.floor(secondsDifference) > 1 ? "s" : "") +
+        " ago"
+      );
+    }
+  }
+
   const getUserInfo = async (userID) => {
     try {
       const userRef = doc(database, "user", userID);
       const userInfo = await getDoc(userRef);
       const userInfoData = userInfo.data();
       setUserInfoJSON(userInfoData);
+
+      const videoResumeRef = doc(database, "video-resume", userID);
+      const videoResumeInfo = await getDoc(videoResumeRef);
+      const videoResumeInfoData = videoResumeInfo.data();
+
+      if (videoResumeInfoData) {
+        const timeSinceUpload = calculateTimeDifference(
+          videoResumeInfoData.uploadDate
+        );
+        videoResumeInfoData.timeSinceUpload = timeSinceUpload;
+        setVideoResumeJSON(videoResumeInfoData);
+      } else {
+        setVideoResumeJSON(null);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +91,17 @@ export default function Profile() {
 
   return (
     <>
-      {userInfoJSON.firstName} {userInfoJSON.lastName}
+      <ProfilePage
+        firstName={userInfoJSON.firstName}
+        lastName={userInfoJSON.lastName}
+        videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
+        videoResumeUploadDate={
+          videoResumeJSON ? videoResumeJSON.uploadDate : null
+        }
+        videoTimeSinceUpload={
+          videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
+        }
+      />
     </>
   );
 }

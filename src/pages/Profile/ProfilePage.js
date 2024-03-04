@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProfilePage.css";
 import dp from "../../images/dp.jpg";
 import uploadIcon from "../../images/upload_dp.svg";
 import editIcon from "../../images/edit_icon.svg"; // Import the edit icon
 
-export default function ProfilePage() {
+export default function ProfilePage(props) {
   // Mock user data
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     firstName: "John",
     lastName: "Doe",
@@ -14,7 +16,8 @@ export default function ProfilePage() {
     skills: "JavaScript, React, HTML, CSS",
     certifications: "Certified Web Developer",
     hobbies: "Reading, Cooking, Hiking",
-    videoResume: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Example link
+    videoResume:
+      "https://inclusify-bucket.s3.us-east-2.amazonaws.com/video-resume/CAazlxCkq9XR4Vx5asBXFfZDeem2/Resume_Bryan_Martinez.mp4", // Example link
     additionalVideos: [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -88,7 +91,11 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-container">
-      <div className="overlay" style={{ display: isPromptOpen ? "block" : "none" }} onClick={() => setIsPromptOpen(false)} />
+      <div
+        className="overlay"
+        style={{ display: isPromptOpen ? "block" : "none" }}
+        onClick={() => setIsPromptOpen(false)}
+      />
       {/* Prompt for options */}
       {isPromptOpen && (
         <div className="centered-prompt">
@@ -96,7 +103,11 @@ export default function ProfilePage() {
             &#10006;
           </span>
           <div className="profile-picture-container">
-            <img src={profilePicture} alt="Profile" className="profile-picture" />
+            <img
+              src={profilePicture}
+              alt="Profile"
+              className="profile-picture"
+            />
           </div>
           <div className="option" onClick={() => handleOptionClick("upload")}>
             Upload a new profile picture
@@ -112,12 +123,13 @@ export default function ProfilePage() {
       <div className="profile-section">
         {/* Profile picture with upload option */}
         <div className="upload-label">
+          <img src={profilePicture} alt="Profile" className="profile-picture" />
           <img
-            src={profilePicture}
-            alt="Profile"
-            className="profile-picture"
+            src={uploadIcon}
+            alt="Upload"
+            className="upload-icon"
+            onClick={() => setIsPromptOpen(true)}
           />
-          <img src={uploadIcon} alt="Upload" className="upload-icon" onClick={() => setIsPromptOpen(true)} />
         </div>
         <input
           id="upload-input"
@@ -130,7 +142,7 @@ export default function ProfilePage() {
       </div>
       <div className="main-content">
         <div className="profile-section">
-          <h2 className="name">John Doe</h2>
+          <h2 className="name">{props.firstName + " " + props.lastName}</h2>
         </div>
         <div className="profile-section">
           <h3 className="section-title">Education</h3>
@@ -139,14 +151,21 @@ export default function ProfilePage() {
               <input
                 type="text"
                 value={user.education}
-                onChange={(e) => setUser({ ...user, education: e.target.value })}
+                onChange={(e) =>
+                  setUser({ ...user, education: e.target.value })
+                }
               />
               <button onClick={() => handleSave("education")}>Save</button>
             </div>
           ) : (
             <div className="editable-content">
               <p>{user.education}</p>
-              <img src={editIcon} alt="Edit" className="edit-icon" onClick={() => handleEdit("education")} />
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("education")}
+              />
             </div>
           )}
         </div>
@@ -164,7 +183,12 @@ export default function ProfilePage() {
           ) : (
             <div className="editable-content">
               <p>{user.skills}</p>
-              <img src={editIcon} alt="Edit" className="edit-icon" onClick={() => handleEdit("skills")} />
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("skills")}
+              />
             </div>
           )}
         </div>
@@ -175,14 +199,21 @@ export default function ProfilePage() {
               <input
                 type="text"
                 value={user.certifications}
-                onChange={(e) => setUser({ ...user, certifications: e.target.value })}
+                onChange={(e) =>
+                  setUser({ ...user, certifications: e.target.value })
+                }
               />
               <button onClick={() => handleSave("certifications")}>Save</button>
             </div>
           ) : (
             <div className="editable-content">
               <p>{user.certifications}</p>
-              <img src={editIcon} alt="Edit" className="edit-icon" onClick={() => handleEdit("certifications")} />
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("certifications")}
+              />
             </div>
           )}
         </div>
@@ -200,20 +231,48 @@ export default function ProfilePage() {
           ) : (
             <div className="editable-content">
               <p>{user.hobbies}</p>
-              <img src={editIcon} alt="Edit" className="edit-icon" onClick={() => handleEdit("hobbies")} />
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("hobbies")}
+              />
             </div>
           )}
         </div>
         <div className="profile-section">
-          <h3 className="section-title">Video Resume</h3>
-          <video
-            controls
-            className="video-frame"
-          >
-            <source src={user.videoResume} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <button className="upload-video-button" onClick={handleVideoUpload}>Upload a Video</button>
+          <h3 className="section-title">
+            Video Resume
+            <div className="uploadTimeDiv">{props.videoTimeSinceUpload}</div>
+          </h3>
+          {props.videoResumeSRC.link ? (
+            <>
+              <video
+                controls
+                className="video-frame"
+                src={props.videoResumeSRC}
+                type="video/mp4"
+              >
+                Your browser does not support the video tag.
+              </video>
+              <button
+                className="upload-video-button"
+                onClick={handleVideoUpload}
+              >
+                Upload a Video
+              </button>
+            </>
+          ) : (
+            <>
+              No Video Resume Yet
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/videoresume")}
+              >
+                Click to Create Video Resume Here
+              </button>
+            </>
+          )}
         </div>
         <div className="profile-section">
           <h3 className="section-title">Additional Videos</h3>
@@ -231,7 +290,9 @@ export default function ProfilePage() {
               ></iframe>
             ))}
           </div>
-          <button className="upload-video-button" onClick={handleVideoUpload}>Upload a Video</button>
+          <button className="upload-video-button" onClick={handleVideoUpload}>
+            Upload a Video
+          </button>
         </div>
       </div>
     </div>
