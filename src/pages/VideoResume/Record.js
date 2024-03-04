@@ -250,7 +250,7 @@ const Record = () => {
             <button className="download-button" onClick={downloadVideo}>
               Download Video
             </button>
-            <button className="upload-button" onClick={handleReRecord}>
+            <button className="upload-button" onClick={uploadFile}>
               Upload Video
             </button>
             <button className="rerecord-button" onClick={handleReRecord}>
