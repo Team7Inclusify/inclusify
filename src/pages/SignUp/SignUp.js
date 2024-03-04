@@ -53,6 +53,7 @@ export default function SignUp() {
       await setDoc(userDoc, {
         firstName: firstName,
         lastName: lastName,
+        email: email,
       });
       navigate("/");
     } catch (error) {

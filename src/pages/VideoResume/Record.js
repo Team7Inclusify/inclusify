@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "./VideoResume.css";
 import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
 
 const Record = () => {
@@ -21,6 +21,7 @@ const Record = () => {
       const userRef = doc(database, "user", userID);
       const userInfo = await getDoc(userRef);
       const userInfoData = userInfo.data();
+      userInfoData.id = userID;
       setUserInfoJSON(userInfoData);
     } catch (error) {
       console.error(error);
@@ -144,10 +145,10 @@ const Record = () => {
       params: { Bucket: S3_BUCKET },
       region: REGION,
     });
-
+    const key = `video-resume/${auth?.currentUser?.uid}/Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
     const params = {
       Bucket: S3_BUCKET,
-      Key: `video-resume/Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`,
+      Key: key,
       Body: videoBlob,
       ContentType: "video/mp4",
     };
@@ -165,6 +166,20 @@ const Record = () => {
       console.log(err);
       alert("File uploaded successfully.");
     });
+
+    let currentDate = new Date();
+    let iso8601Date = currentDate.toISOString();
+
+    try {
+      const userDoc = doc(database, "video-resume", auth?.currentUser?.uid);
+      await setDoc(userDoc, {
+        uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
+        uploadDate: iso8601Date,
+        link: `https://inclusify-bucket.s3.us-east-2.amazonaws.com/${key}`,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
