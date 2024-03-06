@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./navbar/Navbar";
@@ -21,11 +23,12 @@ import Record from "./pages/VideoResume/Record";
 import Summary from "./pages/VideoResume/summary";
 import Footer from "./footer/Footer";
 import AdditionalVideos from "./pages/AdditionalVideos/AdditionalVideos";
+import AccessDenied from "./pages/AccesDeny/AccessDenied";
+import MessageInbox from "./pages/MessageInbox/MessageInbox"; // Import MessageInbox component
 
 // Import the dark mode SVG icon
 import DarkIcon from "./images/dark.svg";
 import { auth } from "./config/firebase";
-import AccessDenied from "./pages/AccesDeny/AccessDenied";
 import UploadResume from "./pages/UploadResume/UploadResume";
 import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
 
@@ -97,11 +100,12 @@ function App() {
           <Route path="/summary" element={<Summary />} />
           <Route path="/template" element={<Template />} />
           {/* Route for the Record component */}
-
           <Route
             path="/record"
             element={loggedIn ? <Record /> : <AccessDenied />}
           />
+          {/* Add route for MessageInbox */}
+          <Route path="/messageinbox" element={<MessageInbox />} />
           <Route
             path="/uploadresume"
             element={loggedIn ? <UploadResume /> : <AccessDenied />}
