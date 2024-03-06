@@ -26,6 +26,8 @@ import AdditionalVideos from "./pages/AdditionalVideos/AdditionalVideos";
 import DarkIcon from "./images/dark.svg";
 import { auth } from "./config/firebase";
 import AccessDenied from "./pages/AccesDeny/AccessDenied";
+import UploadResume from "./pages/UploadResume/UploadResume";
+import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
@@ -99,6 +101,14 @@ function App() {
           <Route
             path="/record"
             element={loggedIn ? <Record /> : <AccessDenied />}
+          />
+          <Route
+            path="/uploadresume"
+            element={loggedIn ? <UploadResume /> : <AccessDenied />}
+          />
+          <Route
+            path="/uploadvideoresume"
+            element={loggedIn ? <UploadVideoResume /> : <AccessDenied />}
           />
         </Routes>
       </div>

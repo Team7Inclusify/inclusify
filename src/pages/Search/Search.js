@@ -3,6 +3,7 @@ import "./Search.css";
 import { useParams } from "react-router-dom";
 import FilterSearch from "./Components/FilterSearch/FilterSearch.js";
 import { getDoc } from "firebase/firestore";
+import UserCard from "./Components/UserCard/UserCard.js";
 
 export default function Search() {
   let { search_tag } = useParams();
@@ -21,6 +22,7 @@ export default function Search() {
     <div className="SearchPage">
       <FilterSearch onFilterSearchChange={handleFilterSearchChange} />
       {search_tag} - Searching: {searching}
+      <UserCard />
     </div>
   );
 }

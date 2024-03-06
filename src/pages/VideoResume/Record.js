@@ -144,17 +144,17 @@ const Record = () => {
     const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
 
     const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
-    const REGION = "us-east-2";
+    const REGION = process.env.REACT_APP_AWS_S3_REGION;
 
     AWS.config.update({
-      accessKeyId: "AKIA3642LHQUWWHZSHP6",
-      secretAccessKey: "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",
+      accessKeyId: process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_S3_SECRET_KEY,
     });
     const s3 = new AWS.S3({
       params: { Bucket: S3_BUCKET },
       region: REGION,
     });
-    const key = `video-resume/${auth?.currentUser?.uid}/Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
+    const key = `video-resume/${auth?.currentUser?.uid}/Video-Resume_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
     const params = {
       Bucket: S3_BUCKET,
       Key: key,
@@ -184,7 +184,7 @@ const Record = () => {
       await setDoc(userDoc, {
         uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
         uploadDate: iso8601Date,
-        link: `https://inclusify-bucket.s3.us-east-2.amazonaws.com/${key}`,
+        link: `https://${S3_BUCKET}.${REGION}.amazonaws.com/${key}`,
       });
     } catch (error) {
       console.error(error);

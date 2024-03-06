@@ -10,6 +10,7 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
+  const [pdfResumeJSON, setPDFResumeJSON] = useState(null);
 
   function calculateTimeDifference(dateString) {
     const providedDate = new Date(dateString);
@@ -71,6 +72,19 @@ export default function Profile() {
       } else {
         setVideoResumeJSON(null);
       }
+      const pdfResumeRef = doc(database, "resume", userID);
+      const pdfResumeInfo = await getDoc(pdfResumeRef);
+      const pdfResumeInfoData = pdfResumeInfo.data();
+
+      if (pdfResumeInfoData) {
+        const timeSinceUpload = calculateTimeDifference(
+          pdfResumeInfoData.uploadDate
+        );
+        pdfResumeInfoData.timeSinceUpload = timeSinceUpload;
+        setPDFResumeJSON(pdfResumeInfoData);
+      } else {
+        setPDFResumeJSON(null);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -129,9 +143,7 @@ export default function Profile() {
           videoTimeSinceUpload={
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
-          resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
-          }
+          resume={pdfResumeJSON ? pdfResumeJSON.link : false}
         />
       ) : (
         <EmployerView
@@ -144,9 +156,7 @@ export default function Profile() {
           videoTimeSinceUpload={
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
-          resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
-          }
+          resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
         />
       )}
     </>

@@ -24,7 +24,7 @@ export default function EmployerView(props) {
         <iframe
           className="employer-pdf"
           ref={pdfContainerRef}
-          src={props.resume}
+          src={props.resumeSRC}
         />
       </div>
       <br />
