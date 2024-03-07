@@ -238,7 +238,7 @@ const Navbar = () => {
                   >
                     Profile
                   </div>
-                  <div className="dropdown-child" onClick={logOut}>
+                  <div className="logout-dropdown-child" onClick={logOut}>
                     Log Out
                   </div>
                 </>
@@ -315,7 +315,7 @@ const Navbar = () => {
                   >
                     Profile
                   </div>
-                  <div className="dropdown-child" onClick={logOut}>
+                  <div className="logout-dropdown-child" onClick={logOut}>
                     Log Out
                   </div>
                 </>
