@@ -184,7 +184,7 @@ const Record = () => {
       await setDoc(userDoc, {
         uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
         uploadDate: iso8601Date,
-        link: `https://${S3_BUCKET}.${REGION}.amazonaws.com/${key}`,
+        link: `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${key}`,
       });
     } catch (error) {
       console.error(error);
