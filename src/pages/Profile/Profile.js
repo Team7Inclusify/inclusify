@@ -143,7 +143,7 @@ export default function Profile() {
           videoTimeSinceUpload={
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
-          resume={pdfResumeJSON ? pdfResumeJSON.link : false}
+          resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
         />
       ) : (
         <EmployerView
@@ -154,9 +154,12 @@ export default function Profile() {
             videoResumeJSON ? videoResumeJSON.uploadDate : null
           }
           videoTimeSinceUpload={
-            videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
+            videoResumeJSON ? videoResumeJSON.timeSinceUpload : null
           }
           resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
+          resumeUploadDate={
+            pdfResumeJSON ? pdfResumeJSON.timeSinceUpload : null
+          }
         />
       )}
     </>

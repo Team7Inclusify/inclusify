@@ -184,7 +184,69 @@ export default function ProfilePage(props) {
             </div>
           )}
         </div>
-        {/* Rest of your profile sections */}
+
+        <div className="profile-section">
+          <h3 className="section-title">
+            Video Resume
+            <div className="uploadTimeDiv">{props.videoTimeSinceUpload}</div>
+          </h3>
+          {props.videoResumeSRC.link ? (
+            <>
+              <video
+                controls
+                className="video-frame"
+                src={props.videoResumeSRC}
+                type="video/mp4"
+              >
+                Your browser does not support the video tag.
+              </video>
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/videoresume")}
+              >
+                Update Video
+              </button>
+            </>
+          ) : (
+            <>
+              No Video Resume Yet
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/videoresume")}
+              >
+                Click to Create Video Resume Here
+              </button>
+            </>
+          )}
+        </div>
+        <div className="profile-section">
+          <h3 className="section-title">
+            PDF Resume
+            <div className="uploadTimeDiv">{props.resumeUploadDate}</div>
+          </h3>
+
+          {props.videoResumeSRC.link ? (
+            <>
+              <iframe src={props.resumeSRC} width="100%" height="600px" />
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/uploadresume")}
+              >
+                Update PDF Resume
+              </button>
+            </>
+          ) : (
+            <>
+              No PDF Resume Yet
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/uploadresume")}
+              >
+                Click to Upload PDF Resume
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
