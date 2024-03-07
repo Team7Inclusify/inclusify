@@ -5,6 +5,7 @@ import { database } from "../../config/firebase";
 import "./Profile.css";
 import ProfilePage from "./ProfilePage";
 import EmployerView from "./EmployerView/EmployerView";
+import defaultPFP from "../../images/default_pfp.png";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -136,6 +137,10 @@ export default function Profile() {
         <ProfilePage
           firstName={userInfoJSON.firstName}
           lastName={userInfoJSON.lastName}
+          pfpSRC={
+            userInfoJSON.pfpLink === "N/A" ? defaultPFP : userInfoJSON.pfpLink
+          }
+          email={userInfoJSON.email}
           videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
           videoResumeUploadDate={
             videoResumeJSON ? videoResumeJSON.uploadDate : null

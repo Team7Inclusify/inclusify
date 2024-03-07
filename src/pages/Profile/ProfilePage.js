@@ -4,7 +4,10 @@ import "./ProfilePage.css";
 import dp from "../../images/dp.jpg";
 import uploadIcon from "../../images/upload_dp.svg";
 import editIcon from "../../images/edit_icon.svg"; // Import the edit icon
-import DocViewer from "react-doc-viewer";
+import AWS from "aws-sdk";
+import { auth } from "../../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { database } from "../../config/firebase";
 
 //  https://www.npmjs.com/package/react-doc-viewer
 
@@ -38,7 +41,7 @@ export default function ProfilePage(props) {
   });
 
   // Function to handle profile picture upload
-  const handleUpload = (e) => {
+  const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -46,6 +49,52 @@ export default function ProfilePage(props) {
         setProfilePicture(reader.result);
       };
       reader.readAsDataURL(file);
+    }
+    const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
+    const REGION = process.env.REACT_APP_AWS_S3_REGION;
+
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_S3_SECRET_KEY,
+    });
+    const s3 = new AWS.S3({
+      params: { Bucket: S3_BUCKET },
+      region: REGION,
+    });
+    const key = `pfp/${auth?.currentUser?.uid}/PFP_${props.firstName}_${props.lastName}.png`;
+    const params = {
+      Bucket: S3_BUCKET,
+      Key: key,
+      Body: file,
+      ContentType: "image/*",
+    };
+
+    var upload = s3
+      .putObject(params)
+      .on("httpUploadProgress", (evt) => {
+        console.log(
+          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
+        );
+      })
+      .promise();
+
+    await upload.then((err, data) => {
+      console.log(err);
+      alert("File uploaded successfully.");
+    });
+
+    try {
+      const userDoc = doc(database, "user", auth?.currentUser?.uid);
+      await setDoc(userDoc, {
+        email: props.email,
+        firstName: props.firstName,
+        lastName: props.lastName,
+        pfpLink: `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${key}`,
+      });
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -70,26 +119,6 @@ export default function ProfilePage(props) {
   // Function to handle saving edited content
   const handleSave = (field) => {
     setIsEditing({ ...isEditing, [field]: false });
-  };
-
-  // Function to handle uploading additional video
-  const handleVideoUpload = () => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "video/*";
-    input.onchange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          // Handle the uploaded video here
-          // For example, you can set it in user state or display it directly
-          setUser({ ...user, videoResume: reader.result });
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-    input.click();
   };
 
   // Function to handle sending a message
@@ -132,7 +161,7 @@ export default function ProfilePage(props) {
       <div className="profile-section">
         {/* Profile picture with upload option */}
         <div className="upload-label">
-          <img src={profilePicture} alt="Profile" className="profile-picture" />
+          <img src={props.pfpSRC} alt="Profile" className="profile-picture" />
           <img
             src={uploadIcon}
             alt="Upload"
