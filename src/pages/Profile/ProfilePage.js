@@ -224,7 +224,7 @@ export default function ProfilePage(props) {
               <video
                 controls
                 className="video-frame"
-                src={props.videoResumeSRC}
+                src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
                 type="video/mp4"
               >
                 Your browser does not support the video tag.
@@ -256,7 +256,11 @@ export default function ProfilePage(props) {
 
           {props.videoResumeSRC.link ? (
             <>
-              <iframe src={props.resumeSRC} width="100%" height="600px" />
+              <iframe
+                src={`${props.resumeSRC}?timestamp=${Date.now()}`}
+                width="100%"
+                height="600px"
+              />
               <button
                 className="upload-video-button"
                 onClick={() => navigate("/uploadresume")}
