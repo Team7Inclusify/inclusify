@@ -22,6 +22,7 @@ export default function ProfilePage(props) {
     skills: "JavaScript, React, HTML, CSS",
     certifications: "Certified Web Developer",
     hobbies: "Reading, Cooking, Hiking",
+    aboutMe: "Quick description about yourself",
     videoResume:
       "https://inclusify-bucket.s3.us-east-2.amazonaws.com/video-resume/CAazlxCkq9XR4Vx5asBXFfZDeem2/Resume_Bryan_Martinez.mp4", // Example link
     additionalVideos: [
@@ -38,6 +39,7 @@ export default function ProfilePage(props) {
     skills: false,
     certifications: false,
     hobbies: false,
+    aboutMe: false,
   });
 
   // Function to handle profile picture upload
@@ -209,6 +211,54 @@ export default function ProfilePage(props) {
                 alt="Edit"
                 className="edit-icon"
                 onClick={() => handleEdit("education")}
+              />
+            </div>
+          )}
+        </div>
+        <div className="profile-section">
+          <h3 className="section-title">About Me</h3>
+          {isEditing.aboutMe ? (
+            <div className="editable-content">
+              <input
+                type="text"
+                value={user.aboutMe}
+                onChange={(e) => setUser({ ...user, aboutMe: e.target.value })}
+              />
+              <button onClick={() => handleSave("aboutMe")}>Save</button>
+            </div>
+          ) : (
+            <div className="editable-content">
+              <p>{user.aboutMe}</p>
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("aboutMe")}
+              />
+            </div>
+          )}
+        </div>
+        <div className="profile-section">
+          <h3 className="section-title">Certifications</h3>
+          {isEditing.certifications ? (
+            <div className="editable-content">
+              <input
+                type="text"
+                value={user.certifications}
+                onChange={(e) =>
+                  setUser({ ...user, certifications: e.target.value })
+                }
+              />
+              <button onClick={() => handleSave("certifications")}>Save</button>
+            </div>
+          ) : (
+            <div className="editable-content">
+              <p>{user.certifications}</p>
+              <img
+                src={editIcon}
+                alt="Edit"
+                className="edit-icon"
+                onClick={() => handleEdit("certifications")}
               />
             </div>
           )}

@@ -3,9 +3,11 @@ import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import "./Record.css";
 
 export default function UploadVideoResume() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [videoUrl, setVideoUrl] = useState(null);
 
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
@@ -38,6 +40,7 @@ export default function UploadVideoResume() {
   const uploadResume = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+    setVideoUrl(URL.createObjectURL(file));
   };
 
   useEffect(() => {
@@ -101,9 +104,14 @@ export default function UploadVideoResume() {
       <h2>Upload Your Video Resume</h2>
       <input type="file" accept="video/*" onChange={uploadResume} />
       {selectedFile && (
-        <button onClick={uploadFileAWS}>
-          Upload File: {selectedFile.name}
-        </button>
+        <>
+          <video src={videoUrl} className="recorded-video" controls />
+          <button onClick={uploadFileAWS}>
+            Upload File: {selectedFile.name}
+          </button>
+          <br />
+          <br />
+        </>
       )}
     </div>
   );
