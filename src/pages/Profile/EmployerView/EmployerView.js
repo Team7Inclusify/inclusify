@@ -11,22 +11,30 @@ export default function EmployerView(props) {
         Math.max(containerHeight, 400) + "px";
     }
   }, []);
-  console.log(props.resumeSRC);
+
   return (
     <div className="employerViewContainer">
       <h2>{props.firstName + " " + props.lastName}</h2>
       <div className="resumes">
-        <video
-          className="employer-video"
-          controls
-          src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
-          type="video/mp4"
-        />
-        <iframe
-          className="employer-pdf"
-          ref={pdfContainerRef}
-          src={`${props.resumeSRC}?timestamp=${Date.now()}`}
-        />
+        {props.videoResumeSRC ? (
+          <video
+            className="employer-video"
+            controls
+            src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
+            type="video/mp4"
+          />
+        ) : (
+          <>No Video Resume Uploaded</>
+        )}
+        {props.resumeSRC ? (
+          <iframe
+            className="employer-pdf"
+            ref={pdfContainerRef}
+            src={`${props.resumeSRC}?timestamp=${Date.now()}`}
+          />
+        ) : (
+          <>No PDF Resume Uploaded</>
+        )}
       </div>
       <br />
       <br />
