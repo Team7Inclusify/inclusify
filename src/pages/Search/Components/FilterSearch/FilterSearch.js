@@ -16,6 +16,12 @@ export default function FilterSearch({ onFilterSearchChange }) {
       >
         Video-Resumes
       </div>
+      <div
+        className="filterSearchChoice"
+        onClick={() => onFilterSearchChange("action-videos")}
+      >
+        Action Videos
+      </div>
     </div>
   );
 }

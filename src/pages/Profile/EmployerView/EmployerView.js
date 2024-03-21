@@ -11,6 +11,7 @@ export default function EmployerView(props) {
         Math.max(containerHeight, 400) + "px";
     }
   }, []);
+  console.log(props.resumeSRC);
   return (
     <div className="employerViewContainer">
       <h2>{props.firstName + " " + props.lastName}</h2>
@@ -18,13 +19,13 @@ export default function EmployerView(props) {
         <video
           className="employer-video"
           controls
-          src={props.videoResumeSRC}
+          src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
           type="video/mp4"
         />
         <iframe
           className="employer-pdf"
           ref={pdfContainerRef}
-          src={props.resume}
+          src={`${props.resumeSRC}?timestamp=${Date.now()}`}
         />
       </div>
       <br />

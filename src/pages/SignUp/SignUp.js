@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AWS from "aws-sdk";
 import { useNavigate, Link } from "react-router-dom";
 import "./SignUp.css";
 import { auth } from "../../config/firebase";
@@ -39,7 +40,7 @@ export default function SignUp() {
   }, [loggedIn]);
 
   if (loggedIn) {
-    navigate("/");
+    navigate("/profile");
   }
 
   const signUp = async () => {
@@ -50,12 +51,13 @@ export default function SignUp() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const userDoc = doc(database, "user", auth?.currentUser?.uid);
+
       await setDoc(userDoc, {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        pfpLink: "N/A",
       });
-      navigate("/");
     } catch (error) {
       console.error(error);
     }

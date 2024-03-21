@@ -29,6 +29,10 @@ import MessageInbox from "./pages/MessageInbox/MessageInbox"; // Import MessageI
 // Import the dark mode SVG icon
 import DarkIcon from "./images/dark.svg";
 import { auth } from "./config/firebase";
+import UploadResume from "./pages/UploadResume/UploadResume";
+import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
+import RecordAV from "./pages/AdditionalVideos/RecordAV";
+import UploadAV from "./pages/AdditionalVideos/UploadAV";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
@@ -93,6 +97,8 @@ function App() {
           {/* Route for the VideoResume component */}
           <Route path="/videoresume" element={<VideoResume />} />
           <Route path="/additionalvideos" element={<AdditionalVideos />} />
+          <Route path="/additionalvideos/record" element={<RecordAV />} />
+          <Route path="/additionalvideos/upload" element={<UploadAV />} />
           <Route path="/step1" element={<Step1 onNext={handleStep1Next} />} />
           <Route path="/step2" element={<Step2 onNext={handleStep2Next} />} />
           <Route path="/summary" element={<Summary />} />
@@ -104,6 +110,15 @@ function App() {
           />
           {/* Add route for MessageInbox */}
           <Route path="/messageinbox" element={<MessageInbox />} />
+          <Route
+            path="/uploadresume"
+            element={loggedIn ? <UploadResume /> : <AccessDenied />}
+          />
+          <Route
+            path="/uploadvideoresume"
+            element={loggedIn ? <UploadVideoResume /> : <AccessDenied />}
+          />
+          <Route path="/profile/:userID" element={<Profile />} />
         </Routes>
       </div>
       <Footer />
