@@ -44,6 +44,7 @@ p {
   background-color: #012548; /* Background color for the second card */
   color: #333; /* Text color for the second card */
 }
+
 .option-card:hover {
   transform: translateY(-5px);
 }

@@ -30,21 +30,20 @@
     margin-top: 8px;
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* Changed from space-between to flex-start */
   }
   
   .like-button {
     background-color: #3498db;
     color: white;
     border: none;
-    /* padding: 8px; */
     cursor: pointer;
     border-radius: 4px;
-    margin-right: 8px;
+    margin-right: 8px; /* Added some margin to separate the like button from Edit/Delete buttons */
   }
   
   .comment-input {
     flex: 1;
-    /* padding: 8px; */
     margin-right: 8px;
   }
   
@@ -52,7 +51,6 @@
     background-color: #3498db;
     color: white;
     border: none;
-    /* padding: 8px; */
     cursor: pointer;
     border-radius: 4px;
   }

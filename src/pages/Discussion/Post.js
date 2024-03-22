@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import "./Discussion.css";
 import EditPostModal from "./EditModal"; // Import the EditPostModal component
-import ThumbsUp from "../../images/ThumbsUp.png"
+import ThumbsUp from "../../images/ThumbsUp.png";
 
 const Post = ({ post, user, onLike, onComment, onEdit, onDelete }) => {
   const [commentText, setCommentText] = useState("");
-  const [comments, setComments] = useState(post.comments.map((comment, index) => ({ id: index + 1, content: comment })));
-  //const [editedComment, setEditedComment] = useState({ id: null, content: "" });
+  const [comments, setComments] = useState(
+    post.comments.map((comment, index) => ({
+      id: index + 1,
+      content: comment,
+    }))
+  );
   const [showEditModal, setShowEditModal] = useState(false);
   const [likes, setLikes] = useState(post.likes);
+  const [liked, setLiked] = useState(false); // New state variable to track like status
 
   const handleCommentChange = (e) => {
     setCommentText(e.target.value);
@@ -31,8 +36,9 @@ const Post = ({ post, user, onLike, onComment, onEdit, onDelete }) => {
   };
 
   const handleLike = () => {
-    const newLikes = likes + 1;
+    const newLikes = liked ? likes - 1 : likes + 1;
     setLikes(newLikes);
+    setLiked(!liked);
     // Call the parent component function to handle like action
     onLike(post.id);
   };
@@ -42,22 +48,9 @@ const Post = ({ post, user, onLike, onComment, onEdit, onDelete }) => {
     setShowEditModal(false); // Close the edit modal after saving changes
   };
 
-  // const handleEditComment = (commentId, newContent) => {
-  //   setComments(comments.map(comment =>
-  //     comment.id === commentId ? { ...comment, content: newContent } : comment
-  //   ));
-  //   setEditedComment({ id: null, content: "" }); // Clear edited comment state
-  //   setShowEditModal(false); // Close the edit modal after saving changes
-  // };
-
   const handleDeleteComment = (commentId) => {
-    setComments(comments.filter(comment => comment.id !== commentId));
+    setComments(comments.filter((comment) => comment.id !== commentId));
   };
-
-  // const handleOpenEditModal = (commentId, content) => {
-  //   setEditedComment({ id: commentId, content });
-  //   setShowEditModal(true);
-  // };
 
   return (
     <div className="post">
@@ -71,22 +64,30 @@ const Post = ({ post, user, onLike, onComment, onEdit, onDelete }) => {
       </div>
       <div className="post-content">{post.content}</div>
       <div className="post-actions">
-        <button className="like-button" onClick={handleLike} style={{ border: 'none', background: 'none' }}>
-          <img src={ThumbsUp} alt="Like" style={{ width: '30px', height: '30px' }} />
+        <button
+          className="like-button"
+          onClick={handleLike}
+          style={{ border: "none", background: "none", marginRight: '20px' }}
+        >
+          <img
+            src={ThumbsUp}
+            alt="Like"
+            style={{ width: "30px", height: "30px" }}
+          />
         </button>
         <span>({likes})</span>
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
-
+        <div style={{ flex: "1" }}></div> {/* Create space between buttons */}
+        <button onClick={handleEdit} style={{ marginRight: '20px' }}>Edit</button>
+        <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white', marginRight: '100px' }}>Delete</button>
       </div>
       <div className="post-comments">
         {comments.map((comment) => (
           <div key={comment.id} className="comment">
             <div>{comment.content}</div>
             <div className="comment-actions">
-              
-            <button className="delete-comment" onClick={() => handleDeleteComment(comment.id)} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
-
+              <button
+                className="delete-comment"
+                onClick={() => handleDeleteComment(comment.id)} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
             </div>
           </div>
         ))}
@@ -108,7 +109,6 @@ const Post = ({ post, user, onLike, onComment, onEdit, onDelete }) => {
         <EditPostModal
           post={post}
           onSave={handleEditPost}
-          //onCommentSave={handleEditComment} // Pass the function to edit comments
           onRequestClose={() => setShowEditModal(false)}
         />
       )}

@@ -1,4 +1,5 @@
 /* Discussion.css */
+
 .discussion-container {
   display: flex;
   flex-direction: column;
@@ -101,4 +102,41 @@
   .comment-submit {
     margin-top: 8px; /* Add margin top to submit button */
   }
+}
+.post-button {
+  background-color: transparent; /* Set background color to transparent */
+  border: none;
+  cursor: pointer;
+  width: 30px; /* Set the width of the button */
+  height: 30px; /* Set the height of the button */
+  padding: 0; /* Remove padding */
+}
+
+.post-button:hover {
+  background-color: transparent; /* Ensure no background color change on hover */
+}
+
+.post-button img {
+  width: 100%; /* Ensure the icon fills the button */
+  height: 100%; /* Ensure the icon fills the button */
+}
+.create-post-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-button {
+  position: absolute;
+  bottom: 3px; /* Adjust the distance from the bottom */
+  right: 10px; /* Adjust the distance from the right */
+  cursor: pointer;
+}
+
+.post-button img {
+  width: 25px;
+  height: 25px;
 }
