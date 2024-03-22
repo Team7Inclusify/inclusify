@@ -22,3 +22,15 @@
     background-color: #4c61af;
     font-weight: bold;
 }
+/* Night Mode Styles */
+.night-mode .profile-container {
+    background-color: #3f3939; /* Dark background color */
+    color: #ffffff; /* Light text color */
+  }
+  .night-mode .profile-section {
+    background-color: #3f3939; /* Dark background color */
+    color: #ffffff; /* Light text color */
+  }
+
+
+

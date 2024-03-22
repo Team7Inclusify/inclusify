@@ -105,7 +105,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
   }, [loggedIn]);
 
   return (
-    <div className={`navbar-whole ${nightMode ? 'night-mode' : ''}`}>
+    <div className="navbar-whole" >
       {/* Inclusify Logo */}
       <div className="navbar-homeImageContainer" onClick={() => navigate("/")}>
         <img

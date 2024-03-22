@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
-import "./Steps.css"
+import "./Steps.css";
 import MicIcon from "../../images/mic.svg";
 
-const Step1 = ({ onNext }) => {
+const Step1 = ({ onNext, nightMode }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [studyLocation, setStudyLocation] = useState("");
@@ -22,7 +22,7 @@ const Step1 = ({ onNext }) => {
 
   const handleNext = () => {
     onNext({ name, location, studyLocation, occupation });
-    navigate('/step2');
+    navigate("/step2");
   };
 
   const handleSpeechToText = (setListening, setModalOpen, setInputValue) => {
@@ -31,7 +31,8 @@ const Step1 = ({ onNext }) => {
     setListening(true);
     setModalOpen(true);
 
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new window.SpeechRecognition();
 
     recognition.start();
@@ -67,7 +68,7 @@ const Step1 = ({ onNext }) => {
   };
 
   return (
-    <div className="container">
+    <div className={`container ${nightMode ? "night-mode" : ""}`}>
       <h2 className="title">Step 1</h2>
       <div className="input-container">
         <div>

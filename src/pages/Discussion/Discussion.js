@@ -62,7 +62,7 @@ const Discussion = ({ nightMode }) => {
   };
 
   return (
-    <div className={`discussion-container ${nightMode ? 'night-mode' : ''}`}>
+    <div className="discussion-container">
       <div className="post-container">
         {posts.map((post) => (
           <Post
@@ -77,7 +77,7 @@ const Discussion = ({ nightMode }) => {
         ))}
       </div>
       <div className="create-post-container">
-        <h2>Create Post</h2>
+        <h2 className={nightMode ? "night-mode-text" : ""}>Create Post</h2>
         <textarea
           value={newPostContent}
           onChange={(e) => setNewPostContent(e.target.value)}
