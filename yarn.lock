@@ -4626,10 +4626,10 @@
   "resolved" "https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
   "version" "1.0.5"
 
-"aws-sdk@^2.1574.0":
-  "integrity" "sha512-AC3VptGeggp7AFGj66PIt9GrnLyDBo7Owb5TmbGDe2OIvgeHH3nBD4S3wRZQ9u3Ea6iREnalXxQ2n5rflCeG9g=="
-  "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1574.0.tgz"
-  "version" "2.1574.0"
+"aws-sdk@^2.1570.0":
+  "integrity" "sha512-WySdibC3YOPCFcXNSevX7cGp6Nc0Ksv7m6aaz6YoqSrmSn7mZhkWaVXqfd14nsjJuyEbEgX+gAiZaahyvkUYJw=="
+  "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1570.0.tgz"
+  "version" "2.1570.0"
   dependencies:
     "buffer" "4.9.2"
     "events" "1.1.1"

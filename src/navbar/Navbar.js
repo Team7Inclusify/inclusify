@@ -126,16 +126,19 @@ const Navbar = () => {
           >
             Additional Videos
           </div>
-          <div className="navbar-link" onClick={() => navigate("/discussion")}>
-            Discussion
+          <div
+            className="navbar-link"
+            onClick={() => navigate("/uploadresume")}
+          >
+            Resume
           </div>
           {windowWidth >= 950 && (
             <>
               <div
                 className="navbar-link"
-                onClick={() => navigate("/about_us")}
+                onClick={() => navigate("/discussion")}
               >
-                About Us
+                Discussion
               </div>
               <div
                 className="navbar-link"
@@ -196,6 +199,12 @@ const Navbar = () => {
                 >
                   FAQ
                 </div>
+                <div
+                  className="dropdown-child"
+                  onClick={() => navigate("/aboutus")}
+                >
+                  About Us
+                </div>
                 {windowWidth < 950 && (
                   <>
                     <div
@@ -206,9 +215,9 @@ const Navbar = () => {
                     </div>
                     <div
                       className="dropdown-child"
-                      onClick={() => navigate("/about_us")}
+                      onClick={() => navigate("/discussion")}
                     >
-                      About Us
+                      Discussion
                     </div>
                   </>
                 )}
@@ -229,7 +238,7 @@ const Navbar = () => {
                   >
                     Profile
                   </div>
-                  <div className="dropdown-child" onClick={logOut}>
+                  <div className="logout-dropdown-child" onClick={logOut}>
                     Log Out
                   </div>
                 </>
@@ -306,7 +315,7 @@ const Navbar = () => {
                   >
                     Profile
                   </div>
-                  <div className="dropdown-child" onClick={logOut}>
+                  <div className="logout-dropdown-child" onClick={logOut}>
                     Log Out
                   </div>
                 </>

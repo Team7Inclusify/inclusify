@@ -5,11 +5,13 @@ import { database } from "../../config/firebase";
 import "./Profile.css";
 import ProfilePage from "./ProfilePage";
 import EmployerView from "./EmployerView/EmployerView";
+import defaultPFP from "../../images/default_pfp.png";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
+  const [pdfResumeJSON, setPDFResumeJSON] = useState(null);
 
   function calculateTimeDifference(dateString) {
     const providedDate = new Date(dateString);
@@ -71,6 +73,19 @@ export default function Profile() {
       } else {
         setVideoResumeJSON(null);
       }
+      const pdfResumeRef = doc(database, "resume", userID);
+      const pdfResumeInfo = await getDoc(pdfResumeRef);
+      const pdfResumeInfoData = pdfResumeInfo.data();
+
+      if (pdfResumeInfoData) {
+        const timeSinceUpload = calculateTimeDifference(
+          pdfResumeInfoData.uploadDate
+        );
+        pdfResumeInfoData.timeSinceUpload = timeSinceUpload;
+        setPDFResumeJSON(pdfResumeInfoData);
+      } else {
+        setPDFResumeJSON(null);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -103,10 +118,18 @@ export default function Profile() {
   return (
     <>
       <div className="viewTypeBar">
-        <div className="viewTypeChoice" onClick={handleUserViewClick}>
+        <div
+          className={`viewTypeChoice ${viewType === "user" && "selectedView"}`}
+          onClick={handleUserViewClick}
+        >
           User View
         </div>
-        <div className="viewTypeChoice" onClick={handleEmployerViewClick}>
+        <div
+          className={`viewTypeChoice ${
+            viewType === "employer" && "selectedView"
+          }`}
+          onClick={handleEmployerViewClick}
+        >
           Employer View
         </div>
       </div>
@@ -114,6 +137,10 @@ export default function Profile() {
         <ProfilePage
           firstName={userInfoJSON.firstName}
           lastName={userInfoJSON.lastName}
+          pfpSRC={
+            userInfoJSON.pfpLink === "N/A" ? defaultPFP : userInfoJSON.pfpLink
+          }
+          email={userInfoJSON.email}
           videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
           videoResumeUploadDate={
             videoResumeJSON ? videoResumeJSON.uploadDate : null
@@ -121,9 +148,7 @@ export default function Profile() {
           videoTimeSinceUpload={
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
-          resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
-          }
+          resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
         />
       ) : (
         <EmployerView
@@ -134,10 +159,11 @@ export default function Profile() {
             videoResumeJSON ? videoResumeJSON.uploadDate : null
           }
           videoTimeSinceUpload={
-            videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
+            videoResumeJSON ? videoResumeJSON.timeSinceUpload : null
           }
-          resume={
-            "https://inclusify-bucket.s3.us-east-2.amazonaws.com/resume/Bryan+Martinez+Resume+-+Copy.pdf"
+          resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
+          resumeUploadDate={
+            pdfResumeJSON ? pdfResumeJSON.timeSinceUpload : null
           }
         />
       )}

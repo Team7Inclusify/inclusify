@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Summary from "./summary";
-import './VideoResume.css';
+import "./VideoResume.css";
 
 const VideoResume = () => {
   const [step, setStep] = useState(0);
@@ -31,14 +31,30 @@ const VideoResume = () => {
     <div className="video-resume-container">
       {step === 0 && (
         <div className="option-cards-container">
-          <div className="option-card generate-pitch" onClick={handleGeneratePitch}>
+          <div
+            className="option-card generate-pitch"
+            onClick={handleGeneratePitch}
+          >
             <h3>Help me generate a pitch</h3>
             <p>Click here if you need assistance crafting your pitch</p>
           </div>
           <div className="or-divider"></div>
-          <div className="option-card skip-recording" onClick={handleSkipToRecording}>
+          <div
+            className="option-card skip-recording"
+            onClick={handleSkipToRecording}
+          >
             <h3>I am ready! Skip to the recording</h3>
-            <p>Click here if you're ready to move directly to the recording step</p>
+            <p>
+              Click here if you're ready to move directly to the recording step
+            </p>
+          </div>
+          <div className="or-divider"></div>
+          <div
+            className="option-card skip-recording"
+            onClick={() => navigate("/uploadvideoresume")}
+          >
+            <h3>Already have a Video Resume?</h3>
+            <p>Click here to upload your video</p>
           </div>
         </div>
       )}
