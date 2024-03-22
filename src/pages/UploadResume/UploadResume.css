@@ -1,0 +1,71 @@
+/* UploadResume.css */
+
+.upload-option {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .upload-option h2 {
+
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .upload-option input[type="file"] {
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .upload-option button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Night mode styles */
+  
+  .night-mode .upload-option {
+    background-color: #4b4444;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  }
+  
+  .night-mode .upload-option h2 {
+    color: #ffffff;
+  }
+  
+  .night-mode .upload-option input[type="file"] {
+    border-color: #666666;
+  }
+  
+  .night-mode .upload-option button {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  /* Responsive Styles */
+  
+  @media screen and (max-width: 768px) {
+    .upload-option {
+      padding: 15px;
+    }
+    
+    .upload-option h2 {
+      font-size: 20px;
+    }
+  
+    .upload-option button {
+      padding: 10px 20px;
+    }
+  }
+  

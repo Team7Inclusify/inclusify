@@ -6,7 +6,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
-
+import DarkIcon from "../images/dark.svg"; // Import the dark mode SVG icon
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
@@ -23,7 +23,7 @@ import confirm_search from "../images/confirm_search.png";
 import Dropdown from "../components/Drop.js";
 import nav_drop from "../images/navbar_dropdown.png";
 
-const Navbar = () => {
+const Navbar = ({ nightMode, toggleNightMode }) => {
   const [loggedIn, setLoggedIn] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ const Navbar = () => {
   }, [loggedIn]);
 
   return (
-    <div className="navbar-whole">
+    <div className={`navbar-whole ${nightMode ? 'night-mode' : ''}`}>
       {/* Inclusify Logo */}
       <div className="navbar-homeImageContainer" onClick={() => navigate("/")}>
         <img
@@ -186,7 +186,7 @@ const Navbar = () => {
             coverIsImg
             coverImg={more_info_icon}
             content={
-              <>
+              <div className="dropdown-content">
                 <div
                   className="dropdown-child"
                   onClick={() => navigate("/tutorials")}
@@ -221,7 +221,7 @@ const Navbar = () => {
                     </div>
                   </>
                 )}
-              </>
+              </div>
             }
           />
           {/* Profile Dropdown*/}
@@ -268,6 +268,10 @@ const Navbar = () => {
           coverImg={nav_drop}
           content={
             <>
+              <div
+                  className="dropdown-child" onClick={toggleNightMode}>
+                  Dark Mode
+                </div>
               <div
                 className="dropdown-child"
                 onClick={() => navigate("/videoresume")}
@@ -373,6 +377,10 @@ const Navbar = () => {
           </div>
         </div>
       </Modal>
+      {/* Night Mode Toggle Button */}
+      <button className="night-mode-toggle" onClick={toggleNightMode}>
+        <img src={DarkIcon} alt="Dark Mode" />
+      </button>
     </div>
   );
 };

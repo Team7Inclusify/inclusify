@@ -3,8 +3,9 @@ import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import "./UploadResume.css"
 
-export default function UploadResume() {
+export default function UploadResume({ nightMode }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [user, setUser] = useState(null);
@@ -97,7 +98,7 @@ export default function UploadResume() {
   };
 
   return (
-    <div className="upload-option">
+    <div className={`upload-option ${nightMode ? 'night-mode' : ''}`}>
       <h2>Upload Your PDF Resume</h2>
       <input type="file" accept=".pdf" onChange={uploadResume} />
       {selectedFile && (

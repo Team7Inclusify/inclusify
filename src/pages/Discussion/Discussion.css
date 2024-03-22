@@ -87,3 +87,6 @@
     margin-top: 8px; /* Add margin top to submit button */
   }
 }
+.discussion-container.night-mode h2 {
+  color: white; /* Set text color to white for h2 elements */
+}

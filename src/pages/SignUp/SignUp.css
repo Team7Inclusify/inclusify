@@ -6,7 +6,10 @@ body {
 }
 
 .signup-page {
-  height: 80vh;
+  position: absolute;
+  top: 50%; /* Place the signup page vertically at the center */
+  left: 50%; /* Place the signup page horizontally at the center */
+  transform: translate(-50%, -50%); /* Center the signup page */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,21 +103,54 @@ p a:hover {
 
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
-  .signup-page{
-    height: 90vh;
+  .signup-page {
+    height: 80vh;
+    width: 100%; /* Make the container as wide as the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+
   }
+
   .signup-content {
-    width: 100%; /* Adjusted width for smaller screens */
+    width: 90%; /* Adjusted width for smaller screens */
+    padding: 20px; /* Adjusted padding for smaller screens */
+  }
+
+  h2 {
+    font-size: 24px; /* Decreased font size for smaller screens */
+    margin-bottom: 20px; /* Adjusted margin for smaller screens */
+  }
+
+  h3 {
+    font-size: 18px; /* Decreased font size for smaller screens */
+    margin-top: 20px; /* Adjusted margin for smaller screens */
   }
 
   input,
   .signup-password {
-    font-size: 16px; /* Decreased font size for smaller screens */
-    height: 35px; /* Decreased height for smaller screens */
+    font-size: 14px; /* Decreased font size for smaller screens */
+    height: 30px; /* Decreased height for smaller screens */
     margin-bottom: 10px; /* Adjusted margin for smaller screens */
   }
 
+  .passwordSpace {
+    width: 5px; /* Adjusted width for smaller screens */
+  }
+
+  .showPasswordIcon {
+    width: 20px; /* Adjusted width for smaller screens */
+    height: 20px; /* Adjusted height for smaller screens */
+  }
+
   button {
-    padding: 12px; /* Adjusted padding for smaller screens */
+    padding: 10px; /* Adjusted padding for smaller screens */
+    font-size: 16px; /* Decreased font size for smaller screens */
+  }
+
+  p {
+    font-size: 14px; /* Decreased font size for smaller screens */
+    margin-top: 15px; /* Adjusted margin for smaller screens */
   }
 }

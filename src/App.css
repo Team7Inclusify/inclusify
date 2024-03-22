@@ -1,16 +1,20 @@
 .App-Page {
-    width: 100vw; /* Use full viewport width */
-    height: 100vh; /* Use full viewport height */
-    overflow-x: hidden; /* Hide horizontal overflow */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  
-  /* Adjust the padding or margin of the content container to make space for the footer */
-  .Rest-App-Page {
-    padding-bottom: 60px; /* Adjust according to the height of your footer */
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure the entire viewport height is covered */
+}
+
+.Rest-App-Page {
+  position: fixed;
+  top: 7.5rem; /* Adjust this value to match the height of your Navbar */
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  padding-top: 1rem; /* Adjust padding as needed */
+  padding-bottom: 5rem; /* Adjust padding as needed */
+}
+
   .night-mode {
     background-color: rgb(73, 69, 69);
     color: white;

@@ -5,7 +5,7 @@ import EditModal from "./EditModal"; // Import the EditPostModal component
 import "./Discussion.css";
 import dp from "../../images/dp.jpg";
 
-const Discussion = () => {
+const Discussion = ({ nightMode }) => {
   const [posts, setPosts] = useState([]);
   const [newPostContent, setNewPostContent] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
@@ -62,7 +62,7 @@ const Discussion = () => {
   };
 
   return (
-    <div className="discussion-container">
+    <div className={`discussion-container ${nightMode ? 'night-mode' : ''}`}>
       <div className="post-container">
         {posts.map((post) => (
           <Post
