@@ -12,7 +12,7 @@
     padding-bottom: 60px; /* Adjust according to the height of your footer */
   }
   .night-mode {
-    background-color: black;
+    background-color: rgb(73, 69, 69);
     color: white;
   }
 /* App.css */
