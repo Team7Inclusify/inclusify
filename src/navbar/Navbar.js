@@ -7,7 +7,6 @@ import SpeechRecognition, {
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import DarkIcon from "../images/dark.svg"; // Import the dark mode SVG icon
-import LightIcon from "../images/light_icon.svg"
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
@@ -187,7 +186,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
             coverIsImg
             coverImg={more_info_icon}
             content={
-              <div className="dropdown-content">
+              <>
                 <div
                   className="dropdown-child"
                   onClick={() => navigate("/tutorials")}
@@ -222,7 +221,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
                     </div>
                   </>
                 )}
-              </div>
+              </>
             }
           />
           {/* Profile Dropdown*/}
@@ -380,11 +379,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
       </Modal>
       {/* Night Mode Toggle Button */}
       <button className="night-mode-toggle" onClick={toggleNightMode}>
-        {nightMode ? (
-          <img src={LightIcon} alt="Light Mode" /> // Show light mode icon if night mode is enabled
-          ) : (
-          <img src={DarkIcon} alt="Dark Mode" /> // Show dark mode icon if night mode is disabled
-        )}
+        <img src={DarkIcon} alt="Dark Mode" />
       </button>
     </div>
   );
