@@ -105,7 +105,7 @@ function App() {
             element={loggedIn ? <Record /> : <AccessDenied />}
           />
           <Route path="/message" element={<MessageInbox />} />
-          <Route path="/message/:userID" element={<MessageInbox />} />
+          <Route path="/message/:receiverID" element={<MessageInbox />} />
           <Route
             path="/uploadresume"
             element={loggedIn ? <UploadResume /> : <AccessDenied />}
