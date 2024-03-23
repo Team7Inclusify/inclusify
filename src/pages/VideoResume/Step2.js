@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
-import "./Steps.css"; 
+import "./Steps.css";
 import MicIcon from "../../images/mic.svg";
 
 const Step2 = ({ onNext }) => {
@@ -34,13 +34,19 @@ const Step2 = ({ onNext }) => {
     onNext({ about, interests, skills, experience, education });
   };
 
-  const handleSpeechToText = (setListening, setTranscript, setModalOpen, setInputValue) => {
+  const handleSpeechToText = (
+    setListening,
+    setTranscript,
+    setModalOpen,
+    setInputValue
+  ) => {
     if (!setListening) return;
 
     setListening(true);
     setModalOpen(true);
 
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new window.SpeechRecognition();
 
     recognition.start();
@@ -80,7 +86,7 @@ const Step2 = ({ onNext }) => {
   return (
     <div className="container">
       <h2 className="title">Step 2</h2>
-      <div className="input-container">
+      <div className="step-input-container">
         <div>
           <h3>Tell me about yourself</h3>
           <div className="input-with-button">
@@ -102,13 +108,19 @@ const Step2 = ({ onNext }) => {
               }
               className="round-button"
             >
-              <img src={MicIcon} alt="Mic Icon" /> 
+              <img src={MicIcon} alt="Mic Icon" />
             </button>
           </div>
           {aboutListening && (
             <Modal
               open={aboutModalOpen}
-              onClose={() => closeModal(setAboutListening, setAboutTranscript, setAboutModalOpen)}
+              onClose={() =>
+                closeModal(
+                  setAboutListening,
+                  setAboutTranscript,
+                  setAboutModalOpen
+                )
+              }
               styles={modalStyles}
             >
               <h2>{aboutListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -138,13 +150,19 @@ const Step2 = ({ onNext }) => {
               }
               className="round-button"
             >
-              <img src={MicIcon} alt="Mic Icon" /> 
+              <img src={MicIcon} alt="Mic Icon" />
             </button>
           </div>
           {interestsListening && (
             <Modal
               open={interestsModalOpen}
-              onClose={() => closeModal(setInterestsListening, setInterestsTranscript, setInterestsModalOpen)}
+              onClose={() =>
+                closeModal(
+                  setInterestsListening,
+                  setInterestsTranscript,
+                  setInterestsModalOpen
+                )
+              }
               styles={modalStyles}
             >
               <h2>{interestsListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -156,31 +174,37 @@ const Step2 = ({ onNext }) => {
         <div>
           <h3>What are you good at?</h3>
           <div className="input-with-button">
-          <input
-            type="text"
-            placeholder="What are your skills?"
-            value={skills}
-            onChange={(e) => setSkills(e.target.value)}
-            className="input-field"
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(
-                setSkillsListening,
-                setSkillsTranscript,
-                setSkillsModalOpen,
-                setSkills
-              )
-            }
-            className="round-button"
-          >
-            <img src={MicIcon} alt="Mic Icon" /> 
-          </button>
+            <input
+              type="text"
+              placeholder="What are your skills?"
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(
+                  setSkillsListening,
+                  setSkillsTranscript,
+                  setSkillsModalOpen,
+                  setSkills
+                )
+              }
+              className="round-button"
+            >
+              <img src={MicIcon} alt="Mic Icon" />
+            </button>
           </div>
           {skillsListening && (
             <Modal
               open={skillsModalOpen}
-              onClose={() => closeModal(setSkillsListening, setSkillsTranscript, setSkillsModalOpen)}
+              onClose={() =>
+                closeModal(
+                  setSkillsListening,
+                  setSkillsTranscript,
+                  setSkillsModalOpen
+                )
+              }
               styles={modalStyles}
             >
               <h2>{skillsListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -192,31 +216,37 @@ const Step2 = ({ onNext }) => {
         <div>
           <h3>Tell me about your work experience</h3>
           <div className="input-with-button">
-          <input
-            type="text"
-            placeholder="Tell me about your work experience"
-            value={experience}
-            onChange={(e) => setExperience(e.target.value)}
-            className="input-field"
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(
-                setExperienceListening,
-                setExperienceTranscript,
-                setExperienceModalOpen,
-                setExperience
-              )
-            }
-            className="round-button"
-          >
-            <img src={MicIcon} alt="Mic Icon" /> 
-          </button>
+            <input
+              type="text"
+              placeholder="Tell me about your work experience"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(
+                  setExperienceListening,
+                  setExperienceTranscript,
+                  setExperienceModalOpen,
+                  setExperience
+                )
+              }
+              className="round-button"
+            >
+              <img src={MicIcon} alt="Mic Icon" />
+            </button>
           </div>
           {experienceListening && (
             <Modal
               open={experienceModalOpen}
-              onClose={() => closeModal(setExperienceListening, setExperienceTranscript, setExperienceModalOpen)}
+              onClose={() =>
+                closeModal(
+                  setExperienceListening,
+                  setExperienceTranscript,
+                  setExperienceModalOpen
+                )
+              }
               styles={modalStyles}
             >
               <h2>{experienceListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -228,31 +258,37 @@ const Step2 = ({ onNext }) => {
         <div>
           <h3>Tell me about your education</h3>
           <div className="input-with-button">
-          <input
-            type="text"
-            placeholder="Tell me about your education"
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
-            className="input-field"
-          />
-          <button
-            onClick={() =>
-              handleSpeechToText(
-                setEducationListening,
-                setEducationTranscript,
-                setEducationModalOpen,
-                setEducation
-              )
-            }
-            className="round-button"
-          >
-            <img src={MicIcon} alt="Mic Icon" /> 
-          </button>
+            <input
+              type="text"
+              placeholder="Tell me about your education"
+              value={education}
+              onChange={(e) => setEducation(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={() =>
+                handleSpeechToText(
+                  setEducationListening,
+                  setEducationTranscript,
+                  setEducationModalOpen,
+                  setEducation
+                )
+              }
+              className="round-button"
+            >
+              <img src={MicIcon} alt="Mic Icon" />
+            </button>
           </div>
           {educationListening && (
             <Modal
               open={educationModalOpen}
-              onClose={() => closeModal(setEducationListening, setEducationTranscript, setEducationModalOpen)}
+              onClose={() =>
+                closeModal(
+                  setEducationListening,
+                  setEducationTranscript,
+                  setEducationModalOpen
+                )
+              }
               styles={modalStyles}
             >
               <h2>{educationListening ? "Mic is On" : "Mic is Off"}</h2>
@@ -263,8 +299,12 @@ const Step2 = ({ onNext }) => {
       </div>
 
       <div className="button-container">
-        <Link to="/videoresume" className="backButtonStyle">Back</Link>
-        <button onClick={handleNext} className="button">Next</button>
+        <Link to="/videoresume" className="backButtonStyle">
+          Back
+        </Link>
+        <button onClick={handleNext} className="button">
+          Next
+        </button>
       </div>
     </div>
   );
