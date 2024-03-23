@@ -35,13 +35,13 @@ import RecordAV from "./pages/AdditionalVideos/RecordAV";
 import UploadAV from "./pages/AdditionalVideos/UploadAV";
 
 function App() {
-  const [isNightMode, setIsNightMode] = useState(false); // State for night mode
+  const [nightMode, setNightMode] = useState(false); // State for night mode
   const [step1Data, setStep1Data] = useState({});
   const [step2Data, setStep2Data] = useState({});
   const navigate = useNavigate();
 
   const toggleNightMode = () => {
-    setIsNightMode(!isNightMode);
+    setNightMode(!nightMode);
   };
 
   const handleStep1Next = (data) => {
@@ -72,11 +72,11 @@ function App() {
   }, [loggedIn]);
 
   return (
-    <div className={isNightMode ? "App-Page night-mode" : "App-Page"}>
-      <Navbar />
-      <button className="night-mode-toggle" onClick={toggleNightMode}>
+    <div className={nightMode ? "App-Page night-mode" : "App-Page"}>
+      <Navbar nightMode={nightMode} toggleNightMode={toggleNightMode}/>
+      {/* <button className="night-mode-toggle" onClick={toggleNightMode}>
         <img src={DarkIcon} alt="Dark Mode" />
-      </button>
+      </button> */}
       <div className="Rest-App-Page">
         <Routes>
           <Route path="/" element={<Welcome />} />

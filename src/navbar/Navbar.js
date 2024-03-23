@@ -10,6 +10,9 @@ import { signOut } from "firebase/auth";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
+import DarkIcon from "../images/dark_icon.svg";
+import LightIcon from "../images/light_icon.svg";
+
 // Images
 import inclusify_image from "../images/inclusify_no_name.png";
 import profile_icon from "../images/profile_icon.png";
@@ -23,7 +26,7 @@ import confirm_search from "../images/confirm_search.png";
 import Dropdown from "../components/Drop.js";
 import nav_drop from "../images/navbar_dropdown.png";
 
-const Navbar = () => {
+const Navbar = ({ nightMode, toggleNightMode }) => {
   const [loggedIn, setLoggedIn] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
@@ -38,7 +41,6 @@ const Navbar = () => {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -105,7 +107,7 @@ const Navbar = () => {
   }, [loggedIn]);
 
   return (
-    <div className="navbar-whole">
+    <div className={`navbar-whole ${nightMode ? "night-mode" : ""}`}>
       {/* Inclusify Logo */}
       <div className="navbar-homeImageContainer" onClick={() => navigate("/")}>
         <img
@@ -115,6 +117,7 @@ const Navbar = () => {
         />
         <div className="navbar-homeText">Inclusify</div>
       </div>
+       
       {windowWidth >= 750 && (
         <>
           <div className="navbar-link" onClick={() => navigate("/videoresume")}>
@@ -201,7 +204,7 @@ const Navbar = () => {
                 </div>
                 <div
                   className="dropdown-child"
-                  onClick={() => navigate("/aboutus")}
+                  onClick={() => navigate("/about_us")}
                 >
                   About Us
                 </div>
@@ -260,6 +263,10 @@ const Navbar = () => {
               )
             }
           />
+          {/* Night mode toggle */}
+       <div className="night-mode-toggle" onClick={toggleNightMode}>
+        {nightMode ? <img src={LightIcon} alt="Light Mode" /> : <img src={DarkIcon} alt="Dark Mode" />}
+      </div>
         </>
       )}
       {windowWidth < 750 && (
@@ -333,11 +340,13 @@ const Navbar = () => {
                   >
                     Sign Up
                   </div>
+                  
                 </>
               )}
             </>
           }
         />
+        
       )}
 
       {/* Mic Modal */}

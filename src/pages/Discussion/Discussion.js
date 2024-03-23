@@ -13,6 +13,7 @@ const Discussion = () => {
 
   const user = {
     profilePicture: dp,
+    username: "user",
   };
 
   const handleCreatePost = () => {
@@ -71,7 +72,7 @@ const Discussion = () => {
 
   return (
     <div className="discussion-container">
-      <div className="post-container">
+      <div className="posts-container">
         {posts.map((post) => (
           <Post
             key={post.id}
