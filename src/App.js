@@ -104,17 +104,22 @@ function App() {
             path="/record"
             element={loggedIn ? <Record /> : <AccessDenied />}
           />
-          {/* Add route for MessageInbox */}
-          <Route path="/messageinbox" element={<MessageInbox />} />
+          <Route path="/message" element={<MessageInbox />} />
+          <Route path="/message/:receiverID" element={<MessageInbox />} />
           <Route
             path="/uploadresume"
             element={loggedIn ? <UploadResume /> : <AccessDenied />}
           />
-          <Route path="/uploadresume" element={loggedIn ? (
-            <UploadResume nightMode={isNightMode} />
-          ) : (
-            <AccessDenied />
-          )} />
+          <Route
+            path="/uploadresume"
+            element={
+              loggedIn ? (
+                <UploadResume nightMode={isNightMode} />
+              ) : (
+                <AccessDenied />
+              )
+            }
+          />
           <Route path="/profile/:userID" element={<Profile />} />
         </Routes>
       </div>
