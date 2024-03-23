@@ -1,7 +1,6 @@
 .message-container {
   width: 400px;
   height: 500px;
-  overflow-y: auto; /* Enable scrolling if content overflows */
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
@@ -30,7 +29,6 @@
   margin-top: 20px;
   box-sizing: border-box;
   width: 100%;
-  background-color: aquamarine;
   flex-direction: row;
 }
 
@@ -52,4 +50,28 @@
 
 .send-button:hover {
   background-color: #0056b3;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 10px; /* Adjust spacing */
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: #007bff;
+}
+
+.received {
+  align-self: flex-start;
+  background-color: #E0E0E0;
 }

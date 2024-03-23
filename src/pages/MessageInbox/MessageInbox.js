@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./MessageInbox.css";
 import default_pfp from "../../images/default_pfp.png";
@@ -22,6 +22,7 @@ const MessageInbox = () => {
   const [recieverInfoJSON, setRecieverInfoJSON] = useState({ pfpLink: "" });
   const [messages, setMessages] = useState([]);
 
+  const messagesEndRef = useRef(null);
   const messagesRef = collection(database, "messages");
 
   useEffect(() => {
@@ -82,11 +83,18 @@ const MessageInbox = () => {
           messages.push({ ...doc.data(), id: doc.id });
         });
         setMessages(messages);
+        setTimeout(scrollToBottom, 100);
       });
 
       return () => unsubscribe();
     }
   }, [authUser]); // Add authUser to dependency array
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="message-container">
@@ -101,21 +109,21 @@ const MessageInbox = () => {
             className="otherUserImg"
             alt="User Profile"
           />
-          {`${
-            recieverInfoJSON.firstName
-              ? recieverInfoJSON.firstName.toUpperCase()
-              : ""
-          } ${
-            recieverInfoJSON.lastName
-              ? recieverInfoJSON.lastName.toUpperCase()
-              : ""
-          }`}
+          {`${recieverInfoJSON.firstName} ${recieverInfoJSON.lastName}`}
         </div>
       )}
       <div className="messages">
         {messages.map((message) => (
-          <h1>{message.text}</h1>
+          <div
+            className={`message ${
+              message.sender === authUser?.uid ? "sent" : "received"
+            }`}
+            key={message.id}
+          >
+            {message.text}
+          </div>
         ))}
+        <div ref={messagesEndRef}></div>
       </div>
       <div className="input-container">
         <textarea
