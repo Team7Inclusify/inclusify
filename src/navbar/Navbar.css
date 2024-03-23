@@ -185,7 +185,23 @@
 .night-mode .dropdown-content {
   background-color: #333; /* Dark background color for night mode */
 }
+.night-mode-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
 
+.night-mode-toggle img {
+  width: 30px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease; /* Add transition effect */
+}
+
+.night-mode-toggle:hover img {
+  transform: scale(1.1); /* Increase size on hover */
+  filter: brightness(70%); 
+}
 /* Add this CSS for the dropdown container */
 .dropdown {
   position: relative;

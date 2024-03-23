@@ -21,15 +21,23 @@
   }
 /* App.css */
 
+/* Styles for the night mode toggle button */
 .night-mode-toggle {
-  background-color: transparent;
+  background-color: transparent; /* Set initial background color */
   border: none;
   cursor: pointer;
+  border-radius: 50%; /* Make the button round */
+  overflow: hidden; /* Ensure the round shape is maintained */
+}
+
+.night-mode-toggle:hover {
+  background-color: #716868; /* Change the background color on hover */
 }
 
 .night-mode-toggle img {
   width: 24px; /* Adjust the size of the icon as needed */
   height: 24px;
+  border-radius: 100%;
 }
 
 /* Styles for the night mode */
@@ -37,9 +45,10 @@
   background-color: #222; /* Set background color to dark */
 }
 
-.night-mode .night-mode-toggle svg {
+.night-mode .night-mode-toggle img {
   fill: #fff; /* Set the icon color to white */
 }
+
   
   
   /* Media query for mobile screens */
