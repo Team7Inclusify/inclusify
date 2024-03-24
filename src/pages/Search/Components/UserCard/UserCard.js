@@ -15,7 +15,7 @@ export default function UserCard(props) {
         src={props.pfpLink === "" ? default_pfp : props.pfpLink}
         alt="User Card PFP"
       />
-      {props.name}
+      <b>{props.name}</b>
     </div>
   );
 }

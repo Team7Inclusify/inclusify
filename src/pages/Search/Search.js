@@ -79,6 +79,7 @@ export default function Search() {
               type={searching}
               name={oneResult.uploader}
               title={oneResult.title}
+              description={oneResult.description}
               link={oneResult.link}
               userID={oneResult.id}
               key={oneResult.id}

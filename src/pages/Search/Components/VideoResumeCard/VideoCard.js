@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./VideoCard.css";
 import video_icon from "../../../../images/video_icon.png";
 
@@ -8,11 +8,17 @@ export default function VideoCard(props) {
       <div className="videoCardContainerInner">
         <div className="videoCardFront">
           <img src={video_icon} alt="Video Icon" className="videoCardImg" />
-          {props.name}
-          {props.type === "video-resume" ? " Resume" : ` ${props.title}`}
+          <div className="VideoCardTitle">
+            {props.type === "video-resume"
+              ? `${props.name} Resume`
+              : ` ${props.title}`}
+          </div>
         </div>
         <div className="videoCardBack">
-          <h1>{props.name}</h1>
+          <div className="creatorName">{props.name}</div>
+          <div className="divDescription">
+            {props.type === "video-resume" ? "Resume" : ` ${props.description}`}
+          </div>
         </div>
       </div>
     </div>
