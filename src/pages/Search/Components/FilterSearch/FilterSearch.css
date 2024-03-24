@@ -16,3 +16,8 @@
 .filterSearchChoice:hover {
     font-weight: bold;
 }
+
+.filterSearchSelected {
+    background-color: #4c61af;
+    font-weight: bold;
+}

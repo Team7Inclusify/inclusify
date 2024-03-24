@@ -1,10 +1,21 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./Search.css";
 import { useParams } from "react-router-dom";
 import FilterSearch from "./Components/FilterSearch/FilterSearch.js";
-import { getDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+  or,
+} from "firebase/firestore";
 import UserCard from "./Components/UserCard/UserCard.js";
-import pfp from "../../images/Bryan.jpg";
+import { database } from "../../config/firebase.js";
 
 export default function Search() {
   let { search_tag } = useParams();
@@ -13,17 +24,47 @@ export default function Search() {
   } else {
     search_tag = "";
   }
-
   const [searching, setSearching] = useState("user");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleFilterSearchChange = (filter) => {
     setSearching(filter);
   };
+
+  useEffect(() => {
+    const searchRef = collection(database, searching);
+    const querySearch = query(
+      searchRef,
+      or(
+        where("firstName", "==", search_tag),
+        where("lastName", "==", search_tag)
+      )
+    );
+    const unsubscribe = onSnapshot(querySearch, (snapshot) => {
+      let searchResults = [];
+      snapshot.forEach((doc) => {
+        searchResults.push({ ...doc.data(), id: doc.id });
+      });
+      setSearchResults(searchResults);
+    });
+
+    return () => unsubscribe();
+  }, [search_tag, searching]);
+
   return (
     <div className="SearchPage">
       <FilterSearch onFilterSearchChange={handleFilterSearchChange} />
       {search_tag} - Searching: {searching}
-      <UserCard name="Bryan Martinez" pfpLink={"N/A"} />
+      <div className="searchResults">
+        {searchResults.map((oneResult) => (
+          <UserCard
+            name={`${oneResult.firstName} ${oneResult.lastName}`}
+            pfpLink={oneResult.pfpLink}
+            userID={oneResult.id}
+            key={oneResult.id}
+          />
+        ))}
+      </div>
     </div>
   );
 }

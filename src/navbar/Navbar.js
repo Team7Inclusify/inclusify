@@ -64,8 +64,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
   function newSearch(event) {
     let searched = document
       .getElementById("navBarSearchInput")
-      .value.toLowerCase()
-      .replace(/ /g, "_");
+      .value.replace(/ /g, "_");
     if (event.key === "Enter") {
       navigate(`/search_results/${searched}`);
     }
@@ -105,7 +104,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
   }, [loggedIn]);
 
   return (
-    <div className="navbar-whole" >
+    <div className="navbar-whole">
       {/* Inclusify Logo */}
       <div className="navbar-homeImageContainer" onClick={() => navigate("/")}>
         <img
@@ -268,10 +267,9 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
           coverImg={nav_drop}
           content={
             <>
-              <div
-                  className="dropdown-child" onClick={toggleNightMode}>
-                  Dark Mode
-                </div>
+              <div className="dropdown-child" onClick={toggleNightMode}>
+                Dark Mode
+              </div>
               <div
                 className="dropdown-child"
                 onClick={() => navigate("/videoresume")}
