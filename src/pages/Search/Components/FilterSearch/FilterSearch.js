@@ -1,26 +1,32 @@
 import React from "react";
 import "./FilterSearch.css";
 
-export default function FilterSearch({ onFilterSearchChange }) {
+export default function FilterSearch({ selected, onFilterSearchChange }) {
   return (
     <div className="filterSearchBar">
       <div
-        className="filterSearchChoice"
+        className={`filterSearchChoice ${
+          selected === "user" && "filterSearchSelected"
+        }`}
         onClick={() => onFilterSearchChange("user")}
       >
         Users
       </div>
       <div
-        className="filterSearchChoice"
+        className={`filterSearchChoice ${
+          selected === "video-resume" && "filterSearchSelected"
+        }`}
         onClick={() => onFilterSearchChange("video-resume")}
       >
         Video-Resumes
       </div>
       <div
-        className="filterSearchChoice"
-        onClick={() => onFilterSearchChange("action-videos")}
+        className={`filterSearchChoice ${
+          selected === "additional-video" && "filterSearchSelected"
+        }`}
+        onClick={() => onFilterSearchChange("additional-video")}
       >
-        Action Videos
+        Additional Videos
       </div>
     </div>
   );

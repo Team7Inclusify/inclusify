@@ -2,20 +2,10 @@ import React, { useState, useCallback, useEffect } from "react";
 import "./Search.css";
 import { useParams } from "react-router-dom";
 import FilterSearch from "./Components/FilterSearch/FilterSearch.js";
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  doc,
-  getDoc,
-  onSnapshot,
-  query,
-  where,
-  orderBy,
-  or,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where, or } from "firebase/firestore";
 import UserCard from "./Components/UserCard/UserCard.js";
 import { database } from "../../config/firebase.js";
+import VideoCard from "./Components/VideoResumeCard/VideoCard.js";
 
 export default function Search() {
   let { search_tag } = useParams();
@@ -34,7 +24,7 @@ export default function Search() {
   useEffect(() => {
     const searchRef = collection(database, searching);
     let querySearch;
-    if (search_tag === "") {
+    if (search_tag === "" || searching !== "user") {
       querySearch = query(searchRef);
     } else {
       querySearch = query(
@@ -58,17 +48,42 @@ export default function Search() {
 
   return (
     <div className="SearchPage">
-      <FilterSearch onFilterSearchChange={handleFilterSearchChange} />
+      <FilterSearch
+        selected={searching}
+        onFilterSearchChange={handleFilterSearchChange}
+      />
       {search_tag} - Searching: {searching}
       <div className="searchResults">
-        {searchResults.map((oneResult) => (
-          <UserCard
-            name={`${oneResult.firstName} ${oneResult.lastName}`}
-            pfpLink={oneResult.pfpLink}
-            userID={oneResult.id}
-            key={oneResult.id}
-          />
-        ))}
+        {searching === "user" &&
+          searchResults.map((oneResult) => (
+            <UserCard
+              name={`${oneResult.firstName} ${oneResult.lastName}`}
+              pfpLink={oneResult.pfpLink}
+              userID={oneResult.id}
+              key={oneResult.id}
+            />
+          ))}
+        {searching === "video-resume" &&
+          searchResults.map((oneResult) => (
+            <VideoCard
+              type={searching}
+              name={oneResult.uploader}
+              link={oneResult.link}
+              userID={oneResult.id}
+              key={oneResult.id}
+            />
+          ))}
+        {searching === "additional-video" &&
+          searchResults.map((oneResult) => (
+            <VideoCard
+              type={searching}
+              name={oneResult.uploader}
+              title={oneResult.title}
+              link={oneResult.link}
+              userID={oneResult.id}
+              key={oneResult.id}
+            />
+          ))}
       </div>
     </div>
   );
