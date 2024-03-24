@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./RecordAV.css"; // Import CSS file for styling
+import "./RecordAV.css";
+import AWS from "aws-sdk";
+import { auth } from "../../config/firebase";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { database } from "../../config/firebase";
 
 const RecordAV = () => {
   const videoRef = useRef(null);
@@ -8,7 +12,11 @@ const RecordAV = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [timer, setTimer] = useState(0);
-  const [showTimer, setShowTimer] = useState(true); // Option to show/hide timer
+  const [showTimer, setShowTimer] = useState(true);
+  const [user, setUser] = useState(null);
+  const [userInfoJSON, setUserInfoJSON] = useState({});
+  const [addVideoTitle, setAddVideoTitle] = useState("");
+  const [addDescription, setDescription] = useState("");
 
   useEffect(() => {
     let interval;
@@ -21,7 +29,31 @@ const RecordAV = () => {
     }
     return () => clearInterval(interval);
   }, [isRecording, isPaused]);
+  const getUserInfo = async (userID) => {
+    try {
+      const userRef = doc(database, "user", userID);
+      const userInfo = await getDoc(userRef);
+      const userInfoData = userInfo.data();
+      userInfoData.id = userID;
+      setUserInfoJSON(userInfoData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const setUserInfo = () =>
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log("Auth User test count log");
+        setUser(authUser);
+        getUserInfo(authUser.uid);
+      } else {
+        setUser(null);
+      }
+    });
 
+  useEffect(() => {
+    setUserInfo();
+  }, [user]);
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -74,9 +106,66 @@ const RecordAV = () => {
     }
   };
 
-  const uploadVideos = (event) => {
-    const files = event.target.files;
-    // Handle uploaded files
+  const uploadVideos = async (event) => {
+    const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
+    const newAVRef = doc(collection(database, "additional-video"));
+
+    const avID = newAVRef.id;
+
+    const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
+    const REGION = process.env.REACT_APP_AWS_S3_REGION;
+
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_S3_SECRET_KEY,
+    });
+    const s3 = new AWS.S3({
+      params: { Bucket: S3_BUCKET },
+      region: REGION,
+    });
+    const key = `additional-video/${auth?.currentUser?.uid}/${avID}/Additional-Video_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
+    const params = {
+      Bucket: S3_BUCKET,
+      Key: key,
+      Body: videoBlob,
+      ContentType: "video/mp4",
+    };
+
+    var upload = s3
+      .putObject(params)
+      .on("httpUploadProgress", (evt) => {
+        console.log(
+          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
+        );
+      })
+      .promise();
+
+    await upload
+      .then(async (data) => {
+        console.log(data);
+        alert("File uploaded successfully.");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    let currentDate = new Date();
+    let iso8601Date = currentDate.toISOString();
+
+    console.log(avID);
+    try {
+      const avDoc = doc(database, "additional-video", avID);
+      await setDoc(avDoc, {
+        uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
+        uploaderID: auth?.currentUser?.uid,
+        title: addVideoTitle,
+        description: addDescription,
+        uploadDate: iso8601Date,
+        link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const formatTime = (time) => {
@@ -106,64 +195,81 @@ const RecordAV = () => {
   return (
     <div className="container">
       <h2 className="heading">Add Additional Videos</h2>
-
-      <div className="options-container">
-        <h2 className="heading">Record a new one</h2>
-        <button
-          className={`record-button ${isRecording ? "recording" : ""}`}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          {isRecording ? "Stop Recording" : "Record"}
-        </button>
-        {isRecording && (
-          <button className="pause-button" onClick={togglePause}>
-            {isPaused ? "Resume" : "Pause"}
-          </button>
-        )}
-      </div>
-      {showTimer && isRecording && (
-        <div className="timer-container">
-          <span className="timer">{formatTime(timer)}</span>
-        </div>
-      )}
-      <div className="video-container">
-        <video
-          ref={videoRef}
-          className="video"
-          autoPlay
-          playsInline
-          controls={!isRecording}
-        ></video>
-      </div>
-      <div className="option-container">
-        <label>
-          <input
-            type="checkbox"
-            checked={showTimer}
-            onChange={() => setShowTimer(!showTimer)}
-          />
-          Show Timer
-        </label>
-      </div>
-      {recordedChunks.length > 0 && (
-        <div className="recorded-video-container">
-          <h3 className="heading">Recorded Video:</h3>
-          <video className="recorded-video" controls>
-            {recordedChunks.map((chunk, index) => (
-              <source
-                key={index}
-                src={URL.createObjectURL(chunk)}
-                type="video/mp4"
+      {recordedChunks.length === 0 ? (
+        <>
+          <div className="options-container">
+            <button
+              className={`record-button ${isRecording ? "recording" : ""}`}
+              onClick={isRecording ? stopRecording : startRecording}
+            >
+              {isRecording ? "Stop Recording" : "Record"}
+            </button>
+            {isRecording && (
+              <button className="pause-button" onClick={togglePause}>
+                {isPaused ? "Resume" : "Pause"}
+              </button>
+            )}
+          </div>
+          {showTimer && isRecording && (
+            <div className="timer-container">
+              <span className="timer">{formatTime(timer)}</span>
+            </div>
+          )}
+          <div className="video-container">
+            <video
+              ref={videoRef}
+              className="video"
+              autoPlay
+              playsInline
+              controls={!isRecording}
+            ></video>
+          </div>
+          <div className="option-container">
+            <label>
+              <input
+                type="checkbox"
+                checked={showTimer}
+                onChange={() => setShowTimer(!showTimer)}
               />
-            ))}
-          </video>
-          <button className="download-button" onClick={downloadVideo}>
-            Download Video
-          </button>
-          <button className="rerecord-button" onClick={handleReRecord}>
-            Re-record
-          </button>
-        </div>
+              Show Timer
+            </label>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="recorded-video-container">
+            <video className="recorded-video" controls>
+              {recordedChunks.map((chunk, index) => (
+                <source
+                  key={index}
+                  src={URL.createObjectURL(chunk)}
+                  type="video/mp4"
+                />
+              ))}
+            </video>
+            <h3>Insert Title of Additional Video</h3>
+            <input
+              type="text"
+              onChange={(event) => setAddVideoTitle(event.target.value)}
+            />
+            <h3>Add Description {"(optional)"}</h3>
+            <textarea
+              type="text"
+              onChange={(event) => setDescription(event.target.value)}
+            />
+            <div className="button-container">
+              <button className="download-button" onClick={downloadVideo}>
+                Download Video
+              </button>
+              <button onClick={uploadVideos} className="upload-button">
+                Upload Video
+              </button>
+              <button className="rerecord-button" onClick={handleReRecord}>
+                Re-record
+              </button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

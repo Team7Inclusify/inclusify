@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { database } from "../../config/firebase";
 import "./UploadAV.css";
 
@@ -53,23 +53,9 @@ export default function UploadAV() {
   }, [selectedFile]);
 
   const uploadFileAWS = async () => {
-    let avID = "";
-    try {
-      const userDocRef = doc(database, "additional-video"); // Assuming auth.currentUser.uid is the document ID
-      await setDoc(userDocRef, {
-        uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
-        uploaderID: auth?.currentUser?.uid,
-        title: addVideoTitle,
-        description: addDescription,
-        uploadDate: iso8601Date,
-        link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
-      });
-      avID = userDocRef.id;
-    } catch (error) {
-      console.error(error);
-    }
+    const newAVRef = doc(collection(database, "additional-video"));
 
-    console.log("avID:", avID);
+    const avID = newAVRef.id;
 
     const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
     const REGION = process.env.REACT_APP_AWS_S3_REGION;
@@ -82,7 +68,7 @@ export default function UploadAV() {
       params: { Bucket: S3_BUCKET },
       region: REGION,
     });
-    const key = `"additional-video"/${auth?.currentUser?.uid}/${avID}/Additional-Video_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
+    const key = `additional-video/${auth?.currentUser?.uid}/${avID}/Additional-Video_${userInfoJSON.firstName}_${userInfoJSON.lastName}.mp4`;
     const params = {
       Bucket: S3_BUCKET,
       Key: key,
@@ -113,8 +99,8 @@ export default function UploadAV() {
 
     console.log(avID);
     try {
-      const userDocRef = doc(database, "additional-video", avID);
-      await setDoc(userDocRef, {
+      const avDoc = doc(database, "additional-video", avID);
+      await setDoc(avDoc, {
         uploader: userInfoJSON.firstName + " " + userInfoJSON.lastName,
         uploaderID: auth?.currentUser?.uid,
         title: addVideoTitle,
