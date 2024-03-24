@@ -33,13 +33,18 @@ export default function Search() {
 
   useEffect(() => {
     const searchRef = collection(database, searching);
-    const querySearch = query(
-      searchRef,
-      or(
-        where("firstName", "==", search_tag),
-        where("lastName", "==", search_tag)
-      )
-    );
+    let querySearch;
+    if (search_tag === "") {
+      querySearch = query(searchRef);
+    } else {
+      querySearch = query(
+        searchRef,
+        or(
+          where("firstName", "==", search_tag),
+          where("lastName", "==", search_tag)
+        )
+      );
+    }
     const unsubscribe = onSnapshot(querySearch, (snapshot) => {
       let searchResults = [];
       snapshot.forEach((doc) => {
