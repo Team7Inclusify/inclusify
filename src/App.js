@@ -120,7 +120,8 @@ function App() {
               )
             }
           />
-          <Route path="/profile/:userID" element={<Profile />} />
+          <Route path="/uploadvideoresume" element={<UploadVideoResume />} />
+          <Route path="/user/:userID" element={<Profile />} />
         </Routes>
       </div>
       <Footer />
