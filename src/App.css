@@ -1,31 +1,43 @@
 .App-Page {
-    width: 100vw; /* Use full viewport width */
-    height: 100vh; /* Use full viewport height */
-    overflow-x: hidden; /* Hide horizontal overflow */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  
-  /* Adjust the padding or margin of the content container to make space for the footer */
-  .Rest-App-Page {
-    padding-bottom: 60px; /* Adjust according to the height of your footer */
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure the entire viewport height is covered */
+}
+
+.Rest-App-Page {
+  position: fixed;
+  top: 7.5rem; /* Adjust this value to match the height of your Navbar */
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  padding-top: 1rem; /* Adjust padding as needed */
+  padding-bottom: 5rem; /* Adjust padding as needed */
+}
+
   .night-mode {
-    background-color: black;
+    background-color: rgb(73, 69, 69);
     color: white;
   }
 /* App.css */
 
+/* Styles for the night mode toggle button */
 .night-mode-toggle {
-  background-color: transparent;
+  background-color: transparent; /* Set initial background color */
   border: none;
   cursor: pointer;
+  border-radius: 50%; /* Make the button round */
+  overflow: hidden; /* Ensure the round shape is maintained */
+}
+
+.night-mode-toggle:hover {
+  background-color: #716868; /* Change the background color on hover */
 }
 
 .night-mode-toggle img {
   width: 24px; /* Adjust the size of the icon as needed */
   height: 24px;
+  border-radius: 100%;
 }
 
 /* Styles for the night mode */
@@ -33,9 +45,10 @@
   background-color: #222; /* Set background color to dark */
 }
 
-.night-mode .night-mode-toggle svg {
+.night-mode .night-mode-toggle img {
   fill: #fff; /* Set the icon color to white */
 }
+
   
   
   /* Media query for mobile screens */

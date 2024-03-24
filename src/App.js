@@ -1,5 +1,3 @@
-// App.js
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./navbar/Navbar";
@@ -25,9 +23,6 @@ import Footer from "./footer/Footer";
 import AdditionalVideos from "./pages/AdditionalVideos/AdditionalVideos";
 import AccessDenied from "./pages/AccesDeny/AccessDenied";
 import MessageInbox from "./pages/MessageInbox/MessageInbox"; // Import MessageInbox component
-
-// Import the dark mode SVG icon
-import DarkIcon from "./images/dark.svg";
 import { auth } from "./config/firebase";
 import UploadResume from "./pages/UploadResume/UploadResume";
 import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
@@ -41,7 +36,7 @@ function App() {
   const navigate = useNavigate();
 
   const toggleNightMode = () => {
-    setIsNightMode(!isNightMode);
+    setIsNightMode((prevMode) => !prevMode);
   };
 
   const handleStep1Next = (data) => {
@@ -73,15 +68,16 @@ function App() {
 
   return (
     <div className={isNightMode ? "App-Page night-mode" : "App-Page"}>
-      <Navbar />
-      <button className="night-mode-toggle" onClick={toggleNightMode}>
-        <img src={DarkIcon} alt="Dark Mode" />
-      </button>
+      <Navbar nightMode={isNightMode} toggleNightMode={toggleNightMode} />
+
       <div className="Rest-App-Page">
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/join" element={<Join />} />
-          <Route path="/discussion" element={<Discussion />} />
+          <Route
+            path="/discussion"
+            element={<Discussion nightMode={isNightMode} />} // Pass nightMode prop
+          />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/search_results/:search_tag" element={<Search />} />
@@ -108,15 +104,21 @@ function App() {
             path="/record"
             element={loggedIn ? <Record /> : <AccessDenied />}
           />
-          {/* Add route for MessageInbox */}
-          <Route path="/messageinbox" element={<MessageInbox />} />
+          <Route path="/message" element={<MessageInbox />} />
+          <Route path="/message/:receiverID" element={<MessageInbox />} />
           <Route
             path="/uploadresume"
             element={loggedIn ? <UploadResume /> : <AccessDenied />}
           />
           <Route
-            path="/uploadvideoresume"
-            element={loggedIn ? <UploadVideoResume /> : <AccessDenied />}
+            path="/uploadresume"
+            element={
+              loggedIn ? (
+                <UploadResume nightMode={isNightMode} />
+              ) : (
+                <AccessDenied />
+              )
+            }
           />
           <Route path="/profile/:userID" element={<Profile />} />
         </Routes>

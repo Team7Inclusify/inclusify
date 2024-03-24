@@ -132,13 +132,13 @@ export default function ProfilePage(props) {
   return (
     <div className="profile-container">
       <div
-        className="overlay"
+        className={`overlay ${isPromptOpen && "night-mode"}`}
         style={{ display: isPromptOpen ? "block" : "none" }}
         onClick={() => setIsPromptOpen(false)}
       />
       {/* Prompt for options */}
       {isPromptOpen && (
-        <div className="centered-prompt">
+        <div className={`centered-prompt ${isPromptOpen && "night-mode"}`}>
           <span className="close-button" onClick={() => setIsPromptOpen(false)}>
             &#10006;
           </span>

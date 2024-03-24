@@ -1,76 +1,135 @@
 /* Discussion.css */
+
 .discussion-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
+  align-items: center;
+  padding: 20px;
+}
+
+
+.post-profile-picture {
+  width: 40px !important; /* Adjust the width as needed */
+  height: 40px !important; /* Adjust the height as needed */
+  border-radius: 50%; /* Make it circular */
+  margin-right: 10px;
 }
 
 .post-container {
-  width: 100%; /* Take full width */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
 }
 
-.post {
-  width: 100%; /* Take full width */
-  margin-bottom: 20px; /* Add margin bottom between posts */
-  padding: 12px; /* Reduce padding for smaller screens */
-}
 
 .create-post-container {
-  width: 100%; /* Take full width */
-  max-width: 500px; /* Limit maximum width */
+  position: relative; /* Add position relative */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
 }
 
-.create-post-container textarea {
-  width: 100%; /* Take full width */
-  resize: vertical;
+.create-post-container h2 {
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: calc(100% - 40px); /* Adjust for button width and margin */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.post-button {
+  position: absolute; /* Position the button absolutely */
+  right: 30px; /* Align to the right side */
+  top: 70%; /* Adjust the top position */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-button:hover {
+  background-color: transparent;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
 }
 
 /* Post.css */
-.post-header {
-  display: flex;
-  align-items: center;
+
+
+.post {
+  display: flex; /* Use flexbox layout */
+  align-items: flex-start; /* Align items at the start of the cross axis */
+  margin-bottom: 20px;
 }
 
-.post-profile-picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 12px;
+.post-header {
+  display: flex; /* Use flexbox layout */
+  align-items: center; /* Align items at the center of the cross axis */
+  margin-right: 10px;
 }
+
 
 .post-content {
-  margin-top: 8px;
+  flex: 1; /* Take up remaining space */
+  margin-bottom: 10px;
+  margin-top: 15px;
+  font-size: large;
 }
+
 
 .post-actions {
-  margin-top: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Align actions evenly */
+  margin-top: 10px;
 }
 
-.like-button,
-.comment-input,
-.comment-submit {
-  flex-grow: 1; /* Grow to take remaining space */
-  margin-right: 8px; /* Add margin right between buttons */
+.post-action {
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-.comment-submit {
-  margin-left: 0; /* Remove left margin for submit button */
+.post-action:hover {
+  color: #007bff;
 }
 
-.post-comments {
-  margin-top: 8px;
+.comment-input {
+  width: calc(100% - 30px);
+  height: 20%;
+  margin-right: 10px;
 }
 
-.comment {
-  margin-top: 4px;
+.comment-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
+.comment-button:hover {
+  background-color: #0056b3;
+}
+.night-mode-text {
+  color: white; /* Set text color to white in night mode */
+}
+
 
 /* Media Queries */
 
 @media only screen and (max-width: 768px) {
+  
   .post-profile-picture {
     width: 30px; /* Reduce profile picture size */
     height: 30px;
@@ -86,4 +145,7 @@
   .comment-submit {
     margin-top: 8px; /* Add margin top to submit button */
   }
+}
+.discussion-container.night-mode h2 {
+  color: white; /* Set text color to white for h2 elements */
 }

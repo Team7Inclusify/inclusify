@@ -1,11 +1,14 @@
 .navbar-whole {
+  position: fixed; /* Ensure Navbar stays fixed */
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   box-shadow: 1px 1px 4px #888888;
   width: 100vw;
   background-color: #001F3F; /* Sky blue background color */
+  z-index: 1000; /* Ensure Navbar stays on top of other content */
 }
-
 .navbar_toggle {
   cursor: pointer;
 }
@@ -165,4 +168,49 @@
 
 .navbar-link:hover {
   color: rgb(154, 220, 237) /* Adjust the hover color as needed */
+}
+/* Add this CSS for the dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff; /* Default background color */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  border-radius: 5px; /* Add border-radius for rounded corners */
+}
+
+/* Add this CSS to change the background color for night mode */
+.night-mode .dropdown-content {
+  background-color: #333; /* Dark background color for night mode */
+}
+.night-mode-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.night-mode-toggle img {
+  width: 30px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease; /* Add transition effect */
+}
+
+.night-mode-toggle:hover img {
+  transform: scale(1.1); /* Increase size on hover */
+  filter: brightness(70%); 
+}
+/* Add this CSS for the dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Add this CSS for the dropdown button */
+.dropdown-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

@@ -10,7 +10,6 @@ import {
 } from "firebase/auth";
 import { database } from "../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
-
 import showPasswordIcon from "../../images/show_password.png";
 import hidePasswordIcon from "../../images/hide_password.png";
 
