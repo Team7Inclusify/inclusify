@@ -2,7 +2,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Welcome.css";
-import Footer from "../../footer/Footer";
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -23,9 +22,6 @@ const Welcome = () => {
           Join Us
         </button>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

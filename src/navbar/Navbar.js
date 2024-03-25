@@ -200,7 +200,7 @@ const Navbar = ({ nightMode, toggleNightMode }) => {
                 </div>
                 <div
                   className="dropdown-child"
-                  onClick={() => navigate("/aboutus")}
+                  onClick={() => navigate("/about_us")}
                 >
                   About Us
                 </div>
