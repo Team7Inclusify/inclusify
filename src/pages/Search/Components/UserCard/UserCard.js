@@ -8,7 +8,7 @@ export default function UserCard(props) {
   return (
     <div
       className="userCardContainer"
-      onClick={() => navigate(`/message/${props.userID}`)}
+      onClick={() => navigate(`/user/${props.userID}`)}
     >
       <img
         className="userCardIMG"

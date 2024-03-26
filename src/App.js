@@ -28,6 +28,7 @@ import UploadResume from "./pages/UploadResume/UploadResume";
 import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
 import RecordAV from "./pages/AdditionalVideos/RecordAV";
 import UploadAV from "./pages/AdditionalVideos/UploadAV";
+import OtherUser from "./pages/Profile/OtherUsers/OtherUser";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
@@ -121,7 +122,7 @@ function App() {
             }
           />
           <Route path="/uploadvideoresume" element={<UploadVideoResume />} />
-          <Route path="/user/:userID" element={<Profile />} />
+          <Route path="/user/:userID" element={<OtherUser />} />
         </Routes>
       </div>
       <Footer />
