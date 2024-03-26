@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { auth, database } from "../../../config/firebase";
+import { useParams } from "react-router-dom";
+import { database } from "../../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import EmployerView from "../EmployerView/EmployerView";
 import { calculateTimeDifference } from "../../../functions/calculateTimeDifference";
+import OtherUserPage from "./OtherUserPage";
 
 export default function OtherUser() {
-  const navigate = useNavigate();
   const { userID } = useParams();
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
@@ -66,7 +66,21 @@ export default function OtherUser() {
         </div>
       </div>
       {viewType === "user" ? (
-        <div />
+        <OtherUserPage
+          firstName={userInfoJSON.firstName}
+          lastName={userInfoJSON.lastName}
+          pfpSRC={userInfoJSON.pfpLink}
+          email={userInfoJSON.email}
+          userID={userID}
+          videoResumeSRC={videoResumeJSON ? videoResumeJSON.link : false}
+          videoResumeUploadDate={
+            videoResumeJSON ? videoResumeJSON.uploadDate : null
+          }
+          videoTimeSinceUpload={
+            videoResumeJSON ? videoResumeJSON.timeSinceUpload : null
+          }
+          resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
+        />
       ) : (
         <EmployerView
           firstName={userInfoJSON.firstName}
