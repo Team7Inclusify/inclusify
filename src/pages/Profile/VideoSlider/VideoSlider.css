@@ -1,0 +1,23 @@
+.VideoSliderContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.VideoContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.addVidTitle {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.addVidDescription {
+    font-size: 18px;
+}

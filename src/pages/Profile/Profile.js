@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { auth } from "../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  where,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
 import { database } from "../../config/firebase";
 import "./Profile.css";
 import ProfilePage from "./ProfilePage";
@@ -13,6 +20,7 @@ export default function Profile() {
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
   const [pdfResumeJSON, setPDFResumeJSON] = useState(null);
+  const [addVidResults, setAddVidResults] = useState([]);
 
   const getUserInfo = async (userID) => {
     try {
@@ -47,6 +55,15 @@ export default function Profile() {
       } else {
         setPDFResumeJSON(null);
       }
+      const addVids = collection(database, "additional-video");
+      const addVidQuery = query(addVids, where("uploaderID", "==", userID));
+      onSnapshot(addVidQuery, (snapshot) => {
+        let addVidQueryResults = [];
+        snapshot.forEach((doc) => {
+          addVidQueryResults.push({ ...doc.data(), id: doc.id });
+        });
+        setAddVidResults(addVidQueryResults);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -110,6 +127,7 @@ export default function Profile() {
             videoResumeJSON ? videoResumeJSON.timeSinceUpload.toString() : null
           }
           resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
+          additionalVideos={addVidResults}
         />
       ) : (
         <EmployerView

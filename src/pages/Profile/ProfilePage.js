@@ -8,6 +8,7 @@ import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import VideoSlider from "./VideoSlider/VideoSlider";
 
 //  https://www.npmjs.com/package/react-doc-viewer
 
@@ -99,7 +100,6 @@ export default function ProfilePage(props) {
       console.error(error);
     }
   };
-
   // Function to handle prompt options
   const handleOptionClick = (option) => {
     console.log("Clicked on option:", option);
@@ -326,6 +326,30 @@ export default function ProfilePage(props) {
                 onClick={() => navigate("/uploadresume")}
               >
                 Click to Upload PDF Resume
+              </button>
+            </>
+          )}
+        </div>
+        <div className="profile-section">
+          <h3 className="section-title">Additional Videos</h3>
+          {props.additionalVideos.length !== 0 ? (
+            <>
+              <VideoSlider addVidList={props.additionalVideos} />
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Click to Upload More Additional Videos
+              </button>
+            </>
+          ) : (
+            <>
+              No Additonal Videos Yet
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Click to Upload Additional Videos
               </button>
             </>
           )}
