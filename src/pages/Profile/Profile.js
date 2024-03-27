@@ -144,6 +144,7 @@ export default function Profile() {
           resumeUploadDate={
             pdfResumeJSON ? pdfResumeJSON.timeSinceUpload : null
           }
+          additionalVideos={addVidResults}
         />
       )}
     </>

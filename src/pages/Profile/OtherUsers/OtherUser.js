@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { database } from "../../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  where,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
 import EmployerView from "../EmployerView/EmployerView";
 import { calculateTimeDifference } from "../../../functions/calculateTimeDifference";
 import OtherUserPage from "./OtherUserPage";
@@ -11,6 +18,7 @@ export default function OtherUser() {
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
   const [pdfResumeJSON, setPDFResumeJSON] = useState(null);
+  const [addVidResults, setAddVidResults] = useState([]);
 
   const [viewType, setViewType] = useState("user");
   const handleUserViewClick = useCallback(() => {
@@ -38,6 +46,15 @@ export default function OtherUser() {
         const userPDFResumeInfo = await getDoc(userPDFResumeRef);
         const userPDFResumeData = userPDFResumeInfo.data();
         setPDFResumeJSON(userPDFResumeData);
+        const addVids = collection(database, "additional-video");
+        const addVidQuery = query(addVids, where("uploaderID", "==", userID));
+        onSnapshot(addVidQuery, (snapshot) => {
+          let addVidQueryResults = [];
+          snapshot.forEach((doc) => {
+            addVidQueryResults.push({ ...doc.data(), id: doc.id });
+          });
+          setAddVidResults(addVidQueryResults);
+        });
       } catch (error) {
         console.error(error);
       }
@@ -80,6 +97,7 @@ export default function OtherUser() {
             videoResumeJSON ? videoResumeJSON.timeSinceUpload : null
           }
           resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
+          additionalVideos={addVidResults}
         />
       ) : (
         <EmployerView
@@ -96,6 +114,7 @@ export default function OtherUser() {
           resumeUploadDate={
             pdfResumeJSON ? pdfResumeJSON.timeSinceUpload : null
           }
+          additionalVideos={addVidResults}
         />
       )}
     </>

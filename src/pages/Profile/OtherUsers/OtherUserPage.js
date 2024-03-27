@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import defaultPFP from "../../../images/default_pfp.png";
 import "./OtherUserPage.css";
+import VideoSlider from "../VideoSlider/VideoSlider";
 
 export default function OtherUserPage(props) {
   const navigate = useNavigate();
@@ -65,6 +66,30 @@ export default function OtherUserPage(props) {
             </>
           ) : (
             <>No PDF Resume Yet</>
+          )}
+        </div>
+        <div className="profile-section">
+          <h3 className="section-title">Additional Videos</h3>
+          {props.additionalVideos.length !== 0 ? (
+            <>
+              <VideoSlider addVidList={props.additionalVideos} />
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Click to Upload More Additional Videos
+              </button>
+            </>
+          ) : (
+            <>
+              No Additonal Videos Yet
+              <button
+                className="upload-video-button"
+                onClick={() => navigate("/additionalvideos")}
+              >
+                Click to Upload Additional Videos
+              </button>
+            </>
           )}
         </div>
       </div>
