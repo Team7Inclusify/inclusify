@@ -22,6 +22,7 @@ export default function EmployerView(props) {
             controls
             src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
             type="video/mp4"
+            playsinline
           />
         ) : (
           <>No Video Resume Uploaded</>

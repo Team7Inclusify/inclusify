@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 import "./VideoSlider.css";
 
 export default function VideoSlider({ addVidList }) {
@@ -29,6 +29,7 @@ export default function VideoSlider({ addVidList }) {
           className="video-frame"
           src={`${addVidList[videoNum].link}?timestamp=${Date.now()}`}
           type="video/mp4"
+          playsinline
         >
           Your browser does not support the video tag.
         </video>

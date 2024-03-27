@@ -105,7 +105,12 @@ export default function UploadVideoResume() {
       <input type="file" accept="video/*" onChange={uploadResume} />
       {selectedFile && (
         <>
-          <video src={videoUrl} className="recorded-video" controls />
+          <video
+            src={videoUrl}
+            className="recorded-video"
+            controls
+            playsinline
+          />
           <button onClick={uploadFileAWS}>
             Upload File: {selectedFile.name}
           </button>

@@ -276,6 +276,7 @@ export default function ProfilePage(props) {
                 className="video-frame"
                 src={`${props.videoResumeSRC}?timestamp=${Date.now()}`}
                 type="video/mp4"
+                playsinline
               >
                 Your browser does not support the video tag.
               </video>
