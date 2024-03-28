@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import "./VideoSlider.css";
+import Accordion from "../../../components/Accordion/Accordion";
 
 export default function VideoSlider({ addVidList }) {
   const [videoNum, setVideoNum] = useState(0);
+  const [desIsOpen, setDesOpen] = useState(false);
+
+  const toggleDescription = () => {
+    setDesOpen(!desIsOpen);
+  };
 
   const MovingBack = () => {
     if (videoNum - 1 === -1) {
@@ -10,6 +16,7 @@ export default function VideoSlider({ addVidList }) {
     } else {
       setVideoNum(videoNum - 1);
     }
+    setDesOpen(false);
   };
 
   const MovingNext = () => {
@@ -18,6 +25,7 @@ export default function VideoSlider({ addVidList }) {
     } else {
       setVideoNum(videoNum + 1);
     }
+    setDesOpen(false);
   };
 
   return (
@@ -26,7 +34,7 @@ export default function VideoSlider({ addVidList }) {
       <div className="VideoContainer">
         <video
           controls
-          className="video-frame"
+          className="video-holder"
           src={`${addVidList[videoNum].link}?timestamp=${Date.now()}`}
           type="video/mp4"
           playsinline
@@ -35,12 +43,13 @@ export default function VideoSlider({ addVidList }) {
         </video>
         <div className="addVidTitle">{addVidList[videoNum].title}</div>
         <br />
-        <div className="addVidDescription">
-          <b>Description</b>
-        </div>
-        <div className="addVidDescription">
-          {addVidList[videoNum].description}
-        </div>
+        <Accordion
+          title="Description"
+          innerheading
+          content={addVidList[videoNum].description}
+          isOpen={desIsOpen}
+          toggleAccordion={toggleDescription}
+        />
       </div>
       <button onClick={MovingNext}>Next</button>
     </div>

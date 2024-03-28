@@ -28,22 +28,24 @@ export default function EmployerView(props) {
     <div className="employerViewContainer">
       <h2>{props.firstName + " " + props.lastName}</h2>
       <div className="videos">
-        {props.additionalVideos.length !== 0 ? (
-          <>
+        <div className="employerViewContainer-Child">
+          {props.additionalVideos.length !== 0 ? (
             <VideoSlider addVidList={employerViewVidList} />
-          </>
-        ) : (
-          <>No Additonal Videos Yet</>
-        )}
-        {props.resumeSRC ? (
-          <iframe
-            className="employer-pdf"
-            ref={pdfContainerRef}
-            src={`${props.resumeSRC}?timestamp=${Date.now()}`}
-          />
-        ) : (
-          <>No PDF Resume Uploaded</>
-        )}
+          ) : (
+            <>No Videos Yet</>
+          )}
+        </div>
+        <div className="employerViewContainer-Child">
+          {props.resumeSRC ? (
+            <iframe
+              className="employer-pdf"
+              ref={pdfContainerRef}
+              src={`${props.resumeSRC}?timestamp=${Date.now()}`}
+            />
+          ) : (
+            <>No PDF Resume Uploaded</>
+          )}
+        </div>
       </div>
       <br />
       <br />

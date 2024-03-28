@@ -1,0 +1,23 @@
+.accordion {
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow: hidden;
+    box-shadow: 0px 0px 1px 0px rgba(0,0,0,.8);
+}
+
+.accordion-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    font-size: 18px;
+}
+.accordion-content {
+    width:100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 18px;
+}

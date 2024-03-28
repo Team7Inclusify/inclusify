@@ -10,8 +10,8 @@
     flex-direction: column;
     min-width: 200px;
     overflow-wrap: break-word;
-  word-wrap: break-word;
-  white-space: normal;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .addVidTitle {
@@ -21,4 +21,8 @@
 
 .addVidDescription {
     font-size: 18px;
+}
+
+.video-holder {
+    flex-grow: 1;
 }
