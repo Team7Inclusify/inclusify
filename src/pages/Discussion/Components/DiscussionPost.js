@@ -19,10 +19,6 @@ const DiscussionPost = (props) => {
         <div className="discussion-post-uploader" onClick={goToUser}>
           {props.uploader}
         </div>
-        <div className="discussionPostButtons">
-          <button>Like</button>
-          <button>Respond</button>
-        </div>
       </div>
     </div>
   );
