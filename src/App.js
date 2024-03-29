@@ -79,6 +79,10 @@ function App() {
             path="/discussion"
             element={<Discussion nightMode={isNightMode} />} // Pass nightMode prop
           />
+          <Route
+            path="/discussion/:discussionID"
+            element={<Discussion nightMode={isNightMode} />} // Pass nightMode prop
+          />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/search_results/:search_tag" element={<Search />} />
