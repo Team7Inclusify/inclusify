@@ -1,0 +1,10 @@
+.discussionInfoJSON-uploader {
+    color: #005EFF;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.discussionInfoJSON-uploader:hover {
+    text-decoration: underline;
+}

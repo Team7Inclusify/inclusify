@@ -29,6 +29,7 @@ import UploadVideoResume from "./pages/VideoResume/UploadVideoResume";
 import RecordAV from "./pages/AdditionalVideos/RecordAV";
 import UploadAV from "./pages/AdditionalVideos/UploadAV";
 import OtherUser from "./pages/Profile/OtherUsers/OtherUser";
+import SpecificDiscussion from "./pages/SpecificDiscussion/SpecificDiscussion.js";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
@@ -81,7 +82,7 @@ function App() {
           />
           <Route
             path="/discussion/:discussionID"
-            element={<Discussion nightMode={isNightMode} />} // Pass nightMode prop
+            element={<SpecificDiscussion />} // Pass nightMode prop
           />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
