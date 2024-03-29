@@ -1,0 +1,40 @@
+.discussion-post-container {
+    width: 75%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .75); 
+    cursor: pointer;
+}
+
+.discussion-post-container:hover {
+    background-color: aqua;
+}
+
+.post-discussion {
+    width: 100%;
+    font-size: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.otherInfoBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.discussion-post-uploader {
+    color: #005EFF;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+.discussion-post-uploader:hover {
+    text-decoration: underline;
+}

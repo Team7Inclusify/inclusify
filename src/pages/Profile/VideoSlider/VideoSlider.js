@@ -37,7 +37,7 @@ export default function VideoSlider({ addVidList }) {
           className="video-holder"
           src={`${addVidList[videoNum].link}?timestamp=${Date.now()}`}
           type="video/mp4"
-          playsinline
+          playsInline
         >
           Your browser does not support the video tag.
         </video>

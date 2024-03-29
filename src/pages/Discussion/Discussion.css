@@ -14,11 +14,11 @@
 .createDiscussionButton {
   background-color: #005EFF;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .discussionsHolder {
   width: 100%;
-  background-color: aqua;
   display: flex;
   flex-direction: column;
 }
@@ -27,4 +27,29 @@
   width: 75%;
   height: 75%;
   border-radius: 10px;
+  align-items: center;
 } 
+
+.discussionCreateModalTitle {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.discussionTextArea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+}
+
+.discussionCreateModalHeader {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.discussionsHolder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

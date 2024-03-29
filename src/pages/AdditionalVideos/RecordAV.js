@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./RecordAV.css";
 import AWS from "aws-sdk";
-import { auth } from "../../config/firebase";
+import { auth, database } from "../../config/firebase";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
-import { database } from "../../config/firebase";
 
 const RecordAV = () => {
   const videoRef = useRef(null);
@@ -40,6 +39,7 @@ const RecordAV = () => {
       console.error(error);
     }
   };
+
   const setUserInfo = () =>
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -54,6 +54,7 @@ const RecordAV = () => {
   useEffect(() => {
     setUserInfo();
   }, [user]);
+
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
