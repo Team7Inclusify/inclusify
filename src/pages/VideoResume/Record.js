@@ -237,7 +237,7 @@ const Record = () => {
       ) : (
         <div className="recorded-video-container">
           <h3 className="heading">Recorded Video</h3>
-          <video className="recorded-video" controls playsinline>
+          <video className="recorded-video" controls playsInline>
             {recordedChunks.map((chunk, index) => (
               <source
                 key={index}

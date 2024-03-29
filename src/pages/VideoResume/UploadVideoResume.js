@@ -109,7 +109,7 @@ export default function UploadVideoResume() {
             src={videoUrl}
             className="recorded-video"
             controls
-            playsinline
+            playsInline
           />
           <button onClick={uploadFileAWS}>
             Upload File: {selectedFile.name}

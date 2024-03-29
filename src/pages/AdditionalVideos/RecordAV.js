@@ -223,7 +223,6 @@ const RecordAV = () => {
               autoPlay
               playsInline
               controls={!isRecording}
-              playsinline
             ></video>
           </div>
           <div className="option-container">
@@ -240,7 +239,7 @@ const RecordAV = () => {
       ) : (
         <>
           <div className="recorded-video-container">
-            <video className="recorded-video" controls playsinline>
+            <video className="recorded-video" controls playsInline>
               {recordedChunks.map((chunk, index) => (
                 <source
                   key={index}

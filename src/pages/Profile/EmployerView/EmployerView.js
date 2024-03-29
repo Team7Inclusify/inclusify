@@ -5,15 +5,15 @@ import VideoSlider from "../VideoSlider/VideoSlider";
 export default function EmployerView(props) {
   const pdfContainerRef = useRef(null);
   let employerViewVidList = [...props.additionalVideos];
-  if (!employerViewVidList[0].link.includes(`${props.videoResumeSRC}`)) {
-    const resumeJSON = {
-      link: `${props.videoResumeSRC}?timestamp=${Date.now()}`,
-      title: `${props.firstName} ${props.lastName} Resume`,
-      description: `Video Resume of ${props.firstName} ${props.lastName}`,
-    };
-    employerViewVidList.unshift(resumeJSON);
-
-    console.log(JSON.stringify(props.additionalVideos));
+  if (employerViewVidList[0]) {
+    if (!employerViewVidList[0].link.includes(`${props.videoResumeSRC}`)) {
+      const resumeJSON = {
+        link: `${props.videoResumeSRC}?timestamp=${Date.now()}`,
+        title: `${props.firstName} ${props.lastName} Resume`,
+        description: `Video Resume of ${props.firstName} ${props.lastName}`,
+      };
+      employerViewVidList.unshift(resumeJSON);
+    }
   }
   useEffect(() => {
     if (pdfContainerRef.current) {
