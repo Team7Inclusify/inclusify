@@ -37,7 +37,6 @@
 
 .responseToResponseHolder {
     width: 100%;
-    background-color: aqua;
     display: flex;
     flex-direction: column;
     align-items: end;
