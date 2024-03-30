@@ -1,0 +1,43 @@
+.responseContainer {
+    width: 90%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .75);
+    min-width: 400px;
+}
+
+.response-discussion {
+    width: 100%;
+    font-size: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.responseInfoBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.response-post-uploader {
+    color: #005EFF;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+.response-post-uploader:hover {
+    text-decoration: underline;
+}
+
+.responseToResponseHolder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}

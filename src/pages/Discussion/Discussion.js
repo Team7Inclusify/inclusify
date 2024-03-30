@@ -57,7 +57,6 @@ const Discussion = () => {
       });
       setDiscussionResults(discussionResults);
     });
-    console.log("hello");
     return () => unsubscribe();
   }, []);
 
