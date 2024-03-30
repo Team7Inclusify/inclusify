@@ -14,6 +14,7 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
+import DiscussionPost from "../Discussion/Components/DiscussionPost";
 
 const SpecificDiscussion = () => {
   const { discussionID } = useParams();
@@ -21,9 +22,10 @@ const SpecificDiscussion = () => {
   const [discussionInfoJSON, setDiscussionInfoJSON] = useState({});
   const [authUser, setAuthUser] = useState(null);
   const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
-  const [discussionComment, setDiscussionComment] = useState("");
+  const [discussionResponse, setDiscussionResponse] = useState("");
   const onOpenCreateDiscussionModal = () => setOpenCreateDiscussion(true);
   const onCloseCreateDiscussionModal = () => setOpenCreateDiscussion(false);
+  const [responseResults, setResponseResults] = useState([]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -39,13 +41,14 @@ const SpecificDiscussion = () => {
     return unsubscribe;
   }, []);
 
-  const uploadDiscussionPost = async () => {
-    // const discussionRef = collection(database, "discussion");
-    // await addDoc(discussionRef, {
-    //   discussion: discussionQuestion,
-    //   createdAt: serverTimestamp(),
-    //   uploader: authUser.uid,
-    // });
+  const uploadResponsePost = async () => {
+    const responseRef = collection(database, "response");
+    await addDoc(responseRef, {
+      response: discussionResponse,
+      createdAt: serverTimestamp(),
+      uploader: authUser.uid,
+      responseTo: discussionID,
+    });
     onCloseCreateDiscussionModal();
   };
 
@@ -64,6 +67,22 @@ const SpecificDiscussion = () => {
     getDiscussionInfo();
     console.log("DISCUSSION INFO DATA RETRIEVAL COUNT");
   }, [discussionID]);
+
+  useEffect(() => {
+    const responseRef = collection(database, "response");
+    const responseQuery = query(
+      responseRef,
+      where("responseTo", "==", discussionID)
+    );
+    const unsubscribe = onSnapshot(responseQuery, (snapshot) => {
+      let responseResults = [];
+      snapshot.forEach((doc) => {
+        responseResults.push({ ...doc.data(), id: doc.id });
+      });
+      setResponseResults(responseResults);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="discussion-container">
@@ -84,6 +103,16 @@ const SpecificDiscussion = () => {
           + Create A New Response
         </button>
       )}
+      <div className="discussionsHolder">
+        {responseResults.map((oneResult) => (
+          <DiscussionPost
+            discussion={oneResult.response}
+            postID={oneResult.id}
+            key={oneResult.id}
+            uploader={oneResult.uploader}
+          />
+        ))}
+      </div>
       <Modal
         open={openCreateDiscussion}
         onClose={onCloseCreateDiscussionModal}
@@ -96,12 +125,9 @@ const SpecificDiscussion = () => {
         <textarea
           className="discussionTextArea"
           type="text"
-          onChange={(event) => setDiscussionComment(event.target.value)}
+          onChange={(event) => setDiscussionResponse(event.target.value)}
         />
-        <button
-          className="createDiscussionButton"
-          onClick={uploadDiscussionPost}
-        >
+        <button className="createDiscussionButton" onClick={uploadResponsePost}>
           Create Your Response
         </button>
       </Modal>
