@@ -25,6 +25,7 @@ export default function ResponsePost(props) {
   const [openComments, setOpenComments] = useState(false);
   const onOpenComments = () => setOpenComments(true);
   const onCloseComments = () => setOpenComments(false);
+  const [responseResults, setResponseResults] = useState([]);
 
   const openCloseComments = () => {
     if (openComments) {
@@ -45,6 +46,22 @@ export default function ResponsePost(props) {
     onCloseCreateDiscussionModal();
   };
 
+  useEffect(() => {
+    const responseRef = collection(database, "response");
+    const responseQuery = query(
+      responseRef,
+      where("responseTo", "==", props.postID)
+    );
+    const unsubscribe = onSnapshot(responseQuery, (snapshot) => {
+      let responseResults = [];
+      snapshot.forEach((doc) => {
+        responseResults.push({ ...doc.data(), id: doc.id });
+      });
+      setResponseResults(responseResults);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className="responseContainer">
       <div className="response-discussion">{props.response}</div>
@@ -62,7 +79,20 @@ export default function ResponsePost(props) {
           <button onClick={openCloseComments}>Show More</button>
         </div>
       </div>
-      {openComments && <div>Show OIther comments here</div>}
+      {openComments && (
+        <div className="responseToResponseHolder">
+          {responseResults.map((oneResult) => (
+            <ResponsePost
+              response={oneResult.response}
+              postID={oneResult.id}
+              key={oneResult.id}
+              uploader={oneResult.uploader}
+              authUser={props.authUser}
+            />
+          ))}
+        </div>
+      )}
+
       <Modal
         open={openCreateDiscussion}
         onClose={onCloseCreateDiscussionModal}
