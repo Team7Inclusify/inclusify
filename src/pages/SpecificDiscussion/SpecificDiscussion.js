@@ -15,14 +15,17 @@ import {
   orderBy,
 } from "firebase/firestore";
 import DiscussionPost from "../Discussion/Components/DiscussionPost";
+import ResponsePost from "./ResponsePost/ResponsePost";
 
 const SpecificDiscussion = () => {
   const { discussionID } = useParams();
+
   const navigate = useNavigate();
+
   const [discussionInfoJSON, setDiscussionInfoJSON] = useState({});
   const [authUser, setAuthUser] = useState(null);
-  const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
   const [discussionResponse, setDiscussionResponse] = useState("");
+  const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
   const onOpenCreateDiscussionModal = () => setOpenCreateDiscussion(true);
   const onCloseCreateDiscussionModal = () => setOpenCreateDiscussion(false);
   const [responseResults, setResponseResults] = useState([]);
@@ -105,11 +108,12 @@ const SpecificDiscussion = () => {
       )}
       <div className="discussionsHolder">
         {responseResults.map((oneResult) => (
-          <DiscussionPost
-            discussion={oneResult.response}
+          <ResponsePost
+            response={oneResult.response}
             postID={oneResult.id}
             key={oneResult.id}
             uploader={oneResult.uploader}
+            authUser={authUser}
           />
         ))}
       </div>
