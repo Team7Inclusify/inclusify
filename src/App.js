@@ -30,12 +30,16 @@ import RecordAV from "./pages/AdditionalVideos/RecordAV";
 import UploadAV from "./pages/AdditionalVideos/UploadAV";
 import OtherUser from "./pages/Profile/OtherUsers/OtherUser";
 import SpecificDiscussion from "./pages/SpecificDiscussion/SpecificDiscussion.js";
+import NotePad from "./components/NotePad/NotePad.js";
+import notePagImage from "./images/notepad.png";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
   const [step1Data, setStep1Data] = useState({});
   const [step2Data, setStep2Data] = useState({});
   const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [showNotePad, setShowNotePad] = useState(false);
 
   const toggleNightMode = () => {
     setIsNightMode((prevMode) => !prevMode);
@@ -52,8 +56,6 @@ function App() {
     navigate("/summary", { state: { data: combinedData } }); // Pass combined data to Summary
   };
 
-  const [loggedIn, setLoggedIn] = useState(null);
-
   const checkAuth = () =>
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -67,6 +69,10 @@ function App() {
     checkAuth();
     console.log("changeInLogIn");
   }, [loggedIn]);
+
+  const handleCloseNotePad = () => {
+    setShowNotePad(false);
+  };
 
   return (
     <div className={isNightMode ? "App-Page night-mode" : "App-Page"}>
@@ -131,6 +137,22 @@ function App() {
         </Routes>
       </div>
       <Footer />
+      {loggedIn && (
+        <>
+          <button
+            className="note-pad-button"
+            onClick={() => setShowNotePad(!showNotePad)}
+          >
+            <img className="note-pad-button-image" src={notePagImage} />
+          </button>
+          {showNotePad && (
+            <NotePad
+              closeNotePad={handleCloseNotePad}
+              nightMode={isNightMode}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }

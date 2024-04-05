@@ -49,7 +49,22 @@
   fill: #fff; /* Set the icon color to white */
 }
 
-  
+.note-pad-button {
+  position: fixed;
+  bottom: 40px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  z-index: 9999;
+  background-color: #ffde59;
+  padding: 5px;
+}
+
+.note-pad-button:hover {
+background-color: #ffcf0d;
+} 
+
+.note-pad-button-image {
+  width:50px;
+}
   
   /* Media query for mobile screens */
   @media only screen and (max-width: 768px) {

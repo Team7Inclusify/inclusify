@@ -39,7 +39,6 @@ const MessageInbox = () => {
 
     // Fetch receiver user info only once when the component mounts
     getReceiverUserInfo();
-    console.log("HELLO");
   }, []);
 
   useEffect(() => {
