@@ -28,6 +28,7 @@
     font-weight: bold;
     box-sizing: border-box;
     font-size: 25px;
+    cursor: default;
 }
 
 .closeNotePadHeader {
@@ -53,16 +54,39 @@
 .notePadContent {
     width: 100%;
     height: 100%;
-    background-color: aquamarine;
     box-sizing: border-box;
 }
 
 .notePadSelection {
     cursor: pointer;
+    padding-top: 5px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    border-bottom: 2px solid lightgray;
+}
+.notePadSelectionNight {
+    border-bottom: 2px solid #282828;
+}
+
+.notePadSelection:hover {
+    background-color: lightgray;
+}
+.notePadSelectionNight:hover {
+    background-color: #282828;
 }
 
 .newNoteTitle {
     box-sizing: border-box;
     width: 100%;
     resize: none;
+}
+
+.notesButtonsBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }

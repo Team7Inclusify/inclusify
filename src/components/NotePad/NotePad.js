@@ -3,14 +3,15 @@ import "./NotePad.css";
 import { auth, database } from "../../config/firebase";
 import {
   addDoc,
+  updateDoc,
   collection,
   serverTimestamp,
   doc,
-  getDoc,
   onSnapshot,
   query,
   where,
   orderBy,
+  deleteDoc,
 } from "firebase/firestore";
 
 export default function NotePad(props) {
@@ -19,6 +20,12 @@ export default function NotePad(props) {
   const [newNoteTitle, setNewNoteTitle] = useState("");
   const [newNoteContent, setNewNoteContent] = useState("");
   const [noteResults, setNotesResults] = useState([]);
+  const [editNoteTitle, setEditNoteTitle] = useState("");
+  const [editNoteContent, setEditNoteContent] = useState("");
+  const [editNoteID, setEditNoteID] = useState("");
+
+  const [originalEditTitle, setOriginalEditTitle] = useState("");
+  const [originalEditContent, setOriginalEditContent] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -44,10 +51,30 @@ export default function NotePad(props) {
         createdAt: serverTimestamp(),
         creator: authUser.uid,
       });
+      setNewNoteTitle("");
+      setNewNoteContent("");
       setNotePadContent("none");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteNote = async () => {
+    try {
+      await deleteDoc(doc(database, "note", editNoteID));
+      setNotePadContent("none");
+    } catch (error) {
+      console.error("Error removing document: ", error);
+    }
+  };
+
+  const setEditNote = (id, title, content) => {
+    setNotePadContent("edit");
+    setEditNoteID(id);
+    setEditNoteTitle(title);
+    setOriginalEditTitle(title);
+    setEditNoteContent(content);
+    setOriginalEditContent(content);
   };
 
   useEffect(() => {
@@ -68,6 +95,29 @@ export default function NotePad(props) {
     }
   }, [authUser]);
 
+  const saveNoteChanges = async () => {
+    try {
+      await updateDoc(doc(database, "note", editNoteID), {
+        title: editNoteTitle,
+        content: editNoteContent,
+        createdAt: serverTimestamp(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const goingBack = () => {
+    setNotePadContent("none");
+    setNewNoteTitle("");
+    setNewNoteContent("");
+    setEditNoteID("");
+    setEditNoteTitle("");
+    setOriginalEditTitle("");
+    setEditNoteContent("");
+    setOriginalEditContent("");
+  };
+
   return (
     <div
       className={`notepad-container ${
@@ -86,31 +136,68 @@ export default function NotePad(props) {
       {notePadContent === "none" ? (
         <div className="notePadContent">
           <div
-            className="notePadSelection"
+            className={`notePadSelection ${
+              props.nightMode && "notePadSelectionNight"
+            }`}
             onClick={() => setNotePadContent("new")}
           >
             Create New One +
           </div>
           {noteResults.map((oneResult) => (
-            <div key={oneResult.id}> {oneResult.title} Bruh</div>
+            <div
+              onClick={() =>
+                setEditNote(oneResult.id, oneResult.title, oneResult.content)
+              }
+              className={`notePadSelection ${
+                props.nightMode && "notePadSelectionNight"
+              }`}
+              key={oneResult.id}
+            >
+              {oneResult.title}
+            </div>
           ))}
         </div>
       ) : (
         <>
-          <button onClick={() => setNotePadContent("none")}>Back</button>
-          <div>Input Title of Note</div>
-          <input
-            className="newNoteTitle"
-            type="text"
-            onChange={(event) => setNewNoteTitle(event.target.value)}
-          />
-          <div>Note Content</div>
-          <textarea
-            className="newNoteContent"
-            type="text"
-            onChange={(event) => setNewNoteContent(event.target.value)}
-          />
-          <button onClick={uploadNewNote}>Upload New Note</button>
+          <div className="notesButtonsBar">
+            <button onClick={goingBack}>Back</button>
+            {(editNoteTitle !== originalEditTitle ||
+              editNoteContent !== originalEditContent) && (
+              <button onClick={saveNoteChanges}>Save</button>
+            )}
+            <button onClick={deleteNote}>Delete</button>
+          </div>
+          {notePadContent === "new" ? (
+            <>
+              <div>Input Title of Note</div>
+              <input
+                className="newNoteTitle"
+                type="text"
+                onChange={(event) => setNewNoteTitle(event.target.value)}
+              />
+              <div>Note Content</div>
+              <textarea
+                className="newNoteContent"
+                type="text"
+                onChange={(event) => setNewNoteContent(event.target.value)}
+              />
+              <button onClick={uploadNewNote}>Upload New Note</button>
+            </>
+          ) : (
+            <>
+              <textarea
+                className="newNoteContent"
+                onChange={(event) => setEditNoteTitle(event.target.value)}
+                value={editNoteTitle}
+              />
+
+              <textarea
+                className="newNoteContent"
+                onChange={(event) => setEditNoteContent(event.target.value)}
+                value={editNoteContent}
+              />
+            </>
+          )}
         </>
       )}
     </div>
