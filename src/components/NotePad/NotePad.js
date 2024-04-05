@@ -102,6 +102,8 @@ export default function NotePad(props) {
         content: editNoteContent,
         createdAt: serverTimestamp(),
       });
+      setOriginalEditTitle(editNoteTitle);
+      setOriginalEditContent(editNoteContent);
     } catch (error) {
       console.log(error);
     }
@@ -160,42 +162,58 @@ export default function NotePad(props) {
       ) : (
         <>
           <div className="notesButtonsBar">
-            <button onClick={goingBack}>Back</button>
-            {(editNoteTitle !== originalEditTitle ||
-              editNoteContent !== originalEditContent) && (
-              <button onClick={saveNoteChanges}>Save</button>
-            )}
-            <button onClick={deleteNote}>Delete</button>
+            <button className="backNoteButton" onClick={goingBack}>
+              Back
+            </button>
           </div>
           {notePadContent === "new" ? (
             <>
               <div>Input Title of Note</div>
               <input
-                className="newNoteTitle"
+                className={`newNoteTitle ${
+                  props.nightMode && "newNoteTitleNight"
+                }`}
                 type="text"
                 onChange={(event) => setNewNoteTitle(event.target.value)}
               />
               <div>Note Content</div>
               <textarea
-                className="newNoteContent"
+                className={`newNoteContent ${
+                  props.nightMode && "newNoteContentNight"
+                }`}
                 type="text"
                 onChange={(event) => setNewNoteContent(event.target.value)}
               />
-              <button onClick={uploadNewNote}>Upload New Note</button>
+              <div className="notesButtonsBar">
+                <button onClick={uploadNewNote}>Upload New Note</button>
+              </div>
             </>
           ) : (
             <>
               <textarea
-                className="newNoteContent"
+                className={`editNoteTitle ${
+                  props.nightMode && "editNoteTitleDark"
+                }`}
                 onChange={(event) => setEditNoteTitle(event.target.value)}
                 value={editNoteTitle}
               />
 
               <textarea
-                className="newNoteContent"
+                className={`newNoteContent ${
+                  props.nightMode && "newNoteContentNight"
+                }`}
                 onChange={(event) => setEditNoteContent(event.target.value)}
                 value={editNoteContent}
               />
+              <div className="notesButtonsBar">
+                <button className="deleteNoteButton" onClick={deleteNote}>
+                  Delete
+                </button>
+                {(editNoteTitle !== originalEditTitle ||
+                  editNoteContent !== originalEditContent) && (
+                  <button onClick={saveNoteChanges}>Save</button>
+                )}
+              </div>
             </>
           )}
         </>

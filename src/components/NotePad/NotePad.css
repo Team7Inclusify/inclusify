@@ -44,11 +44,28 @@
     text-decoration:underline;
 }
 
+.editNoteTitle {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 25%;
+}
+
+.editNoteTitleDark {
+    background-color: rgb(73, 69, 69);
+    color:white;
+}
+
 .newNoteContent {
     resize: none;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+}
+
+.newNoteContentNight {
+    background-color: rgb(73, 69, 69);
+    color:white;
 }
 
 .notePadContent {
@@ -84,9 +101,28 @@
     resize: none;
 }
 
+.newNoteTitleNight {
+    background-color: rgb(73, 69, 69);
+    color: white;
+}
+
 .notesButtonsBar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+
+.backNoteButton {
+    background-color: #007bff;
+}
+.backNoteButton:hover {
+    background-color: #0062CC;
+}
+
+.deleteNoteButton {
+    background-color: #dc3545;
+}
+.deleteNoteButton:hover {
+    background-color: #c82333;
 }
