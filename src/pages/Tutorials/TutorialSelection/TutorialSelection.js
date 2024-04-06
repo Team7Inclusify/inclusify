@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./TutorialSelection.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TutorialSideBar from "../TutorialSideBar/TutorialSideBar";
 import vrJSON from "./TutorialJSONs/VideoResume.json";
 import avJSON from "./TutorialJSONs/AddVideo.json";
@@ -15,7 +15,6 @@ import TutorialCards from "./tutorialCards/tutorialCards";
 export default function TutorialSelection(props) {
   let { tutorialID } = useParams();
   const [json, setJSON] = useState([]);
-  const navigate = useNavigate();
   const getJSON = (param) => {
     switch (param) {
       case "video_resume":

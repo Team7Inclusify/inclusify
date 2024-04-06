@@ -4,13 +4,29 @@ import "./tutorialCards.css";
 export default function TutorialCards(props) {
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
-  const aspectRatio = 9 / 16;
+  const aspectRatio = 16 / 9;
+  const maxHeight = 400; // Maximum height in pixels
+
   useEffect(() => {
     const updateDimensions = () => {
       const container = document.querySelector(".tutorialCardContainer");
       if (container) {
-        setContainerWidth(container.offsetWidth);
-        setContainerHeight(container.offsetWidth * aspectRatio);
+        const width = container.offsetWidth;
+
+        // Calculate height based on aspect ratio
+        let height = width / aspectRatio;
+
+        // If height exceeds maxHeight, reset height to maxHeight and adjust width accordingly
+        if (height > maxHeight) {
+          height = maxHeight;
+          const adjustedWidth = height * aspectRatio;
+          setContainerWidth(adjustedWidth);
+        } else {
+          // If height is under or equal to maxHeight, keep height and width as they are
+          setContainerWidth(width);
+        }
+
+        setContainerHeight(height);
       }
     };
 
@@ -20,7 +36,7 @@ export default function TutorialCards(props) {
     return () => {
       window.removeEventListener("resize", updateDimensions);
     };
-  }, [aspectRatio]);
+  }, [aspectRatio, maxHeight]);
 
   return (
     <div className="tutorialCardContainer">
@@ -29,9 +45,9 @@ export default function TutorialCards(props) {
         width={containerWidth}
         height={containerHeight}
         src={`https://www.youtube.com/embed/${props.videoSRC}`}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen={true}
+        allow="fullscreen;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        frameBorder="0"
       />
     </div>
   );
