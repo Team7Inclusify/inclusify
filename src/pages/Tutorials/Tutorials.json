@@ -1,0 +1,10 @@
+[
+    { "title": "Sign-Up and Log-In", "link": "sign_up_log_in" },
+    { "title": "Video Resume", "link": "video_resume" },
+    { "title": "Additional Video", "link": "additional_video" },
+    { "title": "PDF Resume", "link": "pdf_resume" },
+    { "title": "Profile", "link": "profile" },
+    { "title": "Discussion", "link": "discussion" },
+    { "title": "Notes", "link": "notes" }
+  ]
+  

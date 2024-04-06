@@ -32,6 +32,7 @@ import OtherUser from "./pages/Profile/OtherUsers/OtherUser";
 import SpecificDiscussion from "./pages/SpecificDiscussion/SpecificDiscussion.js";
 import NotePad from "./components/NotePad/NotePad.js";
 import notePagImage from "./images/notepad.png";
+import TutorialSelection from "./pages/Tutorials/TutorialSelection/TutorialSelection.js";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(false); // State for night mode
@@ -95,7 +96,14 @@ function App() {
           <Route path="/search_results/:search_tag" element={<Search />} />
           <Route path="/search_results/" element={<Search />} />
           <Route path="/about_us" element={<AboutUs />} />
-          <Route path="/tutorials" element={<Tutorials />} />
+          <Route
+            path="/tutorials"
+            element={<Tutorials nightMode={isNightMode} />}
+          />
+          <Route
+            path="/tutorials/:tutorialID"
+            element={<TutorialSelection nightMode={isNightMode} />}
+          />
           <Route path="/resources" element={<Resources />} />
           <Route path="/faq" element={<FAQ />} />
           <Route

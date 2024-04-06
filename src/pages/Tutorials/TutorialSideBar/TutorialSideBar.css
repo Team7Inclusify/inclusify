@@ -1,0 +1,27 @@
+.tutorialSideBarContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.tutorialSideBarOption {
+    box-sizing: border-box;
+    width: 100px;
+    height: fit-content;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.tutorialSideBarOption:hover {
+    background-color: aquamarine;
+}
+
+.tutorialSideBarOption:not(:last-child) {
+    border-bottom: 5px solid black;
+}
