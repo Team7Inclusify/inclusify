@@ -11,6 +11,6 @@
 
 
 .tutorialCardVideoPlayer {
-    width: calc(300px * 16 / 9);;
+    width: calc(300px * 16 / 9);
     height: 300px;
 }
