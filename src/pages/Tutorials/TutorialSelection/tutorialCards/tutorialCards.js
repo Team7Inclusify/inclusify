@@ -5,7 +5,7 @@ export default function TutorialCards(props) {
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const aspectRatio = 16 / 9;
-  const maxHeight = 400; // Maximum height in pixels
+  const maxHeight = 400;
 
   useEffect(() => {
     const updateDimensions = () => {

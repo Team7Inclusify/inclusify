@@ -65,8 +65,19 @@ const Record = () => {
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
+        video: {
+          // Specify video constraints, including codec preference
+          width: { min: 640, ideal: 1280, max: 1920 },
+          height: { min: 480, ideal: 720, max: 1080 },
+          // Add codec preferences
+          facingMode: "user", // Use front camera if available
+        },
+        audio: {
+          // Specify audio constraints, including codec preference
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
       });
 
       videoRef.current.srcObject = stream;
