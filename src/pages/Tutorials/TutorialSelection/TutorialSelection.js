@@ -54,11 +54,11 @@ export default function TutorialSelection(props) {
       <TutorialSideBar nightMode={props.nightMode} />
       <div className="jsonContainer">
         {json.map((info, index) => (
-          // <div key={index}>{info.title}</div>
           <TutorialCards
             key={index}
             title={info.title}
             videoSRC={info.tutorialSRC}
+            nightMode={props.nightMode}
           />
         ))}
       </div>
