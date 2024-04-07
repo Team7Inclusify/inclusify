@@ -61,6 +61,7 @@ export default function TutorialSelection(props) {
             nightMode={props.nightMode}
           />
         ))}
+        {json.length === 0 && <>Nothing to show</>}
       </div>
     </div>
   );
