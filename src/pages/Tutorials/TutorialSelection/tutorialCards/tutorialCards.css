@@ -1,10 +1,35 @@
 .tutorialCardContainer {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding:10px;
+    background-color: #fff;
+    border: 1px solid #000; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tutorialCardContainerNight {
+    border: 1px solid #fff; 
+    background-color: rgb(73, 69, 69);;
 }
 
 .tutorialCardTitle {
     font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
+
+.tutorialCardiFrame {
+    border-radius: 5px;
+    border: 3px solid #000; 
+}
+
+.tutorialCardiFrameNight {
+    border: 2px solid #fff; 
+} 

@@ -39,10 +39,6 @@
 
   /* Responsive Styling */
 @media only screen and (max-width: 768px) {
-  .resource-page {
-    
-  }
-  
   .category-container {
     width: 90%;
   }

@@ -11,7 +11,7 @@ export default function TutorialCards(props) {
     const updateDimensions = () => {
       const container = document.querySelector(".tutorialCardContainer");
       if (container) {
-        const width = container.offsetWidth;
+        const width = container.offsetWidth - 20;
 
         // Calculate height based on aspect ratio
         let height = width / aspectRatio;
@@ -39,11 +39,18 @@ export default function TutorialCards(props) {
   }, [aspectRatio, maxHeight]);
 
   return (
-    <div className="tutorialCardContainer">
+    <div
+      className={`tutorialCardContainer ${
+        props.nightMode && "tutorialCardContainerNight"
+      }`}
+    >
       <div className="tutorialCardTitle">{props.title}</div>
       <iframe
         width={containerWidth}
         height={containerHeight}
+        className={`tutorialCardiFrame ${
+          props.nightMode && "tutorialCardiFrameNight"
+        }`}
         src={`https://www.youtube.com/embed/${props.videoSRC}`}
         allow="fullscreen;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

@@ -33,7 +33,7 @@ export default function ProfilePage(props) {
   });
 
   // State for profile picture
-  const [profilePicture, setProfilePicture] = useState(dp);
+  const [profilePicture, setProfilePicture] = useState(props.pfpSRC);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isEditing, setIsEditing] = useState({
     education: false,
@@ -143,11 +143,7 @@ export default function ProfilePage(props) {
             &#10006;
           </span>
           <div className="profile-picture-container">
-            <img
-              src={profilePicture}
-              alt="Profile"
-              className="profile-picture"
-            />
+            <img src={props.pfpSRC} alt="Profile" className="profile-picture" />
           </div>
           <div className="option" onClick={() => handleOptionClick("upload")}>
             Upload a new profile picture

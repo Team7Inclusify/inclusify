@@ -1,15 +1,13 @@
 [
     {
-        "title": "Create an Account",
+        "title": "How to Create an Account",
         "tutorialSRC": "BYPWSJGkZ7M"
     }, {
-        "title": "Logging In",
+        "title": "How to Log In",
         "tutorialSRC": "BYPWSJGkZ7M"
-    }, {
-        "title": "Other Stuff",
-        "tutorialSRC": "BYPWSJGkZ7M"
-    } , {
-        "title": "Convert Pages to pdf ",
+    }
+    , {
+        "title": "How to Log Out",
         "tutorialSRC": "BYPWSJGkZ7M"
     }
 ]

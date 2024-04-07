@@ -26,11 +26,13 @@ export default function Resource() {
 
   return (
     <div className="resource-page">
-      <ResourceCategory title="Resume Building Resources" resources={resumeBuilding} />
+      <ResourceCategory
+        title="Resume Building Resources"
+        resources={resumeBuilding}
+      />
       <ResourceCategory title="Job Search Resources" resources={jobSearch} />
       <ResourceCategory title="YouTube Links" resources={youtubeLinks} />
       <ResourceCategory title="Events" resources={events} />
-      
     </div>
   );
 }

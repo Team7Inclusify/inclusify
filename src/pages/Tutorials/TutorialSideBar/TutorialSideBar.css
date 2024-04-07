@@ -20,7 +20,7 @@
 }
 
 .tutorialSideBarOption:hover {
-    background-color: aquamarine;
+    background-color: #397dc9;
 }
 
 .tutorialSideBarOption:not(:last-child) {
