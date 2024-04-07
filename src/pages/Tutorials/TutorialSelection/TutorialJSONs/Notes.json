@@ -1,15 +1,12 @@
 [
     {
-        "title": "Making a note",
-        "tutorialSRC": "BYPWSJGkZ7M"
+        "title": "How to create a note",
+        "tutorialSRC": "mFxahRFpmhs"
     }, {
-        "title": "Deleing a note",
-        "tutorialSRC": "BYPWSJGkZ7M"
+        "title": "How to edit a note",
+        "tutorialSRC": "mFxahRFpmhs"
     }, {
-        "title": "Convert Google Doc to pdf ",
-        "tutorialSRC": "BYPWSJGkZ7M"
-    } , {
-        "title": "Convert Pages to pdf ",
-        "tutorialSRC": "BYPWSJGkZ7M"
+        "title": "How to delete a note",
+        "tutorialSRC": "mFxahRFpmhs"
     }
 ]
