@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Record.css";
-import AWS from "aws-sdk";
+import AWS, { MediaConvert } from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
@@ -65,19 +65,8 @@ const Record = () => {
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          // Specify video constraints, including codec preference
-          width: { min: 640, ideal: 1280, max: 1920 },
-          height: { min: 480, ideal: 720, max: 1080 },
-          // Add codec preferences
-          facingMode: "user", // Use front camera if available
-        },
-        audio: {
-          // Specify audio constraints, including codec preference
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true,
-        },
+        video: true,
+        audio: true,
       });
 
       videoRef.current.srcObject = stream;
