@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./NotePad.css";
 import text_to_speech from "../../images/text_to_speech_icon.png";
+import microphone from "../../images/microphone-icon.png";
 import { auth, database } from "../../config/firebase";
 import {
   addDoc,
@@ -215,6 +216,16 @@ export default function NotePad(props) {
             </>
           ) : (
             <>
+              <div className="editNotepadHeader">
+                <div className="editNotepadHeaderText">Title</div>
+                <button className="speechToTextButton">
+                  <img
+                    className="speechToTextIMG"
+                    src={microphone}
+                    alt="Text to Speech"
+                  />
+                </button>
+              </div>
               <textarea
                 className={`editNoteTitle ${
                   props.nightMode && "editNoteTitleDark"
@@ -222,7 +233,16 @@ export default function NotePad(props) {
                 onChange={(event) => setEditNoteTitle(event.target.value)}
                 value={editNoteTitle}
               />
-
+              <div className="editNotepadHeader">
+                <div className="editNotepadHeaderText">Content</div>
+                <button className="speechToTextButton">
+                  <img
+                    className="speechToTextIMG"
+                    src={microphone}
+                    alt="Text to Speech"
+                  />
+                </button>
+              </div>
               <textarea
                 className={`newNoteContent ${
                   props.nightMode && "newNoteContentNight"
