@@ -3,13 +3,16 @@ import AWS from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
-import "./UploadResume.css"
+import "./UploadResume.css";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 export default function UploadResume({ nightMode }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
   const getUserInfo = async (userID) => {
     try {
       const userRef = doc(database, "user", userID);
@@ -49,6 +52,7 @@ export default function UploadResume({ nightMode }) {
   }, [selectedFile]);
 
   const uploadFileAWS = async () => {
+    setIsUploading(true);
     const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
     const REGION = process.env.REACT_APP_AWS_S3_REGION;
 
@@ -71,15 +75,12 @@ export default function UploadResume({ nightMode }) {
     var upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
+        setUploadPercent(parseInt((evt.loaded * 100) / evt.total));
       })
       .promise();
 
     await upload.then((err, data) => {
       console.log(err);
-      alert("File uploaded successfully.");
     });
 
     let currentDate = new Date();
@@ -92,13 +93,15 @@ export default function UploadResume({ nightMode }) {
         uploadDate: iso8601Date,
         link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
       });
+      setIsUploading(false);
+      setUploadPercent(0);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className={`upload-option ${nightMode ? 'night-mode' : ''}`}>
+    <div className={`upload-option ${nightMode ? "night-mode" : ""}`}>
       <h2>Upload Your PDF Resume</h2>
       <input type="file" accept=".pdf" onChange={uploadResume} />
       {selectedFile && (
@@ -106,6 +109,7 @@ export default function UploadResume({ nightMode }) {
           Upload File: {selectedFile.name}
         </button>
       )}
+      {isUploading && <ProgressCircle percent={uploadPercent} />}
     </div>
   );
 }

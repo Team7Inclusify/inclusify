@@ -1,0 +1,60 @@
+.progressCircleBG {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(49,49,49,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.progressCircle {
+    position: relative; /* Added */
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #EE534F;
+    border-right: 16px solid #f06a66;
+    border-bottom: 16px solid #f2807e;
+    border-left: 16px solid #f59795;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    text-align: center;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.percentText {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-0deg);
+    color: white;
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.uploadText {
+    padding-top: 20px;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+}

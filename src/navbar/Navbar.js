@@ -20,7 +20,7 @@ import red_mic_icon from "../images/red-mic-icon.png";
 import close_button from "../images/close_icon.png";
 import reset_icon from "../images/reset_icon.png";
 import confirm_search from "../images/confirm_search.png";
-import Dropdown from "../components/Drop.js";
+import Dropdown from "../components/Drop/Drop.js";
 import nav_drop from "../images/navbar_dropdown.png";
 
 const Navbar = ({ nightMode, toggleNightMode }) => {

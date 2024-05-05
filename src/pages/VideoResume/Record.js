@@ -4,6 +4,7 @@ import AWS, { MediaConvert } from "aws-sdk";
 import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 const Record = () => {
   const videoRef = useRef(null);
@@ -14,7 +15,8 @@ const Record = () => {
   const [chunksChanged, setChunksChanged] = useState(false);
   const [timer, setTimer] = useState(0);
   const [showTimer, setShowTimer] = useState(true); // Option to show/hide timer
-
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const getUserInfo = async (userID) => {
@@ -141,6 +143,7 @@ const Record = () => {
   };
 
   const uploadFile = async () => {
+    setIsUploading(true);
     const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
 
     const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
@@ -165,15 +168,12 @@ const Record = () => {
     var upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
+        setUploadPercent(parseInt((evt.loaded * 100) / evt.total));
       })
       .promise();
 
     await upload.then((err, data) => {
       console.log(err);
-      alert("File uploaded successfully.");
     });
 
     let currentDate = new Date();
@@ -186,6 +186,8 @@ const Record = () => {
         uploadDate: iso8601Date,
         link: `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${key}`,
       });
+      setIsUploading(false);
+      setUploadPercent(0);
     } catch (error) {
       console.error(error);
     }
@@ -193,6 +195,7 @@ const Record = () => {
 
   return (
     <div className="container">
+      {isUploading && <ProgressCircle percent={uploadPercent} />}
       {recordedChunks.length === 0 ? (
         <>
           <h2 className="heading">Record Video</h2>

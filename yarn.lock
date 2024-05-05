@@ -10527,6 +10527,13 @@
     "react-lifecycles-compat" "^3.0.0"
     "warning" "^4.0.3"
 
+"react-native-progress@^5.0.1":
+  "integrity" "sha512-TYfJ4auAe5vubDma2yfFvt7ktSI+UCfysqJnkdHEcLXqAitRFOozgF/cLgN5VNi/iLdaf3ga1ETi2RF4jVZ/+g=="
+  "resolved" "https://registry.npmjs.org/react-native-progress/-/react-native-progress-5.0.1.tgz"
+  "version" "5.0.1"
+  dependencies:
+    "prop-types" "^15.7.2"
+
 "react-navbar-dropdown@^1.4.3":
   "integrity" "sha512-XISJDB/nzHjgUz+m4dH2rbVaOvs5t/AFCx83Rq/Yl7U5dTIL9lK3ogI/9FtoQSpW2bxWAN0KcasYjb0QOROSRg=="
   "resolved" "https://registry.npmjs.org/react-navbar-dropdown/-/react-navbar-dropdown-1.4.3.tgz"
