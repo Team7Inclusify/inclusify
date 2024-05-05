@@ -20,10 +20,10 @@
     position: relative; /* Added */
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid #EE534F;
-    border-right: 16px solid #f06a66;
-    border-bottom: 16px solid #f2807e;
-    border-left: 16px solid #f59795;
+    border-top: 16px solid #ff5757;
+    border-right: 16px solid #ffde59;
+    border-bottom: 16px solid #397dc9;
+    border-left: 16px solid #00bf63;
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */

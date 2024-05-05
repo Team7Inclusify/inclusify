@@ -4,6 +4,7 @@ import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { database } from "../../config/firebase";
 import "./UploadAV.css";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 export default function UploadAV() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -13,6 +14,8 @@ export default function UploadAV() {
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addDescription, setDescription] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
   const getUserInfo = async (userID) => {
     try {
       const userRef = doc(database, "user", userID);
@@ -53,6 +56,7 @@ export default function UploadAV() {
   }, [selectedFile]);
 
   const uploadFileAWS = async () => {
+    setIsUploading(true);
     const newAVRef = doc(collection(database, "additional-video"));
 
     const avID = newAVRef.id;
@@ -79,16 +83,13 @@ export default function UploadAV() {
     var upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
+        setUploadPercent(parseInt((evt.loaded * 100) / evt.total));
       })
       .promise();
 
     await upload
       .then(async (data) => {
         console.log(data);
-        alert("File uploaded successfully.");
       })
       .catch((err) => {
         console.error(err);
@@ -108,6 +109,9 @@ export default function UploadAV() {
         uploadDate: iso8601Date,
         link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
       });
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      setIsUploading(false);
+      setUploadPercent(0);
     } catch (error) {
       console.error(error);
     }
@@ -115,6 +119,7 @@ export default function UploadAV() {
 
   return (
     <div className="upload-option">
+      {isUploading && <ProgressCircle percent={uploadPercent} />}
       <h2>Upload Your Additional Video</h2>
       <h3>Insert Title of Additional Video</h3>
       <input

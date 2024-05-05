@@ -4,11 +4,13 @@ import { auth } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { database } from "../../config/firebase";
 import "./Record.css";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 export default function UploadVideoResume() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
-
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
   const [user, setUser] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const getUserInfo = async (userID) => {
@@ -51,6 +53,7 @@ export default function UploadVideoResume() {
   }, [selectedFile]);
 
   const uploadFileAWS = async () => {
+    setIsUploading(true);
     const S3_BUCKET = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
     const REGION = process.env.REACT_APP_AWS_S3_REGION;
 
@@ -73,15 +76,12 @@ export default function UploadVideoResume() {
     var upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
+        setUploadPercent(parseInt((evt.loaded * 100) / evt.total));
       })
       .promise();
 
     await upload.then((err, data) => {
       console.log(err);
-      alert("File uploaded successfully.");
     });
 
     let currentDate = new Date();
@@ -94,6 +94,9 @@ export default function UploadVideoResume() {
         uploadDate: iso8601Date,
         link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
       });
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setIsUploading(false);
+      setUploadPercent(0);
     } catch (error) {
       console.error(error);
     }
@@ -102,6 +105,7 @@ export default function UploadVideoResume() {
   return (
     <div className="upload-option">
       <h2>Upload Your Video Resume</h2>
+      {isUploading && <ProgressCircle percent={uploadPercent} />}
       <input type="file" accept="video/*" onChange={uploadResume} />
       {selectedFile && (
         <>

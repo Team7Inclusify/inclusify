@@ -3,6 +3,7 @@ import "./RecordAV.css";
 import AWS from "aws-sdk";
 import { auth, database } from "../../config/firebase";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 const RecordAV = () => {
   const videoRef = useRef(null);
@@ -16,6 +17,8 @@ const RecordAV = () => {
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addDescription, setDescription] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
 
   useEffect(() => {
     let interval;
@@ -108,6 +111,7 @@ const RecordAV = () => {
   };
 
   const uploadVideos = async (event) => {
+    setIsUploading(true);
     const videoBlob = new Blob(recordedChunks, { type: "video/mp4" });
     const newAVRef = doc(collection(database, "additional-video"));
 
@@ -135,16 +139,13 @@ const RecordAV = () => {
     var upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
+        setUploadPercent(parseInt((evt.loaded * 100) / evt.total));
       })
       .promise();
 
     await upload
       .then(async (data) => {
         console.log(data);
-        alert("File uploaded successfully.");
       })
       .catch((err) => {
         console.error(err);
@@ -164,6 +165,9 @@ const RecordAV = () => {
         uploadDate: iso8601Date,
         link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
       });
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      setIsUploading(false);
+      setUploadPercent(0);
     } catch (error) {
       console.error(error);
     }
@@ -195,6 +199,7 @@ const RecordAV = () => {
 
   return (
     <div className="container">
+      {isUploading && <ProgressCircle percent={uploadPercent} />}
       <h2 className="heading">Add Additional Videos</h2>
       {recordedChunks.length === 0 ? (
         <>
