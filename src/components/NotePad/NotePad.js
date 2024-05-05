@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NotePad.css";
+import text_to_speech from "../../images/text_to_speech_icon.png";
 import { auth, database } from "../../config/firebase";
 import {
   addDoc,
@@ -23,7 +24,8 @@ export default function NotePad(props) {
   const [editNoteTitle, setEditNoteTitle] = useState("");
   const [editNoteContent, setEditNoteContent] = useState("");
   const [editNoteID, setEditNoteID] = useState("");
-
+  const [speechSynthesisSupported, setSpeechSynthesisSupported] =
+    useState(false);
   const [originalEditTitle, setOriginalEditTitle] = useState("");
   const [originalEditContent, setOriginalEditContent] = useState("");
 
@@ -37,7 +39,7 @@ export default function NotePad(props) {
         setAuthUser(null);
       }
     });
-
+    setSpeechSynthesisSupported("speechSynthesis" in window);
     return unsubscribe;
   }, []);
 
@@ -120,6 +122,16 @@ export default function NotePad(props) {
     setOriginalEditContent("");
   };
 
+  function textToSpeechFunction(title, content) {
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = title;
+    window.speechSynthesis.speak(msg);
+    setTimeout(() => {
+      msg.text = content;
+      window.speechSynthesis.speak(msg);
+    }, 3000);
+  }
+
   return (
     <div
       className={`notepad-container ${
@@ -186,6 +198,20 @@ export default function NotePad(props) {
               />
               <div className="notesButtonsBar">
                 <button onClick={uploadNewNote}>Upload New Note</button>
+                {speechSynthesisSupported && (
+                  <button
+                    className="textToSpeechButton"
+                    onClick={() =>
+                      textToSpeechFunction(newNoteTitle, newNoteContent)
+                    }
+                  >
+                    <img
+                      className="textToSpeechIMG"
+                      src={text_to_speech}
+                      alt="Text to Speech"
+                    />
+                  </button>
+                )}
               </div>
             </>
           ) : (
@@ -212,6 +238,20 @@ export default function NotePad(props) {
                 {(editNoteTitle !== originalEditTitle ||
                   editNoteContent !== originalEditContent) && (
                   <button onClick={saveNoteChanges}>Save</button>
+                )}
+                {speechSynthesisSupported && (
+                  <button
+                    className="textToSpeechButton"
+                    onClick={() =>
+                      textToSpeechFunction(editNoteTitle, editNoteContent)
+                    }
+                  >
+                    <img
+                      className="textToSpeechIMG"
+                      src={text_to_speech}
+                      alt="Text to Speech"
+                    />
+                  </button>
                 )}
               </div>
             </>

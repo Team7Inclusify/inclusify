@@ -1,129 +1,138 @@
 .notepad-container {
-    box-shadow: 2px 2px 5px 1px rgba(0,0,0,.8);
-    position: fixed;
-    bottom: 30px;
-    left: 20px;
-    z-index: 9999;
-    width: 375px;
-    height: 78%;
-    min-height:300px;
-    background-color: white;
-    box-sizing: border-box;
-    border-radius: 5px;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  z-index: 9999;
+  width: 375px;
+  height: 78%;
+  min-height: 300px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .notepad-container-night-mode {
-    background-color: rgb(73, 69, 69);
+  background-color: rgb(73, 69, 69);
 }
 
 .notePadHeader {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-weight: bold;
-    box-sizing: border-box;
-    font-size: 25px;
-    cursor: default;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: bold;
+  box-sizing: border-box;
+  font-size: 25px;
+  cursor: default;
 }
 
 .closeNotePadHeader {
-    width: fit-content;
-    background-color: none;
-    font-weight: normal;
-    cursor: pointer;
-    font-size: 18px;
+  width: fit-content;
+  background-color: none;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .closeNotePadHeader:hover {
-    color: red;
-    text-decoration:underline;
-    font-weight: bold;
+  color: red;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .editNoteTitle {
-    resize: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 25%;
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25%;
 }
 
 .editNoteTitleDark {
-    background-color: rgb(73, 69, 69);
-    color:white;
+  background-color: rgb(73, 69, 69);
+  color: white;
 }
 
 .newNoteContent {
-    resize: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 .newNoteContentNight {
-    background-color: rgb(73, 69, 69);
-    color:white;
+  background-color: rgb(73, 69, 69);
+  color: white;
 }
 
 .notePadContent {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .notePadSelection {
-    cursor: pointer;
-    padding-top: 5px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    border-bottom: 2px solid lightgray;
+  cursor: pointer;
+  padding-top: 5px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  border-bottom: 2px solid lightgray;
 }
 .notePadSelectionNight {
-    border-bottom: 2px solid #282828;
+  border-bottom: 2px solid #282828;
 }
 
 .notePadSelection:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 .notePadSelectionNight:hover {
-    background-color: #282828;
+  background-color: #282828;
 }
 
 .newNoteTitle {
-    box-sizing: border-box;
-    width: 100%;
-    resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
 }
 
 .newNoteTitleNight {
-    background-color: rgb(73, 69, 69);
-    color: white;
+  background-color: rgb(73, 69, 69);
+  color: white;
 }
 
 .notesButtonsBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .backNoteButton {
-    background-color: #007bff;
+  background-color: #007bff;
 }
 .backNoteButton:hover {
-    background-color: #0062CC;
+  background-color: #0062cc;
 }
 
 .deleteNoteButton {
-    background-color: #dc3545;
+  background-color: #dc3545;
 }
 .deleteNoteButton:hover {
-    background-color: #c82333;
+  background-color: #c82333;
+}
+
+.textToSpeechButton {
+  background-color: transparent;
+  padding: 0;
+}
+
+.textToSpeechIMG {
+  height: 30px;
 }
