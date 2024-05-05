@@ -109,7 +109,7 @@ export default function UploadAV() {
         uploadDate: iso8601Date,
         link: `https://${process.env.REACT_APP_AWS_S3_BUCKET_NAME}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/${key}`,
       });
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       setIsUploading(false);
       setUploadPercent(0);
     } catch (error) {

@@ -186,6 +186,7 @@ const Record = () => {
         uploadDate: iso8601Date,
         link: `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${key}`,
       });
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       setIsUploading(false);
       setUploadPercent(0);
     } catch (error) {

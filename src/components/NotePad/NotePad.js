@@ -53,9 +53,7 @@ export default function NotePad(props) {
         createdAt: serverTimestamp(),
         creator: authUser.uid,
       });
-      setNewNoteTitle("");
-      setNewNoteContent("");
-      setNotePadContent("none");
+      goingBack();
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +62,7 @@ export default function NotePad(props) {
   const deleteNote = async () => {
     try {
       await deleteDoc(doc(database, "note", editNoteID));
-      setNotePadContent("none");
+      goingBack();
     } catch (error) {
       console.error("Error removing document: ", error);
     }
@@ -120,6 +118,7 @@ export default function NotePad(props) {
     setOriginalEditTitle("");
     setEditNoteContent("");
     setOriginalEditContent("");
+    window.speechSynthesis.cancel();
   };
 
   function textToSpeechFunction(title, content) {
@@ -139,7 +138,12 @@ export default function NotePad(props) {
       }`}
     >
       <div className="notePadHeader">
-        NotePad
+        <div className="notePadTitle">NotePad</div>
+        {notePadContent !== "none" && (
+          <div className="backNotePadHeader" onClick={goingBack}>
+            Go Back
+          </div>
+        )}
         <div
           className="closeNotePadHeader"
           onClick={() => props.closeNotePad()}
@@ -173,11 +177,6 @@ export default function NotePad(props) {
         </div>
       ) : (
         <>
-          <div className="notesButtonsBar">
-            <button className="backNoteButton" onClick={goingBack}>
-              Back
-            </button>
-          </div>
           {notePadContent === "new" ? (
             <>
               <div>Input Title of Note</div>

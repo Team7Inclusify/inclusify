@@ -25,10 +25,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  cursor: default;
+}
+
+.notePadTitle {
   font-weight: bold;
   box-sizing: border-box;
   font-size: 25px;
-  cursor: default;
+  width: fit-content;
 }
 
 .closeNotePadHeader {
@@ -42,6 +46,20 @@
 .closeNotePadHeader:hover {
   color: red;
   text-decoration: underline;
+  font-weight: bold;
+}
+
+.backNotePadHeader {
+  width: fit-content;
+  background-color: none;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.backNotePadHeader:hover {
   font-weight: bold;
 }
 
