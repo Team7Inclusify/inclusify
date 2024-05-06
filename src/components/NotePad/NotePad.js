@@ -120,6 +120,7 @@ export default function NotePad(props) {
     setOriginalEditTitle("");
     setEditNoteContent("");
     setOriginalEditContent("");
+    window.speechSynthesis.cancel();
   };
 
   function textToSpeechFunction(title, content) {
