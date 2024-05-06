@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./NotePad.css";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import text_to_speech from "../../images/text_to_speech_icon.png";
 import microphone from "../../images/microphone-icon.png";
 import { auth, database } from "../../config/firebase";
@@ -29,6 +32,17 @@ export default function NotePad(props) {
     useState(false);
   const [originalEditTitle, setOriginalEditTitle] = useState("");
   const [originalEditContent, setOriginalEditContent] = useState("");
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  const [liveNewTitle, setLiveNewTitle] = useState("");
+  const [liveNewContent, setLiveNewContent] = useState("");
+  const [liveEditTitle, setLiveEditTitle] = useState("");
+  const [liveEditContent, setLiveEditContent] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -132,6 +146,22 @@ export default function NotePad(props) {
     }, 3000);
   }
 
+  function speechToText(field) {
+    if (!listening) {
+      resetTranscript();
+      SpeechRecognition.startListening({ continuous: true });
+    } else {
+      SpeechRecognition.stopListening();
+
+      if (field === "newTitle") {
+        setNewNoteTitle((prevTitle) => prevTitle + " " + transcript);
+      } else if (field === "newContent") {
+        setNewNoteContent((prevTitle) => prevTitle + " " + transcript);
+      }
+      resetTranscript();
+    }
+  }
+
   return (
     <div
       className={`notepad-container ${
@@ -180,21 +210,51 @@ export default function NotePad(props) {
         <>
           {notePadContent === "new" ? (
             <>
-              <div>Input Title of Note</div>
+              <div className="editNotepadHeader">
+                <div className="editNotepadHeaderText">Title</div>
+                {browserSupportsSpeechRecognition && (
+                  <button
+                    className="speechToTextButton"
+                    onClick={() => speechToText("newTitle")}
+                  >
+                    <img
+                      className="speechToTextIMG"
+                      src={microphone}
+                      alt="Text to Speech"
+                    />
+                  </button>
+                )}
+              </div>
               <input
                 className={`newNoteTitle ${
                   props.nightMode && "newNoteTitleNight"
                 }`}
                 type="text"
                 onChange={(event) => setNewNoteTitle(event.target.value)}
+                value={newNoteTitle + " " + transcript}
               />
-              <div>Note Content</div>
+              <div className="editNotepadHeader">
+                <div className="editNotepadHeaderText">Content</div>
+                {browserSupportsSpeechRecognition && (
+                  <button
+                    className="speechToTextButton"
+                    onClick={() => speechToText("newContent")}
+                  >
+                    <img
+                      className="speechToTextIMG"
+                      src={microphone}
+                      alt="Text to Speech"
+                    />
+                  </button>
+                )}
+              </div>
               <textarea
                 className={`newNoteContent ${
                   props.nightMode && "newNoteContentNight"
                 }`}
                 type="text"
                 onChange={(event) => setNewNoteContent(event.target.value)}
+                value={newNoteContent + "" + transcript}
               />
               <div className="notesButtonsBar">
                 <button onClick={uploadNewNote}>Upload New Note</button>
@@ -218,13 +278,15 @@ export default function NotePad(props) {
             <>
               <div className="editNotepadHeader">
                 <div className="editNotepadHeaderText">Title</div>
-                <button className="speechToTextButton">
-                  <img
-                    className="speechToTextIMG"
-                    src={microphone}
-                    alt="Text to Speech"
-                  />
-                </button>
+                {browserSupportsSpeechRecognition && (
+                  <button className="speechToTextButton">
+                    <img
+                      className="speechToTextIMG"
+                      src={microphone}
+                      alt="Text to Speech"
+                    />
+                  </button>
+                )}
               </div>
               <textarea
                 className={`editNoteTitle ${
@@ -235,13 +297,15 @@ export default function NotePad(props) {
               />
               <div className="editNotepadHeader">
                 <div className="editNotepadHeaderText">Content</div>
-                <button className="speechToTextButton">
-                  <img
-                    className="speechToTextIMG"
-                    src={microphone}
-                    alt="Text to Speech"
-                  />
-                </button>
+                {browserSupportsSpeechRecognition && (
+                  <button className="speechToTextButton">
+                    <img
+                      className="speechToTextIMG"
+                      src={microphone}
+                      alt="Text to Speech"
+                    />
+                  </button>
+                )}
               </div>
               <textarea
                 className={`newNoteContent ${
