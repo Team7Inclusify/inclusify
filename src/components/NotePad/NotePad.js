@@ -136,14 +136,16 @@ export default function NotePad(props) {
     window.speechSynthesis.cancel();
   };
 
+  const closeNotePad = () => {
+    resetTranscript();
+    window.speechSynthesis.cancel();
+    props.closeNotePad();
+  };
+
   function textToSpeechFunction(title, content) {
     var msg = new SpeechSynthesisUtterance();
-    msg.text = title;
+    msg.text = title + " " + content;
     window.speechSynthesis.speak(msg);
-    setTimeout(() => {
-      msg.text = content;
-      window.speechSynthesis.speak(msg);
-    }, 3000);
   }
 
   function speechToText(field) {
@@ -175,10 +177,7 @@ export default function NotePad(props) {
             Go Back
           </div>
         )}
-        <div
-          className="closeNotePadHeader"
-          onClick={() => props.closeNotePad()}
-        >
+        <div className="closeNotePadHeader" onClick={closeNotePad}>
           Close
         </div>
       </div>
