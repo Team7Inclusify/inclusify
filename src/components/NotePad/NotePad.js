@@ -125,12 +125,13 @@ export default function NotePad(props) {
 
   function textToSpeechFunction(title, content) {
     var msg = new SpeechSynthesisUtterance();
-    msg.text = title;
+    msg.text = title + content;
     window.speechSynthesis.speak(msg);
-    setTimeout(() => {
-      msg.text = content;
-      window.speechSynthesis.speak(msg);
-    }, 3000);
+  }
+
+  function closeNotePad() {
+    goingBack();
+    props.closeNotePad();
   }
 
   return (
@@ -141,10 +142,7 @@ export default function NotePad(props) {
     >
       <div className="notePadHeader">
         NotePad
-        <div
-          className="closeNotePadHeader"
-          onClick={() => props.closeNotePad()}
-        >
+        <div className="closeNotePadHeader" onClick={() => closeNotePad()}>
           Close
         </div>
       </div>
