@@ -39,10 +39,10 @@ export default function NotePad(props) {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
-  const [liveNewTitle, setLiveNewTitle] = useState("");
-  const [liveNewContent, setLiveNewContent] = useState("");
-  const [liveEditTitle, setLiveEditTitle] = useState("");
-  const [liveEditContent, setLiveEditContent] = useState("");
+  const [liveNewTitle, setLiveNewTitle] = useState(false);
+  const [liveNewContent, setLiveNewContent] = useState(false);
+  const [liveEditTitle, setLiveEditTitle] = useState(false);
+  const [liveEditContent, setLiveEditContent] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -152,18 +152,58 @@ export default function NotePad(props) {
     if (!listening) {
       resetTranscript();
       SpeechRecognition.startListening({ continuous: true });
+      if (field === "newTitle") {
+        setLiveNewContent(false);
+        setLiveEditTitle(false);
+        setLiveEditContent(false);
+        setLiveNewTitle(true);
+      } else if (field === "newContent") {
+        setLiveEditTitle(false);
+        setLiveEditContent(false);
+        setLiveNewTitle(false);
+        setLiveNewContent(true);
+      } else if (field === "editTitle") {
+        setLiveEditContent(false);
+        setLiveNewTitle(false);
+        setLiveNewContent(false);
+        setLiveEditTitle(true);
+      } else if (field === "editContent") {
+        setLiveNewTitle(false);
+        setLiveNewContent(false);
+        setLiveEditTitle(false);
+        setLiveEditContent(true);
+      }
     } else {
       SpeechRecognition.stopListening();
+      setLiveNewContent(false);
+      setLiveEditTitle(false);
+      setLiveEditContent(false);
+      setLiveNewTitle(false);
 
       if (field === "newTitle") {
-        setNewNoteTitle((prevTitle) => prevTitle + " " + transcript);
+        setNewNoteTitle(
+          (prevTitle) =>
+            `${prevTitle}${prevTitle !== "" ? " " : ""}${transcript}`
+        );
       } else if (field === "newContent") {
-        setNewNoteContent((prevTitle) => prevTitle + " " + transcript);
+        setNewNoteContent(
+          (prevTitle) =>
+            `${prevTitle}${prevTitle !== "" ? " " : ""}${transcript}`
+        );
+      } else if (field === "editTitle") {
+        setEditNoteTitle(
+          (prevTitle) =>
+            `${prevTitle}${prevTitle !== "" ? " " : ""}${transcript}`
+        );
+      } else if (field === "editContent") {
+        setEditNoteContent(
+          (prevTitle) =>
+            `${prevTitle}${prevTitle !== "" ? " " : ""}${transcript}`
+        );
       }
       resetTranscript();
     }
   }
-
   return (
     <div
       className={`notepad-container ${
@@ -172,10 +212,17 @@ export default function NotePad(props) {
     >
       <div className="notePadHeader">
         <div className="notePadTitle">NotePad</div>
-        {notePadContent !== "none" && (
-          <div className="backNotePadHeader" onClick={goingBack}>
+        {notePadContent !== "none" ? (
+          <button className="backNoteButton" onClick={goingBack}>
             Go Back
-          </div>
+          </button>
+        ) : (
+          <button
+            onClick={() => setNotePadContent("new")}
+            className="createNoteButton"
+          >
+            Create New Note +
+          </button>
         )}
         <div className="closeNotePadHeader" onClick={closeNotePad}>
           Close
@@ -183,14 +230,6 @@ export default function NotePad(props) {
       </div>
       {notePadContent === "none" ? (
         <div className="notePadContent">
-          <div
-            className={`notePadSelection ${
-              props.nightMode && "notePadSelectionNight"
-            }`}
-            onClick={() => setNotePadContent("new")}
-          >
-            Create New One +
-          </div>
           {noteResults.map((oneResult) => (
             <div
               onClick={() =>
@@ -230,7 +269,9 @@ export default function NotePad(props) {
                 }`}
                 type="text"
                 onChange={(event) => setNewNoteTitle(event.target.value)}
-                value={newNoteTitle + " " + transcript}
+                value={`${newNoteTitle}${
+                  liveNewTitle ? `  ${transcript}` : ""
+                }`}
               />
               <div className="editNotepadHeader">
                 <div className="editNotepadHeaderText">Content</div>
@@ -253,7 +294,9 @@ export default function NotePad(props) {
                 }`}
                 type="text"
                 onChange={(event) => setNewNoteContent(event.target.value)}
-                value={newNoteContent + "" + transcript}
+                value={`${newNoteContent}${
+                  liveNewContent ? `  ${transcript}` : ""
+                }`}
               />
               <div className="notesButtonsBar">
                 <button onClick={uploadNewNote}>Upload New Note</button>
@@ -278,7 +321,10 @@ export default function NotePad(props) {
               <div className="editNotepadHeader">
                 <div className="editNotepadHeaderText">Title</div>
                 {browserSupportsSpeechRecognition && (
-                  <button className="speechToTextButton">
+                  <button
+                    className="speechToTextButton"
+                    onClick={() => speechToText("editTitle")}
+                  >
                     <img
                       className="speechToTextIMG"
                       src={microphone}
@@ -292,12 +338,17 @@ export default function NotePad(props) {
                   props.nightMode && "editNoteTitleDark"
                 }`}
                 onChange={(event) => setEditNoteTitle(event.target.value)}
-                value={editNoteTitle}
+                value={`${editNoteTitle}${
+                  liveEditTitle ? `  ${transcript}` : ""
+                }`}
               />
               <div className="editNotepadHeader">
                 <div className="editNotepadHeaderText">Content</div>
                 {browserSupportsSpeechRecognition && (
-                  <button className="speechToTextButton">
+                  <button
+                    className="speechToTextButton"
+                    onClick={() => speechToText("editContent")}
+                  >
                     <img
                       className="speechToTextIMG"
                       src={microphone}
@@ -311,7 +362,9 @@ export default function NotePad(props) {
                   props.nightMode && "newNoteContentNight"
                 }`}
                 onChange={(event) => setEditNoteContent(event.target.value)}
-                value={editNoteContent}
+                value={`${editNoteContent}${
+                  liveEditContent ? `  ${transcript}` : ""
+                }`}
               />
               <div className="notesButtonsBar">
                 <button className="deleteNoteButton" onClick={deleteNote}>

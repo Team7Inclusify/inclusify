@@ -41,12 +41,11 @@
   font-weight: normal;
   cursor: pointer;
   font-size: 18px;
+  color: #ff5757;
 }
 
 .closeNotePadHeader:hover {
-  color: red;
   text-decoration: underline;
-  font-weight: bold;
 }
 
 .backNotePadHeader {
@@ -91,6 +90,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .notePadSelection {
@@ -134,9 +134,23 @@
 
 .backNoteButton {
   background-color: #007bff;
+  height: fit-content;
+  padding: 3px;
 }
 .backNoteButton:hover {
   background-color: #0062cc;
+}
+
+.createNoteButton {
+  background-color: #ffde59;
+  height: fit-content;
+  padding: 3px;
+  color: #282828;
+  font-weight: bold;
+}
+
+.createNoteButton:hover {
+  background-color: #ffcf0d;
 }
 
 .deleteNoteButton {

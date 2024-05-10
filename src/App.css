@@ -51,8 +51,8 @@
 
 .note-pad-button {
   position: fixed;
-  bottom: 40px; /* Adjust as needed */
-  left: 20px; /* Adjust as needed */
+  bottom: 40px;
+  left: 20px;
   z-index: 9999;
   background-color: #ffde59;
   padding: 5px;
@@ -69,7 +69,7 @@ background-color: #ffcf0d;
   /* Media query for mobile screens */
   @media only screen and (max-width: 768px) {
     .App-Page {
-      align-items: center; /* Center content vertically */
+      align-items: center;
     }
   }
   
