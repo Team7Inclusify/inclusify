@@ -258,7 +258,9 @@ export default function NotePad(props) {
                 <div className="editNotepadHeaderText">Title</div>
                 {browserSupportsSpeechRecognition && (
                   <button
-                    className="speechToTextButton"
+                    className={`speechToTextButton ${
+                      liveNewTitle ? "speechToTextActive" : ""
+                    }`}
                     onClick={() => speechToText("newTitle")}
                   >
                     <img
@@ -283,7 +285,9 @@ export default function NotePad(props) {
                 <div className="editNotepadHeaderText">Content</div>
                 {browserSupportsSpeechRecognition && (
                   <button
-                    className="speechToTextButton"
+                    className={`speechToTextButton ${
+                      liveNewContent ? "speechToTextActive" : ""
+                    }`}
                     onClick={() => speechToText("newContent")}
                   >
                     <img
@@ -328,7 +332,9 @@ export default function NotePad(props) {
                 <div className="editNotepadHeaderText">Title</div>
                 {browserSupportsSpeechRecognition && (
                   <button
-                    className="speechToTextButton"
+                    className={`speechToTextButton ${
+                      liveEditTitle ? "speechToTextActive" : ""
+                    }`}
                     onClick={() => speechToText("editTitle")}
                   >
                     <img
@@ -352,7 +358,9 @@ export default function NotePad(props) {
                 <div className="editNotepadHeaderText">Content</div>
                 {browserSupportsSpeechRecognition && (
                   <button
-                    className="speechToTextButton"
+                    className={`speechToTextButton ${
+                      liveEditContent ? "speechToTextActive" : ""
+                    }`}
                     onClick={() => speechToText("editContent")}
                   >
                     <img

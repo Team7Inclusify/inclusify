@@ -186,7 +186,7 @@
 }
 
 .speechToTextButton:hover {
-  background-color: #d86570;
+  background-color: transparent;
 }
 
 .speechToTextIMG {
@@ -195,4 +195,12 @@
 
 .editNotepadHeaderText {
   font-style: italic;
+}
+
+.speechToTextActive {
+  background-color: #d86570;
+}
+
+.speechToTextActive:hover {
+  background-color: #d86570;
 }
