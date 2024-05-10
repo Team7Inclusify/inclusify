@@ -96,6 +96,7 @@
 .notePadSelection {
   cursor: pointer;
   padding-top: 5px;
+  min-height: 15px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
