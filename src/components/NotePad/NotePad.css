@@ -126,9 +126,11 @@
 }
 
 .notesButtonsBar {
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -155,6 +157,8 @@
 
 .deleteNoteButton {
   background-color: #dc3545;
+  height: fit-content;
+  padding: 5px;
 }
 .deleteNoteButton:hover {
   background-color: #c82333;
@@ -203,4 +207,9 @@
 
 .speechToTextActive:hover {
   background-color: #d86570;
+}
+
+.saveNoteButton{
+  height: fit-content;
+  padding: 5px;
 }

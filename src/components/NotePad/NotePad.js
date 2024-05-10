@@ -271,11 +271,10 @@ export default function NotePad(props) {
                   </button>
                 )}
               </div>
-              <input
-                className={`newNoteTitle ${
-                  props.nightMode && "newNoteTitleNight"
+              <textarea
+                className={`editNoteTitle ${
+                  props.nightMode && "editNoteTitleDark"
                 }`}
-                type="text"
                 onChange={(event) => setNewNoteTitle(event.target.value)}
                 value={`${newNoteTitle}${
                   liveNewTitle ? `  ${transcript}` : ""
@@ -309,7 +308,9 @@ export default function NotePad(props) {
                 }`}
               />
               <div className="notesButtonsBar">
-                <button onClick={uploadNewNote}>Upload New Note</button>
+                <button onClick={uploadNewNote} className="saveNoteButton">
+                  Save
+                </button>
                 {speechSynthesisSupported && (
                   <button
                     className="textToSpeechButton"
@@ -386,7 +387,9 @@ export default function NotePad(props) {
                 </button>
                 {(editNoteTitle !== originalEditTitle ||
                   editNoteContent !== originalEditContent) && (
-                  <button onClick={saveNoteChanges}>Save</button>
+                  <button className="saveNoteButton" onClick={saveNoteChanges}>
+                    Save
+                  </button>
                 )}
                 {speechSynthesisSupported && (
                   <button
