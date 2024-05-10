@@ -125,6 +125,10 @@ export default function NotePad(props) {
   };
 
   const goingBack = () => {
+    setLiveNewContent(false);
+    setLiveEditTitle(false);
+    setLiveEditContent(false);
+    setLiveNewTitle(false);
     setNotePadContent("none");
     setNewNoteTitle("");
     setNewNoteContent("");
@@ -134,6 +138,8 @@ export default function NotePad(props) {
     setEditNoteContent("");
     setOriginalEditContent("");
     resetTranscript();
+    SpeechRecognition.stopListening();
+
     window.speechSynthesis.cancel();
   };
 
