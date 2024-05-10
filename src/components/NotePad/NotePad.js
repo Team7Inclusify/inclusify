@@ -133,12 +133,12 @@ export default function NotePad(props) {
     setOriginalEditTitle("");
     setEditNoteContent("");
     setOriginalEditContent("");
+    resetTranscript();
     window.speechSynthesis.cancel();
   };
 
   const closeNotePad = () => {
-    resetTranscript();
-    window.speechSynthesis.cancel();
+    goingBack();
     props.closeNotePad();
   };
 
