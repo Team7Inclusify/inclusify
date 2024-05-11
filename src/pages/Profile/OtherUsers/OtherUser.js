@@ -61,7 +61,6 @@ export default function OtherUser() {
     };
 
     getUserInfo();
-    console.log("USER INFO DATA RETRIEVAL COUNT");
   }, [userID]);
 
   return (

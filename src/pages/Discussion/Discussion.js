@@ -26,10 +26,8 @@ const Discussion = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in.
         setAuthUser(user);
       } else {
-        // No user is signed in.
         setAuthUser(null);
       }
     });

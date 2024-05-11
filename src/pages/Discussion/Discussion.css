@@ -17,6 +17,10 @@
   margin-bottom: 20px;
 }
 
+.createDiscussionButton:hover{
+  background-color: #0062cc;
+}
+
 .discussionsHolder {
   width: 100%;
   display: flex;
