@@ -12,12 +12,24 @@
     height: 100%;
 }
 
+.main-info-profile-section-night-mode {
+    background-color: rgb(49, 44, 44);
+}
+
 .main-info-column {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     height: 250px;
     justify-content: space-between;
+}
+
+.link-profile-button {
+    background-color: #007bff;
+}
+
+.link-profile-button:hover {
+    background-color: #0062cc;
 }
 
 @media only screen and (max-width: 768px) {

@@ -7,10 +7,17 @@ import VideoSlider from "../VideoSlider/VideoSlider";
 
 export default function OtherUserPage(props) {
   const navigate = useNavigate();
+
+  let profileLink = `https://inclusify-b4ca3.web.app/user/${props.userID}`;
+
   return (
     <div className="profile-container">
       <div className="main-content">
-        <div className="main-info-profile-section">
+        <div
+          className={`main-info-profile-section ${
+            props.nightMode ? "main-info-profile-section-night-mode" : ""
+          }`}
+        >
           <img
             src={props.pfpSRC === "" ? defaultPFP : props.pfpSRC}
             alt="User Profile Picture"
@@ -20,6 +27,14 @@ export default function OtherUserPage(props) {
             <div className="name">{props.firstName + " " + props.lastName}</div>
             <div className="otherInfo">{props.email}</div>
             <button
+              className="link-profile-button"
+              onClick={() => {
+                navigator.clipboard.writeText(profileLink);
+              }}
+            >
+              Profile Link
+            </button>
+            <button
               className="send-message-button"
               onClick={() => navigate(`/message/${props.userID}`)}
             >
@@ -28,7 +43,7 @@ export default function OtherUserPage(props) {
           </div>
         </div>
         <div className="profile-section">
-          <h3>Contact Me At</h3>
+          <h3 className="section-title">Contact Me At</h3>
           {props.email}
         </div>
 

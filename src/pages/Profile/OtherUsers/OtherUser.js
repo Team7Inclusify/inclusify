@@ -13,7 +13,7 @@ import EmployerView from "../EmployerView/EmployerView";
 import { calculateTimeDifference } from "../../../functions/calculateTimeDifference";
 import OtherUserPage from "./OtherUserPage";
 
-export default function OtherUser() {
+export default function OtherUser(props) {
   const { userID } = useParams();
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
@@ -97,6 +97,7 @@ export default function OtherUser() {
           }
           resumeSRC={pdfResumeJSON ? pdfResumeJSON.link : false}
           additionalVideos={addVidResults}
+          nightMode={props.nightMode}
         />
       ) : (
         <EmployerView

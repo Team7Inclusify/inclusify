@@ -141,7 +141,10 @@ function App() {
             }
           />
           <Route path="/uploadvideoresume" element={<UploadVideoResume />} />
-          <Route path="/user/:userID" element={<OtherUser />} />
+          <Route
+            path="/user/:userID"
+            element={<OtherUser nightMode={isNightMode} />}
+          />
         </Routes>
       </div>
       <Footer />
