@@ -26,20 +26,22 @@ export default function OtherUserPage(props) {
           <div className="main-info-column">
             <div className="name">{props.firstName + " " + props.lastName}</div>
             <div className="otherInfo">{props.email}</div>
-            <button
-              className="link-profile-button"
-              onClick={() => {
-                navigator.clipboard.writeText(profileLink);
-              }}
-            >
-              Profile Link
-            </button>
-            <button
-              className="send-message-button"
-              onClick={() => navigate(`/message/${props.userID}`)}
-            >
-              Send Message
-            </button>
+            <div className="profileButtonBar">
+              <button
+                className="link-profile-button"
+                onClick={() => {
+                  navigator.clipboard.writeText(profileLink);
+                }}
+              >
+                Profile Link
+              </button>
+              <button
+                className="send-message-button"
+                onClick={() => navigate(`/message/${props.userID}`)}
+              >
+                Send Message
+              </button>
+            </div>
           </div>
         </div>
         <div className="profile-section">
