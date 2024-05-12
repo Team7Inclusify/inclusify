@@ -129,6 +129,8 @@ export default function ProfilePage(props) {
     navigate("/messageinbox");
   };
 
+  let profileLink = `https://inclusify-b4ca3.web.app/user/${props.userID}`;
+
   return (
     <div className="profile-container">
       <div
@@ -156,7 +158,11 @@ export default function ProfilePage(props) {
           </div>
         </div>
       )}
-      <div className="profile-section">
+      <div
+        className={`main-info-profile-section ${
+          props.nightMode ? "main-info-profile-section-night-mode" : ""
+        }`}
+      >
         {/* Profile picture with upload option */}
         <div className="upload-label">
           <img src={props.pfpSRC} alt="Profile" className="profile-picture" />
@@ -174,18 +180,29 @@ export default function ProfilePage(props) {
           style={{ display: "none" }}
           onChange={handleUpload}
         />
+        <div className="main-info-column">
+          <div className="name">{props.firstName + " " + props.lastName}</div>
+          <div className="otherInfo">{props.email}</div>
+          <div className="profileButtonBar">
+            <button
+              className="link-profile-button"
+              onClick={() => {
+                navigator.clipboard.writeText(profileLink);
+              }}
+            >
+              Profile Link
+            </button>
+            <button
+              className="send-message-button"
+              onClick={() => navigate(`/message/${props.userID}`)}
+            >
+              Send Message
+            </button>
+          </div>
+        </div>
         {/* Rest of your component */}
       </div>
       <div className="main-content">
-        <div className="profile-section">
-          <h2 className="name">{props.firstName + " " + props.lastName}</h2>
-        </div>
-        {/* Add Send Message Button */}
-        <div className="profile-section">
-          <button className="send-message-button" onClick={handleMessage}>
-            Send Message
-          </button>
-        </div>
         <div className="profile-section">
           <h3 className="section-title">Education</h3>
           {isEditing.education ? (
@@ -304,6 +321,7 @@ export default function ProfilePage(props) {
           {props.videoResumeSRC.link ? (
             <>
               <iframe
+                title="Video Resume"
                 src={`${props.resumeSRC}?timestamp=${Date.now()}`}
                 width="100%"
                 height="600px"

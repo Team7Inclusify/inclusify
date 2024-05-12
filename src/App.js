@@ -108,7 +108,9 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route
             path="/profile"
-            element={loggedIn ? <Profile /> : <AccessDenied />}
+            element={
+              loggedIn ? <Profile nightMode={isNightMode} /> : <AccessDenied />
+            }
           />
           {/* Route for the VideoResume component */}
           <Route path="/videoresume" element={<VideoResume />} />

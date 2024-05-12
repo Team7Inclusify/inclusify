@@ -15,8 +15,9 @@ import EmployerView from "./EmployerView/EmployerView";
 import defaultPFP from "../../images/default_pfp.png";
 import { calculateTimeDifference } from "../../functions/calculateTimeDifference";
 
-export default function Profile() {
+export default function Profile(props) {
   const [user, setUser] = useState(null);
+  const [userID, setUserID] = useState(null);
   const [userInfoJSON, setUserInfoJSON] = useState({});
   const [videoResumeJSON, setVideoResumeJSON] = useState(null);
   const [pdfResumeJSON, setPDFResumeJSON] = useState(null);
@@ -74,6 +75,7 @@ export default function Profile() {
         console.log("Auth User test count log");
         setUser(authUser);
         getUserInfo(authUser.uid);
+        setUserID(authUser.uid);
       } else {
         setUser(null);
       }
@@ -113,6 +115,8 @@ export default function Profile() {
       </div>
       {viewType === "user" ? (
         <ProfilePage
+          userID={userID}
+          nightMode={props.nightMode}
           firstName={userInfoJSON.firstName}
           lastName={userInfoJSON.lastName}
           pfpSRC={
